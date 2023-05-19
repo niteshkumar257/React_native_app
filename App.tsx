@@ -13,6 +13,9 @@ const App = () => {
     <AuthProvider>
           <AppNavigator/>
     </AuthProvider>
+    // <View>
+    //   <Text>sddgblbj</Text>
+    // </View>
   
   )
 }
