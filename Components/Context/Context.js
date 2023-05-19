@@ -69,11 +69,12 @@ export const AuthProvider=({children})=>
 
         if(userToken!=null)
         {
+          console.log("logout is called")
         setUserToken(null);
         AsyncStorage.removeItem('userToken');
         setIsLoding(false);
         }
-      if(userToken==null)
+    
         navigation.navigate("login");
 
         

@@ -133,7 +133,7 @@ const style=StyleSheet.create({
       display:"flex",
       justifyContent:"center",
       alignItems:"center",
-      backgroundColor:"white",
+      backgroundColor:"#E9F3FD",
       rowGap:20
 
 
