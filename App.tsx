@@ -1,22 +1,20 @@
-import { View, Text ,StyleSheet} from 'react-native'
+import { View, Text } from 'react-native'
 import React from 'react'
-import { create } from 'react-test-renderer'
+import AppNavigator from './Components/AppNavigator'
+import { AuthProvider } from './Components/Context/Context'
+
+
+ 
 
 
 const App = () => {
+ 
   return (
-    <View>
-     
-    </View>
+    <AuthProvider>
+          <AppNavigator/>
+    </AuthProvider>
+  
   )
 }
-const styles=StyleSheet.create({
-   container:{
-       display:"flex",
-       flexDirection:"column",
-       height:100,
-       backgroundColor:"red"
-   }
-})
 
-export default App;
+export default App
