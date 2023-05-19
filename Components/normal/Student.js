@@ -1,20 +1,19 @@
 import { View, Text,StyleSheet } from 'react-native'
 import React from 'react'
-import StudentImage from "../../assets/male.svg";
-import StudentImage2 from "../../assets/female.svg";
+
 import Icon from "react-native-vector-icons/Ionicons";
 
 const Student = ({navigation,name,child_id}) => {
 
 
-
-   const clickHandler =(id)=>
+  console.log(child_id);
+   const clickHandler =(child_id)=>
    {
    
-   
+     console.log(child_id);
      navigation.navigate("home",
       {
-         child_id:id,
+         child_id:child_id,
          child_name:name
       });
    }

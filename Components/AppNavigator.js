@@ -29,47 +29,47 @@ const AppNavigator = () => {
           component={Logo}
           options={{ title: 'Student' ,headerShown:false}}
         /> */}
-        {/* <Stack.Screen
+        <Stack.Screen
           name="login"
           component={Splash}
           options={{headerShown: false}}
-        /> */}
+        />
         <Stack.Screen
           name="home"
           component={Parent}
           options={{headerShown: false}}
         />
-        {/* <Stack.Screen
+        <Stack.Screen
           name="changePassword"
           component={ChangePassword}
           options={{headerShown: false}}
-        /> */}
-         {/* <Stack.Screen
+        />
+         <Stack.Screen
           name="children"
           component={Children}
           options={{headerShown: false}}
-        /> */}
-         {/* <Stack.Screen
+        />
+         <Stack.Screen
           name="parentProfile"
           component={Parentsprofile}
           options={{ title: 'Profile' }}
-        /> */}
-         {/* <Stack.Screen
+        />
+         <Stack.Screen
           name="notification"
           component={Notification}
           options={{ title: 'Notifications' }}
-        /> */}
-          {/* <Stack.Screen
+        />
+          <Stack.Screen
           name="notfound"
           component={Notfound}
           options={{title:'Notfound',headerShown:false}}
           
-          /> */}
-         {/* <Stack.Screen
+          />
+         <Stack.Screen
           name="student"
           component={Student}
           options={{ title: 'Student' ,headerShown:false}}
-        /> */}
+        />
        
       </Stack.Navigator>
     </NavigationContainer>

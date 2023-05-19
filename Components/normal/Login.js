@@ -11,7 +11,7 @@ const Login=({navigation})=>
   const [password,setPassword]=useState("");
   const [show,setShow]=useState(false);
   const {loginHandler,isLogin,isLoding}=useContext(AuthContext);
-  // console.log(loginHandler,isLoding,isLogin);
+ 
 
 
   const showToast = (type,header,msg="") => {

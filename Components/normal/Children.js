@@ -1,7 +1,6 @@
 import { View, Text, StyleSheet, TextInput } from 'react-native'
 import React, { useEffect, useState, useContext } from 'react'
 import Student from './Student';
-
 import Headers from './header';
 import Toast from 'react-native-toast-message';
 import axios from "axios";

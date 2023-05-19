@@ -10,10 +10,6 @@ import VideoStackNavigator from './VideoStackNavigator';
 import Icon from 'react-native-vector-icons/Ionicons';
 import DataContext from '../Context/DataContext';
 
-import Fees from "../../assets/Fees.svg";
-import Curriculum from "../../assets/Curriculum1.svg";
-import Peformance from "../../assets/performance.svg";
-import Mentor from "../../assets/mentor.svg";
 
 
 
@@ -91,7 +87,7 @@ const BottomNavigator = ({id}) => {
      >
     <Tab.Screen name="Curriculum" component={CurriculumPage} />
     <Tab.Screen name="Fees" component={FeePage} />
-    {/* <Tab.Screen name="Peformance" component={PerfomancePage} /> */}
+    <Tab.Screen name="Peformance" component={PerfomancePage} />
     <Tab.Screen name="Mentor" component={MentorRequestPage} options={{
       headerTintColor: 'black',
    
