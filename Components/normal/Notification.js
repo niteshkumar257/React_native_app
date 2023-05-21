@@ -73,9 +73,11 @@ const styles=StyleSheet.create(
         mainContainer:{
             display:"flex",
             alignItems:"center",
-            height:900,
+            height:700,
             width:"100%",
-            marginTop:10,
+            justifyContent:"center",
+            alignContent:"center",
+           
             rowGap:20,
             backgroundColor:"#E9F3FD"
           
