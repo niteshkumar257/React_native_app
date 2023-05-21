@@ -3,6 +3,7 @@ import VideoCard from './VideoCard'
 import VideoPlayer from './VideoPlayer'
 import VideoList from './VideoList'
 import React, { useState, useEffect } from 'react'
+import { COLORS } from '../Utils/Colors/Colors'
 import axios from 'axios'
 
 
@@ -115,17 +116,10 @@ const styles = StyleSheet.create(
       borderRadius: 9,
       paddingTop: 20,
       padding: 10,
-    
-      display: "flex",
+    display: "flex",
       paddingLeft:20,
-     
-     
-      backgroundColor:"#E9F3FD",
-   
-     
-
-
-    },
+      backgroundColor:COLORS.backgGroundColor,
+   },
     VideoPlayerContainer: {
       display: "flex",
       justifyContent: "center",

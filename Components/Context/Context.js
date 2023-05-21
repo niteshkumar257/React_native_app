@@ -74,7 +74,7 @@ export const AuthProvider=({children})=>
         AsyncStorage.removeItem('userToken');
         setIsLoding(false);
         }
-    
+
         navigation.navigate("login");
 
         

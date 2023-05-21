@@ -1,99 +1,46 @@
 import React from "react";
 import { useState,useContext ,useEffect} from "react";
-import axios from "axios";
-
 import { View,Text ,StyleSheet,Image,TextInput,TouchableOpacity,ActivityIndicator} from "react-native";
 import { AuthContext } from "../Context/Context";
 import Toast from "react-native-toast-message";
+import { COLORS } from '../Utils/Colors/Colors'
+import CustomToast from "./Toast";
 const Login=({navigation})=>
 {
+
+  const gwbanner=require("../img3.png");
+  const gwlogo=require("../../assets/gwlogo.png");
   const [username,setUserName]=useState("");
   const [password,setPassword]=useState("");
   const [show,setShow]=useState(false);
   const {loginHandler,isLogin,isLoding}=useContext(AuthContext);
  
 
+  
 
   const showToast = (type,header,msg="") => {
    
     Toast.show({
       type: type,
       text1: header,
-      text2: msg
+      text2: msg,
+      color:"red",
+      customComponent: (
+        <CustomToast
+          logo={gwlogo}
+          message={msg}
+        />
+      ),
+    
     });
   }
   
-// useEffect(()=>
-// {
-//   console.log("useEffect");
-//     isLogin(navigation)
-// },[])
-const login= async ()=>
-{
-  // navigation.navigate("children");
-  // console.warn(username, password);
-  // setShow(true);
-  // axios.post(`https://school-management-api.azurewebsites.net/parent/login`,{
-  //   username,password
-  // }).then((res)=>
-  // {
-  //   console.log(res);
-  //   setShow(false);
-  //   // navigation.navigate("children");
-  // }).catch(err=>
-  //   {
-  //     console.log(err);
-  //     setShow(false);
-  //     // navigation.navigate("notfound");
-  //   })
 
-  // axios.post('https://school-management-api.azurewebsites.net/parent/login',{
-  //   username:username,
-  //   password:password
-  // }).then((res)=>
-  // {
-  //   console.log(res);
-  // }).catch((err)=>
-  // {
-  //   console.log(err);
-  // })
-  // axios.get('https://school-management-api.azurewebsites.net/parents/15/getChildren').then((res)=>
-  // {
-  //   console.log(res.data);
-  // }).catch(err=>
-  //   {
-  //     console.log(err);
-  //   })
-
-  // try {
-  //   const response = await axios.post('https://school-management-api.azurewebsites.net/admin/login', {
-  //     // data to be sent in the request body
-  //     username: username,
-  //     password: password,
-  //   });
-  //   console.log(response.data);
-  // } catch (error) {
-  //   console.error(error);
-  // }
-
-  // axios.post('https://school-management-api.azurewebsites.net/parent/login',
-  // {
-  //   username:username,
-  //   password:password
-  // }).then((res)=>
-  // {
-  //   console.log(res.data);
-  // }).catch((err)=>
-  // {
-  //   console.log(err);
-  // })
-}
   const changePassword=()=>
   {
       navigation.navigate("changePassword");
   }
-  const gwbanner=require("../img3.png");
-  const gwlogo=require("../../assets/gwlogo.png");
+ 
   return (
     <View style={style.main_container}>
       <ActivityIndicator size={50} color={"#1377c0"} animating={show}/>
@@ -142,7 +89,7 @@ const style=StyleSheet.create({
       display:"flex",
       // justifyContent:"center",
       alignItems:"center",
-      backgroundColor:"#E9F3FD",
+      backgroundColor:COLORS.backgGroundColor,
       rowGap:15,
       paddingTop:80
    
@@ -249,7 +196,31 @@ logo:{
    borderRadius:50,
    
    
-}
+},
+customToastContainer: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  backgroundColor: 'black',
+  borderRadius: 8,
+  padding: 16,
+  marginBottom: 16,
+},
+leftBorder: {
+  backgroundColor: 'YOUR_CUSTOM_LEFT_BORDER_COLOR',
+  width: 4,
+  height: '100%',
+  marginRight: 16,
+  borderRadius: 2,
+},
+toastContent: {
+  flexDirection: 'row',
+  alignItems: 'center',
+},
+logo: {
+  width: 24,
+  height: 24,
+  marginRight: 8,
+},
 
 
 })

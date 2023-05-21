@@ -118,7 +118,7 @@ const styles=StyleSheet.create(
           height:700,
           width:"100%",
           padding:5,
-          backgroundColor:"#E9F3FD"
+          backgroundColor:COLORS.backgGroundColor
          
     },
     container:{

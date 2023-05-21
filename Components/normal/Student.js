@@ -1,7 +1,7 @@
 import { View, Text,StyleSheet } from 'react-native'
 import React from 'react'
-
 import Icon from "react-native-vector-icons/Ionicons";
+import { COLORS } from '../Utils/Colors/Colors'
 
 const Student = ({navigation,name,child_id}) => {
 
@@ -20,7 +20,7 @@ const Student = ({navigation,name,child_id}) => {
   return (
     <View  onStartShouldSetResponder={()=>clickHandler(child_id)} style={styles.container}>
  
- <Icon name="person-sharp" color={"#318CE7"} size={50}/>
+ <Icon name="person-sharp" color={COLORS.mainColor3} size={50}/>
   
   
     <View  style={styles.subContainer}>
@@ -47,16 +47,7 @@ const styles=StyleSheet.create(
        width:"100%",
        height:"100%",
         display:"flex",
-      
-        
-       
-       
-       
-        
-        
-        
-
-     },
+    },
        ChildrenListContainer:{
            height:"80%",
            width:"100%",

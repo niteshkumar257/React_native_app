@@ -1,14 +1,12 @@
 import { View, Text, StyleSheet ,ScrollView} from 'react-native'
 import React, {useEffect,useState,useContext} from 'react'
 import AcitvityHandler from '../bottom/AcitvityHandler'
-
 import NotificationCard from './NotificationCard'
 const feeIcon=require("../../assets/notificationFee.png")
-const Peformance=require("../../assets/PeformanceReport.png");
-const mentor=require("../../assets/presentation.png")
 import axios from "axios";
 import { AuthContext } from '../Context/Context'
 import jwtDecode from 'jwt-decode'
+import { COLORS } from '../Utils/Colors/Colors'
 
 const Notification = () => {
   const [notificationList,setNotificatinList]=useState([]);
@@ -73,11 +71,12 @@ const styles=StyleSheet.create(
         mainContainer:{
             display:"flex",
             alignItems:"center",
-            height:900,
+            height:700,
             width:"100%",
-            marginTop:10,
+            justifyContent:"center",
+            alignContent:"center",
             rowGap:20,
-            backgroundColor:"#E9F3FD"
+            backgroundColor:COLORS.backgGroundColor
           
           
         

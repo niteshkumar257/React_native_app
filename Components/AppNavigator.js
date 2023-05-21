@@ -11,6 +11,7 @@ import Notification from './normal/Notification';
 import Notfound from './normal/Notfound';
 import Student from './normal/Student';
 import Logo from "./normal/Logo";
+import {COLORS} from "./Utils/Colors/Colors"
   
 const Stack = createNativeStackNavigator();
 
@@ -21,7 +22,8 @@ const AppNavigator = () => {
       <Stack.Navigator
        screenOptions={{
         headerTintColor: 'white',
-        headerStyle: { backgroundColor: '#318CE7' },
+        headerStyle: { backgroundColor:COLORS.mainColor3 },
+       
       }}
       >
       <Stack.Screen

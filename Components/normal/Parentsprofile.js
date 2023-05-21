@@ -5,6 +5,7 @@ import Logout from 'react-native-vector-icons/AntDesign';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import { AuthContext } from '../Context/Context';
+import { COLORS } from '../Utils/Colors/Colors'
 
 
 const parent = require("../../assets/mother.png");
@@ -106,7 +107,7 @@ const styles = StyleSheet.create(
       rowGap: 20,
       paddingTop: 10,
       paddingBottom: 10,
-      backgroundColor:"#E9F3FD"
+      backgroundColor:COLORS.backgGroundColor
 
     },
     top: {

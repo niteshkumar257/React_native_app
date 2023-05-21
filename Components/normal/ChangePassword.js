@@ -1,10 +1,9 @@
 import React from "react";
 import { useState } from "react";
-
 import Toast from 'react-native-toast-message';
-
 import { View,Text ,StyleSheet,Image,TextInput,TouchableOpacity,ActivityIndicator} from "react-native";
 import axios from "axios";
+import { COLORS } from '../Utils/Colors/Colors'
 
 const Login=({navigation})=>
 {
@@ -65,16 +64,8 @@ const Login=({navigation})=>
     }
    
 
-
-
   }
   
-  
-  
-   
-  
-  
-   
   
   const logo=require("../img3.png");
   return (
@@ -129,11 +120,13 @@ const style=StyleSheet.create({
   main_container:{
       height:"100%",
       width:"100%",
-      // backgroundColor:"lightgreen",
       display:"flex",
       justifyContent:"center",
       alignItems:"center",
-      backgroundColor:"#E9F3FD",
+
+      backgroundColor:COLORS.backgGroundColor,
+=======
+ 
       rowGap:20
 
 
