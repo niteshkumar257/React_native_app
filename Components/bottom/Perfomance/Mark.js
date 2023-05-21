@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
         borderRadius:9,
         rowGap:10,
+        width:"98%"
        
 
     },

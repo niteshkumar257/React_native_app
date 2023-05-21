@@ -3,5 +3,5 @@ export const COLORS = {
     mainColor2:"#318CE7",
     mainColor3:"#006DFF",
     headingColor:"grey",
-    backgGroundColor:'#E9F3FD'
+    backgGroundColor:'#E0F1FF'
   }

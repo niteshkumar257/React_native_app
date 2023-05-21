@@ -3,7 +3,7 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import CurriculumPage from './Curriculum/Curriculum';
 import FeePage from './Fee/FeeScreen';
-import PerfomancePage from './Perfomance/Performance';
+import PerfomancePage from './Perfomance/PerfomanceScreen';
 import MentorRequestPage from './Mentor/MentorScreen';
 
 import VideoStackNavigator from './YouTubeVideo/VideoStackNavigator';

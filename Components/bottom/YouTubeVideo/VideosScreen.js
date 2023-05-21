@@ -77,19 +77,19 @@ const Video = ({navigation}) => {
        
          <View style={styles.subjectContainer}>
             <View style={styles.imageContainer} onStartShouldSetResponder={subjectSelectHandlerBiology}>
-         <Image source={require('../../assets/microscope.png')}/>
+         <Image source={require('../../../assets/microscope.png')}/>
          <Text style={styles.subejctText}>Biology</Text>
          </View>
             <View style={styles.imageContainer} onStartShouldSetResponder={subjectSelectHandlerPhysics}>
-            <Image source={require('../../assets/pendulum.png')}/>
+            <Image source={require('../../../assets/pendulum.png')}/>
             <Text style={styles.subejctText}>Physics</Text>
                  </View>
                  <View style={styles.imageContainer} onStartShouldSetResponder={subjectSelectHandlerMath}>
-                 <Image source={require('../../assets/design.png')}/>
+                 <Image source={require('../../../assets/design.png')}/>
                  <Text style={styles.subejctText}>Math</Text>
                  </View>
                  <View style={styles.imageContainer} onStartShouldSetResponder={subjectSelectHandlerChemistry}>
-                 <Image size={48} source={require('../../assets/atom.png')}/>
+                 <Image size={48} source={require('../../../assets/atom.png')}/>
                  <Text style={styles.subejctText}>Chemistry</Text>
                  </View>
     
