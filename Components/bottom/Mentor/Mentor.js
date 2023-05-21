@@ -3,9 +3,9 @@ import React, { useState, useCallback, useContext, useEffect,useRef } from 'reac
 import axios from 'axios'
 const mentor = require("../../assets/presentation.png")
 import Icon from 'react-native-vector-icons/Ionicons';
-import { AuthContext } from '../Context/Context';
+import { AuthContext } from '../../Context/Context';
 import jwtDecode from 'jwt-decode';
-import { COLORS } from '../Utils/Colors/Colors'
+import { COLORS } from '../../Utils/Colors/Colors'
 
 
 

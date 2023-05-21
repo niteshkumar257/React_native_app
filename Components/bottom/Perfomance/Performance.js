@@ -1,19 +1,13 @@
 import { View, Text, StyleSheet, ScrollView,TouchableOpacity ,ActivityIndicator,FlatList,SafeAreaView} from 'react-native'
 import React, { useEffect, useState, useContext } from 'react'
 import Icon from "react-native-vector-icons/Ionicons";  
-import Chart from './Chart'
-
 import axios from 'axios';
-import BarGraph from "./BarGraph";
 import Bar from './Bar';
-import { AuthContext } from '../Context/Context';
-
+import { AuthContext } from '../../Context/Context';
 import Mark from './Mark';
-import DataContext from '../Context/DataContext';
-import Area from './Area';
-import AcitvityHandler from './AcitvityHandler';
-import Area1 from './Area1';
-import { COLORS } from '../Utils/Colors/Colors'
+import DataContext from '../../Context/DataContext';
+import AcitvityHandler from '../AcitvityHandler';
+import { COLORS } from '../../Utils/Colors/Colors'
 
 
 

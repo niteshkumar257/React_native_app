@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import Card from './Card'
+import Card from '../Card'
 const Mark = ({data,testId,testDate}) => {
 
    

@@ -1,12 +1,12 @@
 import {View, Text, Image,Dimensions} from 'react-native';
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import CurriculumPage from './Curriculum';
-import FeePage from './FeeScreen';
-import PerfomancePage from './Performance';
-import MentorRequestPage from './MentorScreen';
+import CurriculumPage from './Curriculum/Curriculum';
+import FeePage from './Fee/FeeScreen';
+import PerfomancePage from './Perfomance/Performance';
+import MentorRequestPage from './Mentor/MentorScreen';
 
-import VideoStackNavigator from './VideoStackNavigator';
+import VideoStackNavigator from './YouTubeVideo/VideoStackNavigator';
 import Icon from 'react-native-vector-icons/Ionicons';
 import DataContext from '../Context/DataContext';
 

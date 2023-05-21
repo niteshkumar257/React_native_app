@@ -2,10 +2,10 @@ import { View, Text ,StyleSheet,SafeAreaView,ScrollView} from 'react-native'
 import React ,{useEffect,useState,useContext} from 'react'
 import Mentor from './Mentor';
 import axios from "axios";
-import AcitvityHandler from './AcitvityHandler';
-import { AuthContext } from '../Context/Context';
+import AcitvityHandler from '../AcitvityHandler';
+import { AuthContext } from '../../Context/Context';
 import jwtDecode from 'jwt-decode';
-import { COLORS } from '../Utils/Colors/Colors'
+import { COLORS } from '../../Utils/Colors/Colors'
 
 
 const Screen4 = ({navigation}) => {

@@ -1,9 +1,7 @@
 import { View, Text, StyleSheet, ScrollView, ActivityIndicator,Image } from 'react-native'
-import VideoCard from './VideoCard'
-import VideoPlayer from './VideoPlayer'
-import VideoList from './VideoList'
+
 import React, { useState, useEffect } from 'react'
-import { COLORS } from '../Utils/Colors/Colors'
+import { COLORS } from '../../Utils/Colors/Colors'
 import axios from 'axios'
 
 
