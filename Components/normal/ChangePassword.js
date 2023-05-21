@@ -123,7 +123,10 @@ const style=StyleSheet.create({
       display:"flex",
       justifyContent:"center",
       alignItems:"center",
+
       backgroundColor:COLORS.backgGroundColor,
+=======
+ 
       rowGap:20
 
 
