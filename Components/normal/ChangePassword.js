@@ -64,16 +64,8 @@ const Login=({navigation})=>
     }
    
 
-
-
   }
   
-  
-  
-   
-  
-  
-   
   
   const logo=require("../img3.png");
   return (

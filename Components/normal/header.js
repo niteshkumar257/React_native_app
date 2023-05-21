@@ -4,6 +4,7 @@ import Parent from "../../assets/Parent.svg";
 import Icon from "react-native-vector-icons/Ionicons";
 import jwtDecode from 'jwt-decode';
 import { AuthContext } from '../Context/Context';
+import {COLORS} from "../Utils/Colors/Colors";
 import axios from 'axios';
 
 
@@ -76,7 +77,7 @@ const styles=StyleSheet.create(
      
       alignItems:"center",
       padding:10,
-      backgroundColor:'#318CE7'
+      backgroundColor:COLORS.mainColor3
      },
      leftContainer:{
       flex:1,

@@ -4,21 +4,34 @@ import { View,Text ,StyleSheet,Image,TextInput,TouchableOpacity,ActivityIndicato
 import { AuthContext } from "../Context/Context";
 import Toast from "react-native-toast-message";
 import { COLORS } from '../Utils/Colors/Colors'
+import CustomToast from "./Toast";
 const Login=({navigation})=>
 {
+
+  const gwbanner=require("../img3.png");
+  const gwlogo=require("../../assets/gwlogo.png");
   const [username,setUserName]=useState("");
   const [password,setPassword]=useState("");
   const [show,setShow]=useState(false);
   const {loginHandler,isLogin,isLoding}=useContext(AuthContext);
  
 
+  
 
   const showToast = (type,header,msg="") => {
    
     Toast.show({
       type: type,
       text1: header,
-      text2: msg
+      text2: msg,
+      color:"red",
+      customComponent: (
+        <CustomToast
+          logo={gwlogo}
+          message={msg}
+        />
+      ),
+    
     });
   }
   
@@ -27,8 +40,7 @@ const Login=({navigation})=>
   {
       navigation.navigate("changePassword");
   }
-  const gwbanner=require("../img3.png");
-  const gwlogo=require("../../assets/gwlogo.png");
+ 
   return (
     <View style={style.main_container}>
       <ActivityIndicator size={50} color={"#1377c0"} animating={show}/>
@@ -184,7 +196,31 @@ logo:{
    borderRadius:50,
    
    
-}
+},
+customToastContainer: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  backgroundColor: 'black',
+  borderRadius: 8,
+  padding: 16,
+  marginBottom: 16,
+},
+leftBorder: {
+  backgroundColor: 'YOUR_CUSTOM_LEFT_BORDER_COLOR',
+  width: 4,
+  height: '100%',
+  marginRight: 16,
+  borderRadius: 2,
+},
+toastContent: {
+  flexDirection: 'row',
+  alignItems: 'center',
+},
+logo: {
+  width: 24,
+  height: 24,
+  marginRight: 8,
+},
 
 
 })
