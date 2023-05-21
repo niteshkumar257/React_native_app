@@ -7,6 +7,7 @@ import axios from "axios";
 import { AuthContext } from '../Context/Context';
 import jwtDecode from 'jwt-decode';
 import AcitvityHandler from '../bottom/AcitvityHandler';
+import { COLORS } from '../Utils/Colors/Colors'
 
 
 
@@ -76,7 +77,7 @@ const styles = StyleSheet.create(
       width: "100%",
       height: "100%",
       display: "flex",
-      backgroundColor: "#E9F3FD"
+      backgroundColor:COLORS.backgGroundColor
  },
     ChildrenListContainer: {
       height: "80%",

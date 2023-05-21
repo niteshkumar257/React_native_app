@@ -1,7 +1,7 @@
 import { View, Text,StyleSheet } from 'react-native'
 import React from 'react'
-
 import Icon from "react-native-vector-icons/Ionicons";
+import { COLORS } from '../Utils/Colors/Colors'
 
 const Student = ({navigation,name,child_id}) => {
 
@@ -47,16 +47,7 @@ const styles=StyleSheet.create(
        width:"100%",
        height:"100%",
         display:"flex",
-      
-        
-       
-       
-       
-        
-        
-        
-
-     },
+    },
        ChildrenListContainer:{
            height:"80%",
            width:"100%",

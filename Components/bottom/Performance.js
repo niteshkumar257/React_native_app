@@ -13,6 +13,7 @@ import DataContext from '../Context/DataContext';
 import Area from './Area';
 import AcitvityHandler from './AcitvityHandler';
 import Area1 from './Area1';
+import { COLORS } from '../Utils/Colors/Colors'
 
 
 
@@ -211,7 +212,7 @@ const styles = StyleSheet.create(
       display: "flex",
       justifyContent: "flex-start",
       alignItems: "center",
-      backgroundColor: "#E9F3FD",
+      backgroundColor:COLORS.backgGroundColor,
      
      
       paddingBottom:30,

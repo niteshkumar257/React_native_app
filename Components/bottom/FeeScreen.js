@@ -5,6 +5,7 @@ import axios from 'axios';
 import AcitvityHandler from './AcitvityHandler';
 import DataContext from '../Context/DataContext';
 import { Background } from 'victory-native';
+import { COLORS } from '../Utils/Colors/Colors'
 
 
 
@@ -77,7 +78,7 @@ const styles=StyleSheet.create(
       width:"100%",
       minHeight:700,
       padding:5,
-      backgroundColor:"#E9F3FD"
+      backgroundColor:COLORS.backgGroundColor
      
      
      
