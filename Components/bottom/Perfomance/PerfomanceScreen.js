@@ -95,8 +95,8 @@ const styles = StyleSheet.create(
           height:"100%",
           display:"flex",
          
-           
-          justifyContent:"center",
+           minHeight:645,
+          // justifyContent:"center",
           alignItems:"center",
           height:'auto',
           backgroundColor:COLORS.backgGroundColor

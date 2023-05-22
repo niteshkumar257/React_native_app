@@ -6,12 +6,16 @@ import jwtDecode from 'jwt-decode';
 import { AuthContext } from '../Context/Context';
 import {COLORS} from "../Utils/Colors/Colors";
 import axios from 'axios';
+import { Badge } from '@rneui/themed';
 
 
 const header = ({navigation}) => {
   const {userToken}=useContext(AuthContext)
   let userInfo=jwtDecode(userToken);
   let parentId=(userInfo.result.parent_id);
+  const [notificationList,setNotificatinList]=useState([]);
+  const [unseenNotificationCount,setUnseenNotificatinCount]=useState(0);
+   
   const [fatherName,setFatherName]=useState("");
   const getParentInfo=()=>
   {
@@ -25,10 +29,37 @@ const header = ({navigation}) => {
         })
       
   }
+  const getNotification=()=>
+  {
+   axios.get(`https://school-management-api.azurewebsites.net/parents/${parentId}/getNotification`)
+   .then((res)=>
+   {
+    
+     
+     setNotificatinList((res.data.messages));
+     console.log("adbfj,",res.data.message?.length)
+     
+     
+     console.log(res.data.messages);
+
+     
+   }).catch((err)=>
+   {
+     
+   
+     console.log(err)
+   })
+  }
+  
   useEffect(()=>
   {
     getParentInfo();
+    getNotification();
   },[])
+  // const countUnseenNotification=notificationList?.filter((item)=> item.is_seen==true).reduce((acc,cur)=> {
+  //   return acc+cur;
+  // },0);
+  // setNotificatinList(countUnseenNotification);
   return (
     <View style={styles.container}>
       
@@ -52,7 +83,16 @@ const header = ({navigation}) => {
           navigation.navigate("notification");
         }}
        style={styles.rightContainer}>
+        
        <Icon name="notifications-sharp" size={30} color={"white"}/>
+       <Badge
+            status="error"
+          
+            value={notificationList?.filter(item=> {
+              return item.is_seen===false;
+            }).length }
+            containerStyle={{ position: 'absolute', top: -2, right:-5 }}
+          />
       </View>
       
     </View>

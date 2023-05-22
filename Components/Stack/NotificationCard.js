@@ -3,6 +3,7 @@ import React from 'react'
 import Icon from "react-native-vector-icons/Ionicons";
 import axios from 'axios';
 
+
 const NotificationCard = ({icon,msg,NotificationId,NotificationStatus,getNotification}) => {
 
 
@@ -19,6 +20,8 @@ const NotificationCard = ({icon,msg,NotificationId,NotificationStatus,getNotific
   return (
     <View  
     onStartShouldSetResponder ={()=>updateNotificationStatus(NotificationId)}style={[styles.mainContainer,NotificationStatus && styles.disableViewContainer]}
+    pointerEvents={NotificationStatus?'none':'auto'
+  }
    
    
     >
@@ -67,7 +70,7 @@ const styles=StyleSheet.create(
 
         },
         disableViewContainer:{
-          opacity:.5
+          opacity:.8
         },
         icons:{
          

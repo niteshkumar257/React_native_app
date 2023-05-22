@@ -2,6 +2,7 @@ import { View, Text,StyleSheet,TouchableOpacity } from 'react-native'
 import React,{useEffect,useState} from 'react'
 import { Chart, Line, Area, HorizontalAxis, VerticalAxis,Tooltip } from 'react-native-responsive-linechart'
 import Icon from "react-native-vector-icons/Ionicons";
+import {COLORS} from "../Utils/Colors/Colors";
 
 const ScrolableChart = ({color1,color2,subject}) => {
   let months=["Jan","Feb","March","April","May","June","July","Aug","Sep","Oct","Nov","Dec"]
@@ -39,7 +40,7 @@ const ScrolableChart = ({color1,color2,subject}) => {
       </View>}
       <Text style={styles.valueText}>{subject}</Text>
     <Chart
-  style={{ height: 200, width: 360 }}
+  style={{ height: 200, width: 350 }}
   data={[
     { x: 0, y: 89 ,meta:100 },
     { x: 1, y: 89 ,meta:100 },
@@ -165,7 +166,7 @@ const ScrolableChart = ({color1,color2,subject}) => {
   }}
     smoothing="cubic-spline"
   />
-  <Area theme={{ gradient: { from: { color: color1, opacity: 0.4 }, to: { color: color2, opacity: 0.4 } } }} smoothing="cubic-spline" />
+  <Area theme={{ gradient: { from: { color:COLORS.mainColor3, opacity: 0.4 }, to: { color: COLORS.backgGroundColor, opacity: 0.4 } } }} smoothing="cubic-spline" />
 </Chart>
     </View>
   )

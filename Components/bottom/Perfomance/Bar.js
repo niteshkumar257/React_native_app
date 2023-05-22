@@ -45,7 +45,7 @@ const Bar = ({d,name}) => {
       </Text>
       <View style={{padding: 20, alignItems: 'center'}}>
         <BarChart
-          data={d}
+          data={data}
           barWidth={30}
           initialSpacing={25}
           spacing={25}

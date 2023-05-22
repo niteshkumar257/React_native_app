@@ -52,7 +52,7 @@ const Area1 = ({d,name}) => {
             <LineChart
             areaChart
             curved
-            data={d}
+            data={lineData}
              width={300}
             height={200}
             isAnimated
