@@ -9,7 +9,7 @@ import Children from './Stack/Children';
 import Parentsprofile from './Stack/Parentsprofile';
 import Notification from './Stack/Notification';
 import Notfound from './Stack/Notfound';
-import Student from './Stack/Student';
+import Student from "./Stack/Student"
 import Logo from "./Stack/Logo";
 import {COLORS} from "./Utils/Colors/Colors"
   
