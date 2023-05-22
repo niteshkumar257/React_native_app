@@ -1,12 +1,27 @@
 import { View, Text,StyleSheet,Image } from 'react-native'
 import React from 'react'
 import Icon from "react-native-vector-icons/Ionicons";
+import axios from 'axios';
 
-const NotificationCard = ({icon,msg}) => {
+const NotificationCard = ({icon,msg,NotificationId,NotificationStatus,getNotification}) => {
+
 
     const feeIcon=require("../../assets/notificationFee.png")
+    const updateNotificationStatus=async (notificationId)=>{
+      try {
+        const response = await axios.put(`https://school-management-api.azurewebsites.net/parents/${notificationId}/markNotificationSeen`);
+        console.log('Notification updated successfully:', response.data);
+        getNotification();
+      } catch (error) {
+        console.error('Error updating notification:', error);
+      } 
+    }
   return (
-    <View style={styles.mainContainer}>
+    <View  
+    onStartShouldSetResponder ={()=>updateNotificationStatus(NotificationId)}style={[styles.mainContainer,NotificationStatus && styles.disableViewContainer]}
+   
+   
+    >
       <View style={styles.icons}>
       <Icon name="wallet-sharp" size={40} color={"#1377c0"}/>
       </View>
@@ -50,6 +65,9 @@ const styles=StyleSheet.create(
             shadowRadius: 5,
             
 
+        },
+        disableViewContainer:{
+          opacity:.5
         },
         icons:{
          

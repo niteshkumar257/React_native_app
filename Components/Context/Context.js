@@ -64,13 +64,13 @@ export const AuthProvider=({children})=>
   }
   
   
-    const logoutHandler=(navigation)=>
+    const logoutHandler=async (navigation)=>
     {
 
         if(userToken!=null)
         {
         setUserToken(null);
-        AsyncStorage.removeItem('userToken');
+      await  AsyncStorage.removeItem('userToken');
         setIsLoding(false);
         }
      

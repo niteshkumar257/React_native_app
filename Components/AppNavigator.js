@@ -2,15 +2,15 @@ import {View, Text} from 'react-native';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Splash from './normal/Login';
-import Parent from './normal/Home';
-import ChangePassword from  "./normal/ChangePassword";
-import Children from './normal/Children';
-import Parentsprofile from './normal/Parentsprofile';
-import Notification from './normal/Notification';
-import Notfound from './normal/Notfound';
-import Student from './normal/Student';
-import Logo from "./normal/Logo";
+import Splash from './Stack/Login';
+import Parent from './Stack/Home';
+import ChangePassword from  "./Stack/ChangePassword";
+import Children from './Stack/Children';
+import Parentsprofile from './Stack/Parentsprofile';
+import Notification from './Stack/Notification';
+import Notfound from './Stack/Notfound';
+import Student from './Stack/Student';
+import Logo from "./Stack/Logo";
 import {COLORS} from "./Utils/Colors/Colors"
   
 const Stack = createNativeStackNavigator();

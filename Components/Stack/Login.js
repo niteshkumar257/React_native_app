@@ -8,7 +8,7 @@ import CustomToast from "./Toast";
 const Login=({navigation})=>
 {
 
-  const gwbanner=require("../img3.png");
+  const gwbanner=require("../../assets/img3.png");
   const gwlogo=require("../../assets/gwlogo.png");
   const [username,setUserName]=useState("");
   const [password,setPassword]=useState("");

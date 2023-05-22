@@ -21,6 +21,7 @@ const Parentsprofile = ({ navigation }) => {
   const { logoutHandler, userToken } = useContext(AuthContext);
   let userInfo = jwtDecode(userToken);
   let parentId = (userInfo.result.parent_id);
+ console.log(parentId)
   useEffect(() => {
     axios.get(`https://school-management-api.azurewebsites.net/parents/${parentId}`)
       .then((res) => {

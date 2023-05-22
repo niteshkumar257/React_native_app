@@ -3,7 +3,7 @@ import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import Main from './Main';
 import CustomDrawer from './CustomDrawer';
-import Children from '../normal/Children';
+import Children from '../Stack/Children';
 const Drawer = createDrawerNavigator();
 const DrawerNavigator = ({child_name,child_id}) => {
     console.log("drawer"+child_name,child_id);

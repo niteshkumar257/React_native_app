@@ -67,7 +67,7 @@ const Login=({navigation})=>
   }
   
   
-  const logo=require("../img3.png");
+  const logo=require("../../assets/img3.png");
   return (
     <View style={style.main_container}>
      <ActivityIndicator size={50} color={"#1377c0"} animating={show}/>

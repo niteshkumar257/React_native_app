@@ -14,7 +14,8 @@ const Notification = () => {
   const [error,setError]=useState(false);
   const {userToken}=useContext(AuthContext);
   let userInfo=jwtDecode(userToken);
-let parentId=(userInfo.result.parent_id);
+  let parentId=(userInfo.result.parent_id);
+   
    const getNotification=()=>
    {
     axios.get(`https://school-management-api.azurewebsites.net/parents/${parentId}/getNotification`)
@@ -22,7 +23,9 @@ let parentId=(userInfo.result.parent_id);
     {
      
       setIsLodiging(false);
-      setNotificatinList(res.data.messages);
+      setNotificatinList((res.data.messages).reverse());
+      console.log(res.data.messages);
+      
     }).catch((err)=>
     {
       setIsLodiging(false);
@@ -49,7 +52,12 @@ let parentId=(userInfo.result.parent_id);
            color:"black"
         }} >No notifcations !</Text> :
         notificationList.map((item,index)=>(
-          <NotificationCard  key={index} icon={feeIcon} msg={item.messages}/>
+          <NotificationCard  key={index}
+           NotificationId={item.notification_id}
+           NotificationStatus={item.is_seen}
+          icon={feeIcon} msg={item.messages}
+          getNotification={getNotification}
+          />
           
 
         ))
@@ -69,11 +77,12 @@ export default Notification;
 const styles=StyleSheet.create(
     {
         mainContainer:{
+          paddingTop:20,
             display:"flex",
             alignItems:"center",
             height:700,
             width:"100%",
-            justifyContent:"center",
+          
             alignContent:"center",
             rowGap:20,
             backgroundColor:COLORS.backgGroundColor
