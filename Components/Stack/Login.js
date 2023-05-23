@@ -217,8 +217,8 @@ toastContent: {
   alignItems: 'center',
 },
 logo: {
-  width: 24,
-  height: 24,
+  width: 60,
+  height: 60,
   marginRight: 8,
 },
 

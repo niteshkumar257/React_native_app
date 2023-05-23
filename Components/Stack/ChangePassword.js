@@ -37,22 +37,55 @@ const Login=({navigation})=>
         old_password:oldPassword,
         new_password:newPassword
       }).then((data) => {
-          console.log(data)
-          setNewPassword("");
-          setOldPassword("");
-          setUserName("");
-          setConfirmPassword("");
-          showToast("success","SuccesFull","Password changed successfully")
-          setTimeout(() =>   navigation.navigate("login"),500);
+          console.log(data.data);
+        
+          if(data.data.success==0)
+          {
+            showToast("error",data.data.error);
+            setOldPassword("");
+            setUserName("");
+          }
+          else 
+          {
+            showToast("success","SuccesFull","Password changed successfully")
+            setTimeout(() =>   navigation.navigate("login"),500);
+            setNewPassword("");
+            setOldPassword("");
+            setUserName("");
+            setConfirmPassword("");
+          }
+          
          
           setShow(false);
         
           
 
       }).catch((err) => {
+        if (err.response) {
+          // The request was made, but the server responded with a non-2xx status code
+          if (err.response.status === 401) {
+            setIsLoding(false);
+            showToast('error', 'Unauthorized user');
+          } else {
+            setIsLoding(false);
+            showToast('error', 'An error occurred');
+
+          }
+        } else if (err.request) {
+          setIsLoding(false);
+          // The request was made, but no response was received
+          showToast('error', 'No response received from server');
+          navigation.navigate('notfound');
+        } else {
+          setIsLoding(false);
+          // Something happened in setting up the request that triggered an Error
+          showToast('error', 'Network failure or server is unreachable');
+         navigation.navigate('notfound');
+
+        }
         setShow(false);
     
-         showToast("error",err.message,"Not found")
+        
       })
     }
 

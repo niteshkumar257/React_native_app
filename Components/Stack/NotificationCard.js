@@ -26,7 +26,7 @@ const NotificationCard = ({icon,msg,NotificationId,NotificationStatus,getNotific
    
     >
       <View style={styles.icons}>
-      <Icon name="wallet-sharp" size={40} color={"#1377c0"}/>
+      <Icon  name="wallet-sharp" size={40} color={"#1377c0"}/>
       </View>
       <View style={styles.Info}>
       <Text style={{

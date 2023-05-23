@@ -49,12 +49,34 @@ export const AuthProvider=({children})=>
                 
                }).catch((err)=>
                {
-                console.log(err);
-                setIsLoding(false);
+                if (err.response) {
+                  // The request was made, but the server responded with a non-2xx status code
+                  if (err.response.status === 401) {
+                    setIsLoding(false);
+                    showToast('error', 'Unauthorized user');
+                  } else {
+                    setIsLoding(false);
+                    showToast('error', 'An error occurred');
+
+                  }
+                } else if (err.request) {
+                  setIsLoding(false);
+                  // The request was made, but no response was received
+                  showToast('error', 'No response received from server');
+                  navigation.navigate('notfound');
+                } else {
+                  setIsLoding(false);
+                  // Something happened in setting up the request that triggered an Error
+                  showToast('error', 'Network failure or server is unreachable');
+                 navigation.navigate('notfound');
+
+                }
+                showToast("error",err.response.data.error);
+             
                 setUserName("");
                 setPassword("");
                 setShow(false);
-                navigation.navigate('notfound');
+                // navigation.navigate('notfound');
                
 
 
@@ -70,7 +92,7 @@ export const AuthProvider=({children})=>
         if(userToken!=null)
         {
         setUserToken(null);
-      await  AsyncStorage.removeItem('userToken');
+        AsyncStorage.removeItem('userToken');
         setIsLoding(false);
         }
      

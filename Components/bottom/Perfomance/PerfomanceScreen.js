@@ -60,7 +60,18 @@ const PerfomanceScreen = () => {
                 </View>
                 {
                     dataFecthStatus ?<AcitvityHandler show={dataFecthStatus} /> :
-                <View style={styles.perforomanceContainer}>
+                    
+               ( <View style={styles.perforomanceContainer}>
+                {
+                  testDetails.length==0 && 
+                  <Text style={{
+                    textAlign:"center",
+                    fontSize:20,
+                    color:"black",
+                    fontWeight:700,
+                    marginTop:250
+                  }}>No test Given</Text>
+                }
                     <View style={styles.topContainer}>
                        <TableComponent data={testDetails}/>
                     </View>
@@ -72,7 +83,7 @@ const PerfomanceScreen = () => {
                     </View>
                   
                     }
-                </View>
+                </View>)
                 }
                 </View>
         </View>
