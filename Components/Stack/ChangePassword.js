@@ -112,7 +112,9 @@ const Login=({navigation})=>
      placeholder="Username"
      style={style.text_input}
      value={username}
+     color="black"
      caretHidden={false}
+     placeholderTextColor="black"
      onChangeText={(text)=>setUserName(text)}
      />
      <TextInput
@@ -120,7 +122,9 @@ const Login=({navigation})=>
      style={style.text_input}
      value={oldPassword}
      caretHidden={false}
+     color="black"
      secureTextEntry={true}
+     placeholderTextColor="black"
      onChangeText={(text)=>setOldPassword(text)}
      />
      <TextInput
@@ -128,6 +132,8 @@ const Login=({navigation})=>
      style={style.text_input}
      value={newPassword}
      caretHidden={false}
+     color="black"
+     placeholderTextColor="black"
      onChangeText={(text)=>setNewPassword(text)}
      />
      <TextInput
@@ -135,7 +141,9 @@ const Login=({navigation})=>
      style={style.text_input}
      value={confirmPassword}
      caretHidden={false}
+     color="black"
      secureTextEntry={true}
+     placeholderTextColor="black"
      onChangeText={(text)=>setConfirmPassword(text)}
      />
     </View>

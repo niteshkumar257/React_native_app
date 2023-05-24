@@ -53,6 +53,7 @@ const PerfomanceScreen = () => {
               name='analytics-outline'
               size={30}
               color="black"
+              
               onPress={()=>showGraphicalAnalysis()}
             />
                 </View>

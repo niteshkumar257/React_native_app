@@ -10,9 +10,10 @@ import { COLORS } from '../Utils/Colors/Colors'
 
 const parent = require("../../assets/mother.png");
 const Parentsprofile = ({ navigation }) => {
-  // const logOutHandler = () => {
-  //     navigation.navigate("login");
-  //   }
+  const logOutHandler = () => {
+      navigation.navigate("login");
+    }
+  
   const [parentInfo, setParentInfo] = useState({});
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

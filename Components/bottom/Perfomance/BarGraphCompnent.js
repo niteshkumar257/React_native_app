@@ -46,57 +46,72 @@ const BarGraphCompnent = ({data}) => {
       })  
     }
     graphDataConvert(data);
-    console.log(dataList);
+    dataList.map((item,index)=> console.log(item));
   return (
     <View>
-     {
-          dataList.map((item,index)=>(
-            <Bar
-            key={item.id}
-            d={item.markInfo}
-           name={item.subjectName}/>
-          ))
-     }
-     {
-          dataList.map((item,index)=>(
-            <Area
-            key={item.id}
-            d={item.markInfo}
-           name={item.subjectName}/>
-          ))
-     }
-    {
-          dataList.map((item,index)=>(
-            <Area1
-            key={item.id}
-            d={item.markInfo}
-           name={item.subjectName}/>
-          ))
-     }
-     {
-          dataList.map((item,index)=>(
-            <LineChart
-            key={item.id}
-            d={item.markInfo}
-           name={item.subjectName}/>
-          ))
-     }
+      <View>
       {
           dataList.map((item,index)=>(
-            <ScrolableChart
-            key={item.id}
+            <Bar
+            key={index}
             d={item.markInfo}
-           name={item.subjectName}/>
+           name={item.subjectName}></Bar>
           ))
      }
-     {
-      dataList.map((item,index)=>(
-        <BarGraph
-        key={item.id}
-        d={item.markInfo}
-       name={item.subjectName}/>
-      ))
+      </View>
+      <View>
+      {
+          dataList.map((item,index)=>(
+            <Area
+            key={index}
+            d={item.markInfo}
+           name={item.subjectName}></Area>
+          ))
      }
+      </View>
+    
+     <View>
+     {
+          dataList.map((item,index)=>(
+            <Area1
+            key={index}
+            d={item.markInfo}
+           name={item.subjectName}></Area1>
+          ))
+     }
+     </View>
+     <View>
+    {
+          dataList.map((item,index)=>(
+            <LineChart
+            key={index}
+            d={item.markInfo}
+           name={item.subjectName}></LineChart>
+          ))
+     }
+    </View>
+  <View>
+    {
+          dataList.map((item,index)=>(
+            <ScrolableChart
+            key={index}
+            d={item.markInfo}
+           name={item.subjectName}></ScrolableChart>
+          ))
+     }
+    </View>
+    {/* <View>
+    {
+          dataList.map((item,index)=>(
+            <BarGraph
+            key={index}
+            d={item.markInfo}
+           name={item.subjectName}></BarGraph>
+          ))
+     }
+    </View> */}
+       
+    
     </View>
   )
 }

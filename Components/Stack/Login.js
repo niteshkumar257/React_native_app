@@ -51,6 +51,8 @@ const Login=({navigation})=>
     <View style={style.Info_container}>
      <TextInput
      placeholder="Username"
+     placeholderTextColor="black"
+     color="black"
      style={style.text_input}
      value={username}
      caretHidden={false}
@@ -59,9 +61,11 @@ const Login=({navigation})=>
      <TextInput
      placeholder="Password"
      style={style.text_input}
+     color="black"
      value={password}
      caretHidden={false}
      secureTextEntry={true}
+     placeholderTextColor="black"
      onChangeText={(text)=>setPassword(text)}
      />
     </View>

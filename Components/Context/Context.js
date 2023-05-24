@@ -26,7 +26,7 @@ export const AuthProvider=({children})=>
     const loginHandler= async(username,password,navigation,setPassword,setUserName,showToast,setShow)=>
     {
      
-      
+         console.log(navigation);
           if(username && password)
           {
             setShow(true);
@@ -89,14 +89,24 @@ export const AuthProvider=({children})=>
     const logoutHandler=async (navigation)=>
     {
 
-        if(userToken!=null)
-        {
-        setUserToken(null);
-        AsyncStorage.removeItem('userToken');
-        setIsLoding(false);
-        }
      
-        navigation.navigate("login");
+      
+        
+        try {
+          console.log(navigation.navigate);
+      
+          setUserToken(null);
+          AsyncStorage.removeItem('userToken');
+          setIsLoding(false);
+      
+          navigation.navigate("login");
+        } catch (error) {
+          console.error(error);
+          
+        }
+       
+     
+      
 
         
     }
