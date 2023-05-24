@@ -4,7 +4,8 @@ import { Chart, Line, Area, HorizontalAxis, VerticalAxis,Tooltip } from 'react-n
 import Icon from "react-native-vector-icons/Ionicons";
 import {COLORS} from "../Utils/Colors/Colors";
 
-const ScrolableChart = ({color1,color2,subject}) => {
+const ScrolableChart = ({color1,color2,name}) => {
+  console.log(name);
   let months=["Jan","Feb","March","April","May","June","July","Aug","Sep","Oct","Nov","Dec"]
   const [month,setMonth]=useState(0);
   const [score,setScore]=useState(0);
@@ -23,22 +24,28 @@ const ScrolableChart = ({color1,color2,subject}) => {
     setScore(0);
   }
   return (
-    <View style={styles.chartContainer}>
-       { show &&  score!=0 && month!=0 &&
-     <View style={styles.scoreContainer}>
-      <View style={styles.valueContainer}>
-      <Text style={styles.keyText}>Month : {months[month-1]}</Text>
-        <Text style={styles.keyText}>Mark : {score}/{total}</Text>
-        
-      </View>
-      <View>
-        <TouchableOpacity onPress={showHandler}>
-          <Icon name="close-sharp" size={20} color={"black"}/>
-        </TouchableOpacity>
-      </View>
-       
-      </View>}
-      <Text style={styles.valueText}>{subject}</Text>
+    <View
+    style={{
+      margin: 10,
+      padding: 5,
+      paddingRight:5,
+       width:370,
+      backgroundColor: 'white',
+      display:"flex",
+      elevation: 5,
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 0},
+      shadowOpacity: 0.1,
+      shadowRadius: 5,
+      borderRadius:9,
+   
+      justifyContent:"flex-start",
+      alignItems:"center"
+    }}>
+    <Text style={{color: 'black', fontSize: 16, fontWeight: 'bold'}}>
+      {name}
+    </Text>
+    <View style={{padding: 20, alignItems: 'center'}}>
     <Chart
   style={{ height: 200, width: 350 }}
   data={[
@@ -168,6 +175,7 @@ const ScrolableChart = ({color1,color2,subject}) => {
   />
   <Area theme={{ gradient: { from: { color:COLORS.mainColor3, opacity: 0.4 }, to: { color: COLORS.backgGroundColor, opacity: 0.4 } } }} smoothing="cubic-spline" />
 </Chart>
+</View>
     </View>
   )
 }

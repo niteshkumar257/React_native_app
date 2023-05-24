@@ -2,12 +2,10 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator
 import React from 'react'
 import { useState, useEffect,useContext } from "react";
 import axios from 'axios';
-import { AuthContext } from '../../Context/Context';
 import AcitvityHandler from '../AcitvityHandler';
 import { COLORS } from '../../Utils/Colors/Colors'
 import DataContext from '../../Context/DataContext';
 import TableComponent from './TableComponent';
-import AreaGraphComponent from './AreaGraphComponent';
 import BarGraphCompnent from './BarGraphCompnent';
 import Icon from "react-native-vector-icons/Ionicons";
 

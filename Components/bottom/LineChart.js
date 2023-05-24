@@ -2,9 +2,30 @@ import  { View, Text } from 'react-native'
 import React from 'react'
 import { Chart, Line, Area, HorizontalAxis, VerticalAxis } from 'react-native-responsive-linechart'
 
-const LineChart = ({type}) => {
+const LineChart = ({type,name}) => {
   return (
-    <View>
+    <View
+    style={{
+      margin: 10,
+      padding: 5,
+      paddingRight:5,
+       width:370,
+      backgroundColor: 'white',
+      display:"flex",
+      elevation: 5,
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 0},
+      shadowOpacity: 0.1,
+      shadowRadius: 5,
+      borderRadius:9,
+   
+      justifyContent:"flex-start",
+      alignItems:"center"
+    }}>
+    <Text style={{color: 'black', fontSize: 16, fontWeight: 'bold'}}>
+      {name}
+    </Text>
+    <View style={{padding: 20, alignItems: 'center'}}>
        <Chart
   style={{ height: 200, width: 400 }}
   data={[
@@ -128,8 +149,9 @@ const LineChart = ({type}) => {
       labels: { formatter: (v) => v.toFixed(0) } }}
    />
   {/* <Area theme={{ gradient: { from: { color: '#44bd32' }, to: { color: '#44bd32', opacity: 0.2 } }}} /> */}
-  <Line   smoothing={type} theme={{ stroke: { color: '#44bd32', width: 2 }, scatter: { default: { width: 8, height: 8, rx: 4, color: '#44ad32' }, selected: { color: 'red' } } }} />
+  <Line   smoothing={"bezier"} theme={{ stroke: { color: '#44bd32', width: 2 }, scatter: { default: { width: 8, height: 8, rx: 4, color: '#44ad32' }, selected: { color: 'red' } } }} />
 </Chart>
+</View>
     </View>
   )
 }

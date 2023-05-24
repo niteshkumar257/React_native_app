@@ -45,7 +45,7 @@ const Bar = ({d,name}) => {
       </Text>
       <View style={{padding: 20, alignItems: 'center'}}>
         <BarChart
-          data={data}
+          data={d}
           barWidth={30}
           initialSpacing={25}
           spacing={25}
@@ -68,7 +68,6 @@ const Bar = ({d,name}) => {
           scrollAnimation={true}
           barMarginBottom={5}
           showScrollIndicator={true}
-      
           yAxisLabelTexts={['0', '20', '40', '60', '80', '90', '100']}
           labelWidth={40}
           xAxisLabelTextStyle={{color: 'black', textAlign: 'center'}}
