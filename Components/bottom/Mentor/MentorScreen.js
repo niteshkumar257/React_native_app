@@ -23,7 +23,7 @@ const Screen4 = ({navigation}) => {
   const getMentorsDetails=()=>
   {
 
-    console.warn("mentor is cliked");
+  
     setIsLoding(true);
      axios.get("https://school-management-api.azurewebsites.net/mentors")
      .then((res)=>{

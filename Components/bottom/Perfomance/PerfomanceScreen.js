@@ -124,7 +124,7 @@ const styles = StyleSheet.create(
         display:"flex",
         justifyContent:'center',
         alignItems:"center",
-        width:width-10,
+        width:width,
 
       
         
