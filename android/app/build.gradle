@@ -95,10 +95,10 @@ android {
 
     namespace "com.awesomeproject"
     defaultConfig {
-        applicationId "com.gannvwala.myapp"
+        applicationId "com.awesomeproject"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 2
+        versionCode 1
         versionName "1.0"
     }
 

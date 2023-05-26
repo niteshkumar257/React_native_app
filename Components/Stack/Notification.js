@@ -7,6 +7,9 @@ import axios from "axios";
 import { AuthContext } from '../Context/Context'
 import jwtDecode from 'jwt-decode'
 import { COLORS } from '../Utils/Colors/Colors'
+import { Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
 
 const Notification = () => {
   const [notificationList,setNotificatinList]=useState([]);
@@ -80,7 +83,7 @@ const styles=StyleSheet.create(
           paddingTop:20,
             display:"flex",
             alignItems:"center",
-            height:700,
+            height:height,
             width:"100%",
           
             alignContent:"center",

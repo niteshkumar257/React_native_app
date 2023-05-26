@@ -1,11 +1,13 @@
-import { View, Text, StyleSheet, ScrollView, ActivityIndicator,Image } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator, Image } from 'react-native'
 
 import React, { useState, useEffect } from 'react'
 import { COLORS } from '../../Utils/Colors/Colors'
 import axios from 'axios'
+import { Dimensions } from 'react-native';
 
+const { width, height } = Dimensions.get('window');
 
-const Video = ({navigation}) => {
+const Video = ({ navigation }) => {
   const [startPlay, setStartPlay] = useState(false);
   const [videoId, setVideoId] = useState(null);
   const [playStatus, setPlayStatus] = useState(false);
@@ -27,75 +29,71 @@ const Video = ({navigation}) => {
     }
   ]
 
-  
 
- const subjectList=[
-  {id:1,subject:"Physics"},
-  {id:2,subject:"Chemistry"},
-  {id:3,subject:"Mathematics"},
-  {id:4,subject:"Biology"},
-  {id:5,subject:"Histroy"},
- ]
- const subjectSelectHandlerBiology=()=>
- {
 
-      navigation.navigate('subject',{
-            subject_name:"Biology",
-            playList_Id:'PL5ABW4Ea26ZSAWmLQ4aoB3_LI82wOp7Z7'
-      });
- }
- const subjectSelectHandlerMath=()=>
- {
+  const subjectList = [
+    { id: 1, subject: "Physics" },
+    { id: 2, subject: "Chemistry" },
+    { id: 3, subject: "Mathematics" },
+    { id: 4, subject: "Biology" },
+    { id: 5, subject: "Histroy" },
+  ]
+  const subjectSelectHandlerBiology = () => {
 
-      navigation.navigate('subject',{
-           
-            subject_name:"Math",
-            playList_Id:'PL5ABW4Ea26ZSAWmLQ4aoB3_LI82wOp7Z7'
-            
+    navigation.navigate('subject', {
+      subject_name: "Biology",
+      playList_Id: 'PL5ABW4Ea26ZSAWmLQ4aoB3_LI82wOp7Z7'
+    });
+  }
+  const subjectSelectHandlerMath = () => {
 
-      });
- }
- const subjectSelectHandlerPhysics=()=>
- {
+    navigation.navigate('subject', {
 
-      navigation.navigate('subject',{
-            subject_name:"Physics",
-            playList_Id:"PL5ABW4Ea26ZSoXZTG3LBt6iGCh_tnSA78"
-      });
- }
- const subjectSelectHandlerChemistry=()=>
- {
+      subject_name: "Math",
+      playList_Id: 'PL5ABW4Ea26ZSAWmLQ4aoB3_LI82wOp7Z7'
 
-      navigation.navigate('subject',{
-            subject_name:"Chemistry",
-            playList_Id:'PL5ABW4Ea26ZSzfUq9VGWfv9iJqbOPOO7j'
-      });
- }
+
+    });
+  }
+  const subjectSelectHandlerPhysics = () => {
+
+    navigation.navigate('subject', {
+      subject_name: "Physics",
+      playList_Id: "PL5ABW4Ea26ZSoXZTG3LBt6iGCh_tnSA78"
+    });
+  }
+  const subjectSelectHandlerChemistry = () => {
+
+    navigation.navigate('subject', {
+      subject_name: "Chemistry",
+      playList_Id: 'PL5ABW4Ea26ZSzfUq9VGWfv9iJqbOPOO7j'
+    });
+  }
   return (
     <ScrollView >
       <View style={styles.videoContainer} removeClippedSubviews={true}>
-       
-         <View style={styles.subjectContainer}>
-            <View style={styles.imageContainer} onStartShouldSetResponder={subjectSelectHandlerBiology}>
-         <Image source={require('../../../assets/microscope.png')}/>
-         <Text style={styles.subejctText}>Biology</Text>
-         </View>
-            <View style={styles.imageContainer} onStartShouldSetResponder={subjectSelectHandlerPhysics}>
-            <Image source={require('../../../assets/pendulum.png')}/>
+
+        <View style={styles.subjectContainer}>
+          <View style={styles.imageContainer} onStartShouldSetResponder={subjectSelectHandlerBiology}>
+            <Image source={require('../../../assets/microscope.png')} />
+            <Text style={styles.subejctText}>Biology</Text>
+          </View>
+          <View style={styles.imageContainer} onStartShouldSetResponder={subjectSelectHandlerPhysics}>
+            <Image source={require('../../../assets/pendulum.png')} />
             <Text style={styles.subejctText}>Physics</Text>
-                 </View>
-                 <View style={styles.imageContainer} onStartShouldSetResponder={subjectSelectHandlerMath}>
-                 <Image source={require('../../../assets/design.png')}/>
-                 <Text style={styles.subejctText}>Math</Text>
-                 </View>
-                 <View style={styles.imageContainer} onStartShouldSetResponder={subjectSelectHandlerChemistry}>
-                 <Image size={48} source={require('../../../assets/atom.png')}/>
-                 <Text style={styles.subejctText}>Chemistry</Text>
-                 </View>
-    
+          </View>
+          <View style={styles.imageContainer} onStartShouldSetResponder={subjectSelectHandlerMath}>
+            <Image source={require('../../../assets/design.png')} />
+            <Text style={styles.subejctText}>Math</Text>
+          </View>
+          <View style={styles.imageContainer} onStartShouldSetResponder={subjectSelectHandlerChemistry}>
+            <Image size={48} source={require('../../../assets/atom.png')} />
+            <Text style={styles.subejctText}>Chemistry</Text>
+          </View>
+
+        </View>
       </View>
-      </View>
-     
+
     </ScrollView>
 
   )
@@ -107,17 +105,20 @@ const styles = StyleSheet.create(
     videoContainer: {
 
       flex: 1,
-      width:"100%",
-      height:700,
+      width: width,
+      height: height,
       flexDirection: "column",
+     backgroundColor:"red",
+      alignItems:"center",
       rowGap: 10,
       borderRadius: 9,
       paddingTop: 20,
-      padding: 10,
-    display: "flex",
-      paddingLeft:20,
-      backgroundColor:COLORS.backgGroundColor,
-   },
+     
+      display: "flex",
+    
+      backgroundColor: COLORS.backgGroundColor,
+     
+    },
     VideoPlayerContainer: {
       display: "flex",
       justifyContent: "center",
@@ -129,47 +130,52 @@ const styles = StyleSheet.create(
       shadowOffset: { width: 0, height: 0 },
       shadowOpacity: 0.1,
       shadowRadius: 5,
-
+      backgroundColor: "red"
     },
-    imageContainer:{
-        display:"flex",
-        alignItems:"center",
-        justifyContent:"center",
-        height:150,
-         width:150,
-        //  backgroundColor:"#e1ffff",
-         rowGap:5,
-         backgroundColor: 'white',
+    imageContainer: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      height: 170,
+      width: 170,
+      //  backgroundColor:"#e1ffff",
+      rowGap: 5,
+      backgroundColor: 'black',
       elevation: 0,
       shadowColor: '#000',
+     
       shadowOffset: { width: 0, height: 0 },
       shadowOpacity: 0.1,
       shadowRadius: 5,
-         borderRadius:9
-         
-         
+      borderRadius: 9
+
+
 
     },
-    subjectContainer:{
+    subjectContainer: {
 
-      height:"100%",
-      width:"100%",
-      display:"flex",
-      flexDirection:"row",
-      columnGap:20,
-      flexWrap:"wrap",
-      rowGap:20,
-        height:"auto",
-        paddingLeft:15
-     
-     
+      height: "100%",
+      width: "100%",
+      display: "flex",
+      justifyContent:"center",
+      alignItems:"center",
+      flexDirection: "row",
+      
+      columnGap: 40,
+      flexWrap: "wrap",
+      rowGap: 20,
+      height: "auto",
+    
+      padding:10,
+
+
     },
-    subejctText:{
-      fontSize:13,
-      color:"black",
-      fontWeight:600
+    subejctText: {
+      fontSize: 13,
+      color: "white",
+      fontWeight: 600
     }
-   
+
 
   }
 )

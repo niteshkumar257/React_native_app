@@ -48,7 +48,7 @@ const Login=({navigation})=>
           else 
           {
             showToast("success","SuccesFull","Password changed successfully")
-            setTimeout(() =>   navigation.navigate("login"),500);
+            setTimeout(() =>   navigation.navigate("login"),2000);
             setNewPassword("");
             setOldPassword("");
             setUserName("");

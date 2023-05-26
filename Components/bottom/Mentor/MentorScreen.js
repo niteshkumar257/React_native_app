@@ -6,16 +6,14 @@ import AcitvityHandler from '../AcitvityHandler';
 import { AuthContext } from '../../Context/Context';
 import jwtDecode from 'jwt-decode';
 import { COLORS } from '../../Utils/Colors/Colors'
-
+import { Dimensions } from 'react-native';
+const { width, height } = Dimensions.get('window');
 
 const Screen4 = ({navigation}) => {
   const [MentorDetails,setMentorDetails]=useState([]);
   const [parentMentor,setParentMentor]=useState(false);
   const [isLoding,setIsLoding]=useState(true);
   const [status,setStatus]=useState(false);
-  
-
-
   // user informatoion
   const {userToken}=useContext(AuthContext);
   let userInfo=jwtDecode(userToken);
@@ -45,7 +43,7 @@ const Screen4 = ({navigation}) => {
               isSchecule = true;
             } 
                   
-       setMentorDetails(mentor);
+        setMentorDetails(mentor);
           setParentMentor(true);
         setIsLoding(false);
       });   
@@ -86,8 +84,8 @@ const Screen4 = ({navigation}) => {
       
          <View style={styles.container}>
          
-      { parentMentor && MentorDetails && 
-        MentorDetails.map((item,index)=>(
+      { (parentMentor && MentorDetails) ?
+        MentorDetails?.map((item,index)=>(
           <Mentor key={item.mentor_id
           } name={item.mentor_name} 
             mentor_id={item.mentor_id}
@@ -100,7 +98,16 @@ const Screen4 = ({navigation}) => {
            exp={"Academics"}
            details={"28 years experience in education system along with great command in Physics .he was district resource person to train Govt lecture from Ajij Premji Foundation ,Wipro" }
            />
-        ))
+        )) :
+        <View style={{
+          display:"flex",
+          justifyContent:"center",
+          alignItems
+        }}>
+              <Text>No Mentor listed</Text>
+        </View>
+
+       
       }
        
        
@@ -115,7 +122,7 @@ const Screen4 = ({navigation}) => {
 const styles=StyleSheet.create(
   {
     ViewContainer:{
-          height:700,
+          height:height,
           width:"100%",
           padding:5,
           backgroundColor:COLORS.backgGroundColor

@@ -8,6 +8,9 @@ import DataContext from '../../Context/DataContext';
 import TableComponent from './TableComponent';
 import BarGraphCompnent from './BarGraphCompnent';
 import Icon from "react-native-vector-icons/Ionicons";
+import { Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
 
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -105,14 +108,14 @@ const styles = StyleSheet.create(
           height:"100%",
           display:"flex",
          
-           minHeight:645,
+           minHeight:height,
           // justifyContent:"center",
           alignItems:"center",
           height:'auto',
           backgroundColor:COLORS.backgGroundColor
       },
       perforomanceContainer:{
-            width:"100%",
+            width:width,
            
           
           
@@ -121,12 +124,17 @@ const styles = StyleSheet.create(
         display:"flex",
         justifyContent:'center',
         alignItems:"center",
+        width:width-10,
+
       
         
       },bottomContainer:{
         display:"flex",
           justifyContent:"center",
-          alignItems:"center"
+          alignItems:"center",
+         
+          width:width,
+
       }
  ,titleContainer:{
         width:"100%",
