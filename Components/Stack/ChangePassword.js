@@ -93,7 +93,7 @@ const Login=({navigation})=>
     else 
     {
       setShow(false);
-      showToast("error","All fields are Required ?","AllFields Required")
+      showToast('error',"All fields are Required ?","AllFields Required")
     }
    
 

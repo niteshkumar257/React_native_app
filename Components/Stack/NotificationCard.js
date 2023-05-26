@@ -2,9 +2,10 @@ import { View, Text,StyleSheet,Image } from 'react-native'
 import React from 'react'
 import Icon from "react-native-vector-icons/Ionicons";
 import axios from 'axios';
+import {COLORS} from "../Utils/Colors/Colors";
 
 
-const NotificationCard = ({icon,msg,NotificationId,NotificationStatus,getNotification}) => {
+const NotificationCard = ({icon,msg,NotificationId,NotificationStatus,getNotification,date}) => {
 
 
     const feeIcon=require("../../assets/notificationFee.png")
@@ -39,6 +40,16 @@ const NotificationCard = ({icon,msg,NotificationId,NotificationStatus,getNotific
       }}> 
       {msg}
       </Text>
+      <Text style={{
+        fontSize:13,
+        fontWeight:700,
+        lineHeight:17,
+        color:"black",
+        letterSpacing:1,
+        
+        
+        
+      }}> {new Date(date).toLocaleDateString()}</Text>
       </View>
     </View>
   )
@@ -86,6 +97,8 @@ const styles=StyleSheet.create(
             height:"auto",
             flex:3,
             width:"75%",
+            display:'flex',
+            rowGap:10,
            
             padding:5
             

@@ -23,6 +23,7 @@ const Screen4 = ({navigation}) => {
   const getMentorsDetails=()=>
   {
 
+    console.warn("mentor is cliked");
     setIsLoding(true);
      axios.get("https://school-management-api.azurewebsites.net/mentors")
      .then((res)=>{
@@ -42,7 +43,18 @@ const Screen4 = ({navigation}) => {
               element.check=true; 
               isSchecule = true;
             } 
-                  
+            console.log(mentor)
+          
+            console.log(mentor)
+            mentor.sort((a, b) => {
+              if (a.check && !b.check) {
+                return -1; // Move a before b
+              } else if (!a.check && b.check) {
+                return 1; // Move b before a
+              } else {
+                return 0; // Maintain the original order
+              }
+            });
         setMentorDetails(mentor);
           setParentMentor(true);
         setIsLoding(false);
@@ -52,7 +64,11 @@ const Screen4 = ({navigation}) => {
         if(isSchecule == true){
           element.check2 = true;
         } 
-      });   
+      });  
+     
+      console.log("mentor array")
+      console.log(mentor);
+   
     
     }).catch((err)=>
     {
@@ -95,8 +111,9 @@ const Screen4 = ({navigation}) => {
               status={status}
             check={item.check}
           qualification={"MSc in Physics"}
-           exp={"Academics"}
-           details={"28 years experience in education system along with great command in Physics .he was district resource person to train Govt lecture from Ajij Premji Foundation ,Wipro" }
+           exp={item.details}
+           mobile={item.mobile}
+           email={item.gmail}
            />
         )) :
         <View style={{

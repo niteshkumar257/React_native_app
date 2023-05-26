@@ -10,10 +10,10 @@ import { COLORS } from '../../Utils/Colors/Colors'
 
 
 
-const Mentor = ({ name, qualification, exp, details, mentor_id ,check,getMentorsDetails,item,setStatus,status}) => {
+const Mentor = ({ name, qualification, exp,email, details, mentor_id ,mobile,check,getMentorsDetails,item,setStatus,status}) => {
 
  
-  
+  console.log(name);
   const [disableButton,setDisableButton]=useState(false);
   const showButton=useRef(false);
 
@@ -67,17 +67,17 @@ const Mentor = ({ name, qualification, exp, details, mentor_id ,check,getMentors
               </View>
 
             </View>
-            <View style={styles.InfoSubContainer}>
-              <Text style={styles.keyText}>Qualification</Text>
+            {/* <View style={styles.InfoSubContainer}>
+              <Text style={styles.keyText}>Email</Text>
               <View style={styles.valueContainer}>
-                <Text style={styles.valueText}>{qualification}</Text>
+                <Text style={styles.valueText}>{email}</Text>
               </View>
 
-            </View>
+            </View> */}
             <View style={styles.InfoSubContainer}>
-              <Text style={styles.keyText}>Expericence</Text>
+              <Text style={styles.keyText}>Phone</Text>
               <View style={styles.valueContainer}>
-                <Text style={styles.valueText}>{exp}</Text>
+                <Text style={styles.valueText}>{mobile}</Text>
               </View>
 
             </View>
@@ -89,7 +89,7 @@ const Mentor = ({ name, qualification, exp, details, mentor_id ,check,getMentors
 
             onTextLayout={onTextLayout}
             numberOfLines={textShown ? undefined : 1}
-            style={styles.detailText}>{details}</Text>
+            style={styles.detailText}>{exp}</Text>
 
           {
             lengthMore ? <Text

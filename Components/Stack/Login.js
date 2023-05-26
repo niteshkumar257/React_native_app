@@ -71,7 +71,7 @@ const Login=({navigation})=>
     </View>
     <View style={style.btn}>
       <TouchableOpacity style={style.button} onPress={()=>loginHandler(username,password,navigation,setPassword,setUserName,showToast,setShow)}>
-        <Text style={style.text}>Log In</Text>
+        <Text style={style.text}>Log  In</Text>
       </TouchableOpacity>
     </View>
     <TouchableOpacity onPress={changePassword}>
@@ -96,24 +96,16 @@ const style=StyleSheet.create({
       backgroundColor:COLORS.backgGroundColor,
       rowGap:15,
       paddingTop:80
-   
-
-
-  },
+   },
  Logo_container:{
   height:100,
   width:"80%",
   borderRadius:9,
-
   display:"flex",
   alignItems:"center",
   justifyContent:"center",
   flexDirection:"column",
   rowGap:30
- 
-  
-
-  
  },
  Info_container:{
   height:200,
@@ -125,33 +117,22 @@ display:"flex",
  display:"flex",
  justifyContent:"center",
  alignIgtem:"center",
-
- 
-
- },
+},
  banner:{
   height:55,
   width:"95%",
   padding:20,
-
-
- },
+},
  btn:{
      height:70,
      width:"85%",
      borderRadius:9,
      fontSize:20,
      padding:5,
-  
      display:"flex",
      justifyContent:"center",
      alignItems:"center",
-     
-
-
-
-    
- },
+   },
  text_input:{
   height:70,
   width:"100%",
@@ -164,9 +145,6 @@ display:"flex",
   display:"flex",
   justifyContent:"center",
   alignItems:"center",
-  
-  
-
  },
 button:{
   height:50,
@@ -184,8 +162,6 @@ button:{
   shadowOpacity: 0.1,
   shadowRadius: 5,
   
-  
- 
 },
 text:{
 fontSize:25,

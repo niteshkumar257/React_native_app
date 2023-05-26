@@ -89,11 +89,8 @@ export const AuthProvider=({children})=>
     const logoutHandler=async (navigation)=>
     {
 
-     
-      
-        
-        try {
-          console.log(navigation.navigate);
+     try {
+       
       
           setUserToken(null);
           AsyncStorage.removeItem('userToken');

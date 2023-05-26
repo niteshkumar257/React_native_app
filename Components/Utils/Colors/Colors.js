@@ -3,5 +3,6 @@ export const COLORS = {
     mainColor2:"#318CE7",
     mainColor3:"#006DFF",
     headingColor:"grey",
-    backgGroundColor:'#E0F1FF'
+    backgGroundColor:'#E0F1FF',
+    succesColor:"lightgreen"
   }
