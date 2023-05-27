@@ -95,7 +95,7 @@ android {
 
     namespace "com.awesomeproject"
     defaultConfig {
-        applicationId "com.gannvwala2.com"
+        applicationId "com.gannvwala5.com"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 2

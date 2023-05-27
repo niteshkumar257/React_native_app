@@ -2,15 +2,16 @@ import { View, Text ,StyleSheet,ScrollView,FlatList,Image} from 'react-native'
 import React ,{useEffect,useState,useContext} from 'react'
 import DataContext from '../../Context/DataContext'
 import axios from 'axios'
+import {COLORS} from "../../Utils/Colors/Colors";
 
 const Screen1 = () => {
    
   const {id}=useContext(DataContext);
   const [childId,setChildId]=useState(id);
- const Curriculum="../../../assets/data1.png";
+ const Curriculum=(require("../../../assets/data1.png"));
  const  [schoolId,setSchoolId]=useState();
  const [classId,setClassId]=useState();
- const [url,setUrl]=useState(require("../../../assets/data1.png"));
+ const [url,setUrl]=useState(null);
 console.log(url);
  const getSchoolIdAndClassId=()=>
  {
@@ -20,26 +21,27 @@ console.log(url);
      
       setClassId(res.data.studentDetails[0].class_id);
       setSchoolId(res.data.studentDetails[0].school_id);
-   
-      getCurriculum();
+     console.log(23,res.data.studentDetails[0].class_id);
+      getCurriculum(res.data.studentDetails[0].class_id,res.data.studentDetails[0].school_id);
     }).catch(err=>
       {
         console.log(err);
       })
  }
- const getCurriculum=()=>
+ const getCurriculum=(class_id,school_id)=>
  {
-  console.log(schoolId,classId);
+  console.log(32,class_id,school_id);
   axios.get(`https://school-management-api.azurewebsites.net/viewCurriculum`, {
     params: {
-      school_id: schoolId,
-      class_id: classId
+      school_id: school_id,
+      class_id: class_id
       }
    }).then(res=>
     {
-      console.log(res.data);
-      setUrl((res.data.url));
-      console.log(res.data.url);
+      // console.log(40,res.data);
+      setUrl(res.data.url);
+      console.log(42,res.data.url);
+      // console.log(res.data.url);
     }).catch((err)=>
     {
       console.log(err);
@@ -55,14 +57,16 @@ console.log(url);
     <ScrollView style={styles.ViewContainer}>
       <View style={styles.container}> 
   
-  {
-    url!=null ? <Image style={styles.Image} source={url!=null ?url:Curriculum}/> :
+   {
+    url!=null ? <Image style={styles.Image} source={ { uri: url }}/> :
     <Text style={{
       fontSize:20,
       fontWeight:600,
       color:"black"
-    }}>No curriculum is assigned</Text>
-  }
+    }}>No curriculum is assigned</Text> 
+    }
+   
+ 
  
 </View>
     </ScrollView>
@@ -75,7 +79,7 @@ const styles=StyleSheet.create(
       height:900,
       width:"100%",
       padding:5,
-      backgroundColor:"#E9F3FD"
+      backgroundColor:COLORS.backgGroundColor
     
 },
     container:{

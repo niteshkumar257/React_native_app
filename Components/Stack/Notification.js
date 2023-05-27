@@ -8,6 +8,8 @@ import { AuthContext } from '../Context/Context'
 import jwtDecode from 'jwt-decode'
 import { COLORS } from '../Utils/Colors/Colors'
 import { Dimensions } from 'react-native';
+import { useDispatch,useSelector } from 'react-redux'
+import { renderNotificationList } from '../Redux/NotificationSlice'
 
 const { width, height } = Dimensions.get('window');
 
@@ -16,6 +18,8 @@ const Notification = () => {
   const [isLoding,setIsLodiging]=useState(true);
   const [error,setError]=useState(false);
   const {userToken}=useContext(AuthContext);
+  const dispatch=useDispatch();
+  const notificationListRedux=useSelector((state)=>state.Notification.notificationList);
   let userInfo=jwtDecode(userToken);
   let parentId=(userInfo.result.parent_id);
    
@@ -26,22 +30,22 @@ const Notification = () => {
     {
      
       setIsLodiging(false);
-      setNotificatinList(
-        (res.data.messages).sort((a, b) => {
-          const dateA = new Date(a.created_on);
-          const dateB = new Date(b.created_on);
+      // setNotificatinList(
+      //   (res.data.messages).sort((a, b) => {
+      //     const dateA = new Date(a.created_on);
+      //     const dateB = new Date(b.created_on);
         
-          if (dateA < dateB) return 1;
-          if (dateA > dateB) return -1;
+      //     if (dateA < dateB) return 1;
+      //     if (dateA > dateB) return -1;
         
-          // Dates are the same
-          if (!a.is_seen && b.is_seen) return -1;
-          if (a.is_seen && !b.is_seen) return 1;
+      //     // Dates are the same
+      //     if (!a.is_seen && b.is_seen) return -1;
+      //     if (a.is_seen && !b.is_seen) return 1;
         
-          return 0;
-        }))
+      //     return 0;
+      //   }))
      
-      
+        dispatch(renderNotificationList(res.data.messages));
       
     }).catch((err)=>
     {
@@ -63,12 +67,12 @@ const Notification = () => {
          <View style={styles.mainContainer} >
       {
 
-        notificationList.length===0 ? <Text style={{
+        notificationListRedux.length===0 ? <Text style={{
            fontSize:20,
            fontWeight:500,
            color:"black"
         }} >No notifcations !</Text> :
-        notificationList.map((item,index)=>(
+        notificationListRedux.map((item,index)=>(
           <NotificationCard  key={index}
            NotificationId={item.notification_id}
            NotificationStatus={item.is_seen}

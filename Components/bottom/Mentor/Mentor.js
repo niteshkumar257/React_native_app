@@ -53,7 +53,7 @@ const Mentor = ({ name, qualification, exp,email, details, mentor_id ,mobile,che
   }, []);
 
   return (
-    <View style={styles.main_container}>
+    <View style={[styles.main_container,(item.check) && styles.active_border]} >
       <View style={styles.container}>
         <View style={styles.topContainer}>
           <View style={styles.profileContainer}>
@@ -135,7 +135,7 @@ const styles = StyleSheet.create(
       flexDirection: "column",
       rowGap: 2,
       alignItems: "center",
-
+    
       padding: 5,
       backgroundColor: "white",
       borderRadius: 9,
@@ -309,6 +309,10 @@ const styles = StyleSheet.create(
       alignItems:"center"
 
 
+    },
+    active_border:{
+      borderWidth:2,
+      borderColor:"green",  
     }
 
 

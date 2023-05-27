@@ -25,6 +25,9 @@ const Login=({navigation})=>
       text1: header,
       text2: msg,
       color:"red",
+      style: {
+        backgroundColor: 'red', // Set the desired background color here
+      },
       customComponent: (
         <CustomToast
           logo={gwlogo}

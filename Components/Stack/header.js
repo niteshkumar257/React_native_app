@@ -7,6 +7,7 @@ import { AuthContext } from '../Context/Context';
 import {COLORS} from "../Utils/Colors/Colors";
 import axios from 'axios';
 import { Badge } from '@rneui/themed';
+import { useSelector } from 'react-redux';
 
 
 const header = ({navigation}) => {
@@ -15,6 +16,7 @@ const header = ({navigation}) => {
   let parentId=(userInfo.result.parent_id);
   const [notificationList,setNotificatinList]=useState([]);
   const [unseenNotificationCount,setUnseenNotificatinCount]=useState(0);
+  const count=useSelector((state)=>state.Notification.count);
    
   const [fatherName,setFatherName]=useState("");
   const getParentInfo=()=>
@@ -87,10 +89,10 @@ const header = ({navigation}) => {
        <Icon name="notifications-sharp" size={30} color={"white"}/>
        <Badge
             status="error"
-          
-            value={notificationList?.filter(item=> {
-              return item.is_seen===false;
-            }).length }
+              value={count}
+            // value={notificationList?.filter(item=> {
+            //   return item.is_seen===false;
+            // }).length }
             containerStyle={{ position: 'absolute', top: -2, right:-5 }}
           />
       </View>
