@@ -1,16 +1,69 @@
 import { View, Text ,StyleSheet,ScrollView,FlatList,Image} from 'react-native'
 import React ,{useEffect,useState,useContext} from 'react'
 import DataContext from '../../Context/DataContext'
+import axios from 'axios'
+
 const Screen1 = () => {
    
   const {id}=useContext(DataContext);
   const [childId,setChildId]=useState(id);
- const Curriculum=require("../../../assets/data1.png");
+ const Curriculum="../../../assets/data1.png";
+ const  [schoolId,setSchoolId]=useState();
+ const [classId,setClassId]=useState();
+ const [url,setUrl]=useState(require("../../../assets/data1.png"));
+console.log(url);
+ const getSchoolIdAndClassId=()=>
+ {
+    axios.get(`https://school-management-api.azurewebsites.net/students/${childId}`)
+    .then((res)=>
+    {
+     
+      setClassId(res.data.studentDetails[0].class_id);
+      setSchoolId(res.data.studentDetails[0].school_id);
+   
+      getCurriculum();
+    }).catch(err=>
+      {
+        console.log(err);
+      })
+ }
+ const getCurriculum=()=>
+ {
+  console.log(schoolId,classId);
+  axios.get(`https://school-management-api.azurewebsites.net/viewCurriculum`, {
+    params: {
+      school_id: schoolId,
+      class_id: classId
+      }
+   }).then(res=>
+    {
+      console.log(res.data);
+      setUrl((res.data.url));
+      console.log(res.data.url);
+    }).catch((err)=>
+    {
+      console.log(err);
+    })
+ }
+ useEffect(()=>
+ {
+  getSchoolIdAndClassId();
+ 
+
+ },[])
   return (
     <ScrollView style={styles.ViewContainer}>
       <View style={styles.container}> 
   
-  <Image style={styles.Image} source={Curriculum}/>
+  {
+    url!=null ? <Image style={styles.Image} source={url!=null ?url:Curriculum}/> :
+    <Text style={{
+      fontSize:20,
+      fontWeight:600,
+      color:"black"
+    }}>No curriculum is assigned</Text>
+  }
+ 
 </View>
     </ScrollView>
     

@@ -26,7 +26,7 @@ const Children = ({ navigation }) => {
       .then((res) => {
 
         setChildren(res.data.allChildren);
-      
+       
         setShowActitvity(false);
         
       }).catch((err) => {
