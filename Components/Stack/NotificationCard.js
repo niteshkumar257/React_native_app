@@ -3,17 +3,20 @@ import React from 'react'
 import Icon from "react-native-vector-icons/Ionicons";
 import axios from 'axios';
 import {COLORS} from "../Utils/Colors/Colors";
+import { fetchContent } from '../Redux/NotificationSlice';
+import { useDispatch } from 'react-redux';
 
 
-const NotificationCard = ({icon,msg,NotificationId,NotificationStatus,getNotification,date}) => {
-
-
+const NotificationCard = ({icon,msg,NotificationId,NotificationStatus,getNotification,date,parentId}) => {
+ 
+  const dispatch=useDispatch();
     const feeIcon=require("../../assets/notificationFee.png")
     const updateNotificationStatus=async (notificationId)=>{
       try {
         const response = await axios.put(`https://school-management-api.azurewebsites.net/parents/${notificationId}/markNotificationSeen`);
         console.log('Notification updated successfully:', response.data);
-        getNotification();
+        dispatch(fetchContent(parentId));
+        
       } catch (error) {
         console.error('Error updating notification:', error);
       } 

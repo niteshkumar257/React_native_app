@@ -9,76 +9,89 @@ import jwtDecode from 'jwt-decode'
 import { COLORS } from '../Utils/Colors/Colors'
 import { Dimensions } from 'react-native';
 import { useDispatch,useSelector } from 'react-redux'
-import { renderNotificationList } from '../Redux/NotificationSlice'
+
+import { fetchContent } from '../Redux/NotificationSlice'
 
 const { width, height } = Dimensions.get('window');
 
 const Notification = () => {
   const [notificationList,setNotificatinList]=useState([]);
-  const [isLoding,setIsLodiging]=useState(true);
+ 
   const [error,setError]=useState(false);
   const {userToken}=useContext(AuthContext);
   const dispatch=useDispatch();
-  const notificationListRedux=useSelector((state)=>state.Notification.notificationList);
+  const notificationListRedux=useSelector((state)=>state.Notification.notificationList.messages);
+ console.log(notificationListRedux,24);
+  const isLoading = useSelector((state) => state.Notification.isLoading)
+  const Error = useSelector((state) => state.Notification.error)
+  const count=useSelector((state)=>state.Notification.count);
   let userInfo=jwtDecode(userToken);
   let parentId=(userInfo.result.parent_id);
    
-   const getNotification=()=>
-   {
-    axios.get(`https://school-management-api.azurewebsites.net/parents/${parentId}/getNotification`)
-    .then((res)=>
-    {
+  //  const getNotification=()=>
+  //  {
+  //   axios.get(`https://school-management-api.azurewebsites.net/parents/${parentId}/getNotification`)
+  //   .then((res)=>
+  //   {
      
-      setIsLodiging(false);
-      // setNotificatinList(
-      //   (res.data.messages).sort((a, b) => {
-      //     const dateA = new Date(a.created_on);
-      //     const dateB = new Date(b.created_on);
+  //     setIsLodiging(false);
+  //     // setNotificatinList(
+  //     //   (res.data.messages).sort((a, b) => {
+  //     //     const dateA = new Date(a.created_on);
+  //     //     const dateB = new Date(b.created_on);
         
-      //     if (dateA < dateB) return 1;
-      //     if (dateA > dateB) return -1;
+  //     //     if (dateA < dateB) return 1;
+  //     //     if (dateA > dateB) return -1;
         
-      //     // Dates are the same
-      //     if (!a.is_seen && b.is_seen) return -1;
-      //     if (a.is_seen && !b.is_seen) return 1;
+  //     //     // Dates are the same
+  //     //     if (!a.is_seen && b.is_seen) return -1;
+  //     //     if (a.is_seen && !b.is_seen) return 1;
         
-      //     return 0;
-      //   }))
+  //     //     return 0;
+  //     //   }))
      
-        dispatch(renderNotificationList(res.data.messages));
+  //       dispatch(renderNotificationList(res.data.messages));
       
-    }).catch((err)=>
-    {
-      setIsLodiging(false);
-      setError(true);
-      console.log(err)
-    })
-   }
+  //   }).catch((err)=>
+  //   {
+  //     setIsLodiging(false);
+  //     setError(true);
+  //     console.log(err)
+  //   })
+  //  }
    useEffect(()=>
    {
-     getNotification();
-   },[])
-   
+   dispatch(fetchContent(parentId));
+   },[dispatch]);
+  //  if (isLoading) {
+  //   return <Text>Loding</Text>
+  // }
+
+  // if (Error) {
+  //   return error
+  // }
+
+ console.log(notificationListRedux);  
   return (
 
     <ScrollView>
       {
-        isLoding  ? <AcitvityHandler show={isLoding}/> :
+        isLoading  ? <AcitvityHandler show={isLoading}/> :
          <View style={styles.mainContainer} >
       {
 
-        notificationListRedux.length===0 ? <Text style={{
+      notificationListRedux.length===0 ? <Text style={{
            fontSize:20,
            fontWeight:500,
            color:"black"
         }} >No notifcations !</Text> :
-        notificationListRedux.map((item,index)=>(
+        notificationListRedux?.map((item,index)=>(
           <NotificationCard  key={index}
            NotificationId={item.notification_id}
            NotificationStatus={item.is_seen}
           icon={feeIcon} msg={item.messages}
           date={item.created_on}
-          getNotification={getNotification}
+          parentId={parentId}
           />
           
 

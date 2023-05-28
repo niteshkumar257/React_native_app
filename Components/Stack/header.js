@@ -7,15 +7,17 @@ import { AuthContext } from '../Context/Context';
 import {COLORS} from "../Utils/Colors/Colors";
 import axios from 'axios';
 import { Badge } from '@rneui/themed';
-import { useSelector } from 'react-redux';
+
+import { useDispatch,useSelector } from 'react-redux';
+import { fetchContent } from '../Redux/NotificationSlice';
 
 
 const header = ({navigation}) => {
   const {userToken}=useContext(AuthContext)
   let userInfo=jwtDecode(userToken);
   let parentId=(userInfo.result.parent_id);
-  const [notificationList,setNotificatinList]=useState([]);
-  const [unseenNotificationCount,setUnseenNotificatinCount]=useState(0);
+  const dispatch=useDispatch();
+  
   const count=useSelector((state)=>state.Notification.count);
    
   const [fatherName,setFatherName]=useState("");
@@ -31,33 +33,34 @@ const header = ({navigation}) => {
         })
       
   }
-  const getNotification=()=>
-  {
-   axios.get(`https://school-management-api.azurewebsites.net/parents/${parentId}/getNotification`)
-   .then((res)=>
-   {
+  // const getNotification=()=>
+  // {
+  //  axios.get(`https://school-management-api.azurewebsites.net/parents/${parentId}/getNotification`)
+  //  .then((res)=>
+  //  {
     
      
-     setNotificatinList((res.data.messages));
-     console.log("adbfj,",res.data.message?.length)
+  //    setNotificatinList((res.data.messages));
+  //    console.log("adbfj,",res.data.message?.length)
      
      
-     console.log(res.data.messages);
+  //    console.log(res.data.messages);
 
      
-   }).catch((err)=>
-   {
+  //  }).catch((err)=>
+  //  {
      
    
-     console.log(err)
-   })
-  }
+  //    console.log(err)
+  //  })
+  // }
   
   useEffect(()=>
   {
     getParentInfo();
-    getNotification();
-  },[])
+    dispatch(fetchContent(parentId));
+    
+  },[dispatch])
   // const countUnseenNotification=notificationList?.filter((item)=> item.is_seen==true).reduce((acc,cur)=> {
   //   return acc+cur;
   // },0);

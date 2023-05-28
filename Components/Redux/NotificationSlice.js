@@ -1,37 +1,49 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice ,createAsyncThunk} from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const initialState = {
  notificationList:[],
+ isLoading:false,
+error:null,
  count:0
 };
 
+export const fetchContent = createAsyncThunk(
+  'content/fetchContent',
+  async (state,action) => {
+   
+    const res = await axios(`https://school-management-api.azurewebsites.net/parents/${state}/getNotification`)
+    const data = await res.data;
+  
+    return data
+  }
+)
 const counterSlice = createSlice({
   name: 'notificationList',
   initialState,
-  reducers:{
-    renderNotificationList(state,action)
-    {
+  reducers:{},
+  extraReducers:(builder) => {
 
-        state.notificationList= action.payload.sort((a, b) => {
-            const dateA = new Date(a.created_on);
-            const dateB = new Date(b.created_on);
-          
-            if (dateA < dateB) return 1;
-            if (dateA > dateB) return -1;
-          
-            // Dates are the same
-            if (!a.is_seen && b.is_seen) return -1;
-            if (a.is_seen && !b.is_seen) return 1;
-          
-            return 0;
-          })
-       
-         state.count=state.notificationList?.filter(item=> {
-            return item.is_seen===false;
-          }).length;
-    },
-   
-  }
+    builder.addCase(fetchContent.pending, (state) => {
+    
+      state.isLoading = true;
+    })
+    builder.addCase(fetchContent.fulfilled, (state, action) => {
+      console.log("32",action);
+      state.isLoading = false
+      state.notificationList = action.payload
+      state.count=action.payload.messages.filter(item=> {
+          return item.is_seen===false;
+        }).length 
+      
+        
+    })
+    builder.addCase(fetchContent.rejected, (state, action) => {
+      state.isLoading = false
+      state.error = action.error.message
+    })
+  },
+  
 });
 
 export const { renderNotificationList} = counterSlice.actions;
