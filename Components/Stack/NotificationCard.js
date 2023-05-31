@@ -85,7 +85,7 @@ const styles=StyleSheet.create(
         },
         disableViewContainer:{
           opacity:.8,
-          backgroundColor:'grey'
+          backgroundColor:'lightgrey'
         },
         icons:{
          

@@ -13,7 +13,7 @@ import { COLORS } from '../../Utils/Colors/Colors'
 const Mentor = ({ name, qualification, exp,email, details, mentor_id ,mobile,check,getMentorsDetails,item,setStatus,status}) => {
 
  
-  console.log(name);
+  console.log(name,mentor_id);
   const [disableButton,setDisableButton]=useState(false);
   const showButton=useRef(false);
 

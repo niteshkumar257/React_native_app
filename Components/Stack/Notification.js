@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet ,ScrollView} from 'react-native'
+import { View, Text, StyleSheet ,ScrollView,SafeAreaView} from 'react-native'
 import React, {useEffect,useState,useContext} from 'react'
 import AcitvityHandler from '../bottom/AcitvityHandler'
 import NotificationCard from './NotificationCard'
@@ -74,7 +74,8 @@ const Notification = () => {
  console.log(notificationListRedux);  
   return (
 
-    <ScrollView>
+    <SafeAreaView>
+    <ScrollView overScrollMode="never" removeClippedSubviews={true}>
       {
         isLoading  ? <AcitvityHandler show={isLoading}/> :
          <View style={styles.mainContainer} >
@@ -104,6 +105,7 @@ const Notification = () => {
 }
 
     </ScrollView>
+    </SafeAreaView>
    
   )
 }
@@ -115,7 +117,8 @@ const styles=StyleSheet.create(
           paddingTop:20,
             display:"flex",
             alignItems:"center",
-            height:height,
+           minHeight:height,
+           height:"auto",
             width:"100%",
           
             alignContent:"center",

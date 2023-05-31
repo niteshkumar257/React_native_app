@@ -43,9 +43,9 @@ const Screen4 = ({navigation}) => {
               element.check=true; 
               isSchecule = true;
             } 
-            console.log(mentor)
+           
           
-            console.log(mentor)
+          
             mentor.sort((a, b) => {
               if (a.check && !b.check) {
                 return -1; // Move a before b
@@ -55,6 +55,7 @@ const Screen4 = ({navigation}) => {
                 return 0; // Maintain the original order
               }
             });
+             console.log(58,mentor);
         setMentorDetails(mentor);
           setParentMentor(true);
         setIsLoding(false);
@@ -101,8 +102,9 @@ const Screen4 = ({navigation}) => {
          <View style={styles.container}>
          
       { (parentMentor && MentorDetails) ?
-        MentorDetails?.map((item,index)=>(
-          <Mentor key={item.mentor_id
+        MentorDetails?.map((item)=>{
+
+       return    <Mentor key={item.mentor_id
           } name={item.mentor_name} 
             mentor_id={item.mentor_id}
              getMentorsDetails={getMentorsDetails}
@@ -115,7 +117,7 @@ const Screen4 = ({navigation}) => {
            mobile={item.mobile}
            email={item.gmail}
            />
-        )) :
+}) :
         <View style={{
           display:"flex",
           justifyContent:"center",
