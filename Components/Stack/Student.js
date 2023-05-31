@@ -20,7 +20,7 @@ const Student = ({navigation,name,child_id}) => {
   return (
     <View  onStartShouldSetResponder={()=>clickHandler(child_id)} style={styles.container}>
  
- <Icon name="person-sharp" color={COLORS.mainColor3} size={50}/>
+ <Icon name="person-sharp" color={"black"} size={50}/>
   
   
     <View  style={styles.subContainer}>

@@ -3,6 +3,9 @@ import React ,{useEffect,useState,useContext} from 'react'
 import DataContext from '../../Context/DataContext'
 import axios from 'axios'
 import {COLORS} from "../../Utils/Colors/Colors";
+import AcitvityHandler from '../AcitvityHandler';
+import { Dimensions } from 'react-native';
+const { width, height } = Dimensions.get('window');
 
 const Screen1 = () => {
    
@@ -12,6 +15,7 @@ const Screen1 = () => {
  const  [schoolId,setSchoolId]=useState();
  const [classId,setClassId]=useState();
  const [url,setUrl]=useState(null);
+ const [isLoading,setIsLoading]=useState(true);
 console.log(url);
  const getSchoolIdAndClassId=()=>
  {
@@ -41,10 +45,12 @@ console.log(url);
       // console.log(40,res.data);
       setUrl(res.data.url);
       console.log(42,res.data.url);
+      setIsLoading(false);
       // console.log(res.data.url);
     }).catch((err)=>
     {
       console.log(err);
+      setIsLoading(false);
     })
  }
  useEffect(()=>
@@ -53,6 +59,10 @@ console.log(url);
  
 
  },[])
+ if(isLoading)
+ {
+  return <AcitvityHandler show={isLoading}/>
+ }
   return (
     <ScrollView style={styles.ViewContainer}>
       <View style={styles.container}> 
@@ -76,14 +86,14 @@ console.log(url);
 const styles=StyleSheet.create(
   {
     ViewContainer:{
-      height:900,
+      height:height,
       width:"100%",
       padding:5,
       backgroundColor:COLORS.backgGroundColor
     
 },
     container:{
-      height:700,
+      height:height,
       width:"100%",
        display:"flex",
        justifyContent:"center",

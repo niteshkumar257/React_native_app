@@ -4,7 +4,7 @@ import Fee from "./Fee";
 import axios from 'axios';
 import AcitvityHandler from '../AcitvityHandler';
 import DataContext from '../../Context/DataContext';
-import { Background } from 'victory-native';
+
 import { COLORS } from '../../Utils/Colors/Colors'
 
 

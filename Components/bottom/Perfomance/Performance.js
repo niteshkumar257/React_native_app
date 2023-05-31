@@ -2,9 +2,6 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator
 import React, { useEffect, useState, useContext } from 'react'
 import Icon from "react-native-vector-icons/Ionicons";
 import axios from 'axios';
-import Bar from './Bar';
-import { AuthContext } from '../../Context/Context';
-import Mark from './Mark';
 import DataContext from '../../Context/DataContext';
 import AcitvityHandler from '../AcitvityHandler';
 import { COLORS } from '../../Utils/Colors/Colors'

@@ -1,5 +1,6 @@
 import { View, Text ,ActivityIndicator} from 'react-native'
 import React from 'react'
+import {COLORS} from "../Utils/Colors/Colors";
 
 const AcitvityHandler = ({show}) => {
 
@@ -10,6 +11,7 @@ const AcitvityHandler = ({show}) => {
         alignItems:"center",
         height:650,
         width:"100%",
+        backgroundColor:COLORS.backgGroundColor
        
     
     }}>

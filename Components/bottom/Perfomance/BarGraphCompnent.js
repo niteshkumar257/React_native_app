@@ -3,14 +3,9 @@ import React from 'react'
 import Bar from './Bar'
 import Area from '../Area'
 import Area1 from '../Area1'
-import BarGraph from '../BarGraph'
-import ChartKit from '../ChartKit'
-import ChartC from '../Chart'
-import Graph from '../Graph'
 import LineChart from '../LineChart'
 import ScrolableChart from '../ScrolableChart'
-import CharttWrapper from '../CharttWrapper'
-import AreaChart from './AreaChart'
+
 const months=['Jan','Feb','Mar','Apr','May','June','July','Aug','Sep','Oct','Nov','Dec']
 const BarGraphCompnent = ({data}) => {
     let dataList = [];

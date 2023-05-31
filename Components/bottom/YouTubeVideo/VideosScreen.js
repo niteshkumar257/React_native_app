@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, ScrollView, ActivityIndicator, Image } from 're
 
 import React, { useState, useEffect } from 'react'
 import { COLORS } from '../../Utils/Colors/Colors'
-import axios from 'axios'
+
 import { Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
