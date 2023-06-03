@@ -11,6 +11,13 @@ const { width, height } = Dimensions.get('window');
 const Login=({navigation})=>
 {
 
+  useEffect(()=>
+  {
+     
+      isLogin(navigation)
+   
+   
+  },[])
   const gwbanner=require("../../assets/img3.png");
   const gwlogo=require("../../assets/gwlogo.png");
   const [username,setUserName]=useState("");

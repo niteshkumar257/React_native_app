@@ -7,10 +7,9 @@ const Logo = ({navigation}) => {
   const {isLogin}=useContext(AuthContext);
   useEffect(()=>
   {
-     setTimeout(()=>
-     {
+     
       isLogin(navigation)
-     },3000)
+   
    
   },[])
   return (

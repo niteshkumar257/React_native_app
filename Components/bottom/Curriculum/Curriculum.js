@@ -104,10 +104,7 @@ const [show,setShow]=useState(true);
  
 
 
- if(curriculumLoading)
- {
-  return <AcitvityHandler show={curriculumLoading}/>
- }
+ 
  if(curriculumErrorStatus)
  {
   console.log(error.message);
@@ -115,7 +112,7 @@ const [show,setShow]=useState(true);
   return (
     <ScrollView style={styles.ViewContainer}>
       <View style={styles.container}> 
-  
+  {curriculumLoading && <AcitvityHandler show={curriculumLoading}/>}
    {
     res?.data.url!=null ? <Image style={styles.Image} source={ { uri: res?.data.url }}/> :
     <Text style={{
@@ -148,8 +145,8 @@ const styles=StyleSheet.create(
        justifyContent:"center",
        alignItems:"center",
      
-       padding:20,
-       gap:30,
+     
+      
     },
     text:{
       fontSize:20,

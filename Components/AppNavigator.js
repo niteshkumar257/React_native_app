@@ -27,11 +27,7 @@ const AppNavigator = () => {
        
       }}
       >
-      <Stack.Screen
-          name="logo"
-          component={Logo}
-          options={{ title: 'Student' ,headerShown:false}}
-        />
+     
         <Stack.Screen
           name="login"
           component={Splash}

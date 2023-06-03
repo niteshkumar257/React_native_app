@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet ,ScrollView,SafeAreaView} from 'react-native'
 import React, {useEffect,useState,useContext} from 'react'
-import AcitvityHandler from '../bottom/AcitvityHandler'
+import AcitivityhandlerStack from '../bottom/AcitivityhandlerStack'
 import NotificationCard from './NotificationCard'
 const feeIcon=require("../../assets/notificationFee.png")
 import axios from "axios";
@@ -77,7 +77,7 @@ const Notification = () => {
     <SafeAreaView>
     <ScrollView overScrollMode="never" removeClippedSubviews={true}>
       {
-        isLoading  ? <AcitvityHandler show={isLoading}/> :
+        isLoading  ? <AcitivityhandlerStack show={isLoading}/> :
          <View style={styles.mainContainer} >
       {
 

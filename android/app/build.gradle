@@ -95,7 +95,7 @@ android {
 
     namespace "com.awesomeproject"
     defaultConfig {
-        applicationId "com.gw3.parent"
+        applicationId "com.gw0.parent"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 4
