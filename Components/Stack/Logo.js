@@ -7,8 +7,11 @@ const Logo = ({navigation}) => {
   const {isLogin}=useContext(AuthContext);
   useEffect(()=>
   {
-    console.log("logo screen");
-    isLogin(navigation)
+     setTimeout(()=>
+     {
+      isLogin(navigation)
+     },3000)
+   
   },[])
   return (
     <View style={{
@@ -18,8 +21,12 @@ const Logo = ({navigation}) => {
     }}>
       <Image 
         source={require('../../assets/gwlogo.png')}  
-        style={{width: 200, height: 200 }}
+        style={{width: 100, height: 100 }}
     />
+    <Text style={{
+      fontSize:20,
+      color:"black"
+    }}>GW Parents</Text>
     </View>
   )
 }

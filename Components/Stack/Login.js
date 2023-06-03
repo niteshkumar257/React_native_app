@@ -5,6 +5,9 @@ import { AuthContext } from "../Context/Context";
 import Toast from "react-native-toast-message";
 import { COLORS } from '../Utils/Colors/Colors'
 import CustomToast from "./Toast";
+import { Dimensions } from 'react-native';
+const { width, height } = Dimensions.get('window');
+
 const Login=({navigation})=>
 {
 
@@ -74,7 +77,7 @@ const Login=({navigation})=>
     </View>
     <View style={style.btn}>
       <TouchableOpacity style={style.button} onPress={()=>loginHandler(username,password,navigation,setPassword,setUserName,showToast,setShow)}>
-        <Text style={style.text}>Log  In</Text>
+        <Text style={style.text}>LOG IN</Text>
       </TouchableOpacity>
     </View>
     <TouchableOpacity onPress={changePassword}>
@@ -102,16 +105,18 @@ const style=StyleSheet.create({
    },
  Logo_container:{
   height:100,
-  width:"80%",
+  width:width-60,
   borderRadius:9,
   display:"flex",
   alignItems:"center",
   justifyContent:"center",
   flexDirection:"column",
-  rowGap:30
+  rowGap:30,
+  
  },
  Info_container:{
-  height:200,
+  marginTop:20,
+  height:160,
   width:"80%",
   borderRadius:9,
 borderBottomColor:"black",
@@ -120,24 +125,27 @@ display:"flex",
  display:"flex",
  justifyContent:"center",
  alignIgtem:"center",
+
 },
  banner:{
-  height:55,
-  width:"95%",
+  height:60,
+  width:width-60,
   padding:20,
+ 
 },
  btn:{
-     height:70,
-     width:"85%",
+     height:50,
+     width:width-60,
      borderRadius:9,
      fontSize:20,
      padding:5,
      display:"flex",
      justifyContent:"center",
      alignItems:"center",
+    
    },
  text_input:{
-  height:70,
+  height:50,
   width:"100%",
   borderRadius:9,
   fontSize:15,
@@ -174,9 +182,10 @@ fontWeight:500
 
 },
 logo:{
-   height:50,
-   width:50,
-   borderRadius:50,
+   height:100,
+   width:100,
+   backgroundColor:"red"
+  
    
    
 },

@@ -6,6 +6,7 @@ import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import { AuthContext } from '../Context/Context';
 import { COLORS } from '../Utils/Colors/Colors'
+import { useQuery } from '@tanstack/react-query';
 
 
 const parent = require("../../assets/mother.png");
@@ -23,20 +24,44 @@ const Parentsprofile = ({ navigation }) => {
   let userInfo = jwtDecode(userToken);
   let parentId = (userInfo.result.parent_id);
  console.log(parentId)
-  useEffect(() => {
-    axios.get(`https://school-management-api.azurewebsites.net/parents/${parentId}`)
-      .then((res) => {
+  // useEffect(() => {
+  //   axios.get(`https://school-management-api.azurewebsites.net/parents/${parentId}`)
+  //     .then((res) => {
 
 
         
-        setName(res.data.parentDetails.father_name);
-        setEmail(res.data.parentDetails.email);
-        setPhone(res.data.parentDetails.whatsapp_no);
-        setAltPhone(res.data.parentDetails.alternative_mobile)
-      }).catch((err) => {
-        console.log(err);
-      })
-  }, [])
+  //       setName(res.data.parentDetails.father_name);
+  //       setEmail(res.data.parentDetails.email);
+  //       setPhone(res.data.parentDetails.whatsapp_no);
+  //       setAltPhone(res.data.parentDetails.alternative_mobile)
+  //     }).catch((err) => {
+  //       console.log(err);
+  //     })
+  // }, [])
+  const {data:res,isLoading,isError,error}=useQuery({
+    queryKey:["parentProfile",parentId],
+    queryFn:()=>
+    {
+      return    axios.get(`https://school-management-api.azurewebsites.net/parents/${parentId}`)
+    }
+  })
+  useEffect(()=>
+  {
+       if(!isLoading)
+       {
+        console.log("Loading done");
+        
+        setName(res?.data?.parentDetails.father_name);
+        setEmail(res?.data?.parentDetails.email);
+        setPhone(res?.data?.parentDetails.whatsapp_no);
+        setAltPhone(res?.data?.parentDetails.alternative_mobile)
+        console.log(name,email,phone,altPhone)
+       }
+       if(isError)
+       {
+        console.log(Error);
+       }
+  },[res])
   return (
     <View style={styles.main_container}>
       <View style={styles.top}>

@@ -1,6 +1,8 @@
 import { View, Text ,ActivityIndicator} from 'react-native'
 import React from 'react'
 import {COLORS} from "../Utils/Colors/Colors";
+import { Dimensions } from 'react-native';
+const { width, height } = Dimensions.get('window');
 
 const AcitvityHandler = ({show}) => {
 
@@ -9,8 +11,8 @@ const AcitvityHandler = ({show}) => {
         flex:1,
         justifyContent:"center",
         alignItems:"center",
-        height:650,
-        width:"100%",
+        height:height-200,
+        width:width,
         backgroundColor:COLORS.backgGroundColor
        
     

@@ -8,6 +8,7 @@ import { AuthContext } from '../Context/Context';
 import jwtDecode from 'jwt-decode';
 import AcitvityHandler from '../bottom/AcitvityHandler';
 import { COLORS } from '../Utils/Colors/Colors'
+import { useQuery } from '@tanstack/react-query';
 
 
 
@@ -21,21 +22,41 @@ const Children = ({ navigation }) => {
   let parentId = (userInfo.result.parent_id);
 
 
-  useEffect(() => {
-    axios.get(`https://school-management-api.azurewebsites.net/parents/${parentId}/getChildren`)
-      .then((res) => {
+  // useEffect(() => {
+  //   axios.get(`https://school-management-api.azurewebsites.net/parents/${parentId}/getChildren`)
+  //     .then((res) => {
 
-        setChildren(res.data.allChildren);
+  //       setChildren(res.data.allChildren);
        
-        setShowActitvity(false);
+  //       setShowActitvity(false);
         
-      }).catch((err) => {
-        console.log(err);
-        setShowActitvity(false);
+  //     }).catch((err) => {
+  //       console.log(err);
+  //       setShowActitvity(false);
      
-        navigation.navigate("notfound")
-      })
-  }, [])
+  //       navigation.navigate("notfound")
+  //     })
+  // }, [])
+  const {isLoading,isError,error,data}=useQuery({
+    queryKey:["childrenlist",parentId],
+    queryFn:()=>
+    {
+      return   axios.get(`https://school-management-api.azurewebsites.net/parents/${parentId}/getChildren`);
+    }
+  })
+  useEffect(()=>
+  {
+    if(!isLoading)
+    {
+      
+      console.log("data loads succesffuly")
+      setChildren(data?.data?.allChildren);
+    }
+    if(isError)
+    {
+      console.log(error.message);
+    }
+  },[data])
 
  const showToast = (type, header, msg = "") => {
 
@@ -49,7 +70,7 @@ const Children = ({ navigation }) => {
  return (
     <View style={styles.mainContainer}>
       <Headers navigation={navigation} />
-      {showActivity ? <AcitvityHandler /> :
+      {isLoading ? <AcitvityHandler /> :
         <View style={styles.ChildrenListContainer}>
           
            <View style={styles.titleContainer}>

@@ -11,6 +11,7 @@ import Notification from './Stack/Notification';
 import Notfound from './Stack/Notfound';
 import Student from "./Stack/Student"
 import Logo from "./Stack/Logo";
+import Success from './Stack/Success';
 import {COLORS} from "./Utils/Colors/Colors"
   
 const Stack = createNativeStackNavigator();
@@ -44,7 +45,19 @@ const AppNavigator = () => {
         <Stack.Screen
           name="changePassword"
           component={ChangePassword}
-          options={{headerShown: false}}
+          options={{headerShown: true,title:"",
+            headerStyle: {
+              backgroundColor:COLORS.backgGroundColor, 
+              borderBottomWidth: 0,
+              elevation: 0,
+            
+  shadowOpacity: 0,
+            
+              // Change this to your desired color
+            },
+            headerTintColor: 'black',
+            headerShadowVisible: false,
+          }}
         />
          <Stack.Screen
           name="children"
@@ -71,6 +84,18 @@ const AppNavigator = () => {
           name="student"
           component={Student}
           options={{ title: 'Student' ,headerShown:false}}
+        />
+         <Stack.Screen
+          name="success"
+          component={Success}
+          options={{ title: '' ,headerShown:true,
+          headerStyle: {
+            backgroundColor: COLORS.backgGroundColor, // Change this to your desired color
+          },
+          headerTintColor:"black",
+          headerShadowVisible:false,
+        }}
+         
         />
        
       </Stack.Navigator>

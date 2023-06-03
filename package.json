@@ -19,6 +19,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "@rneui/base": "^0.0.0-edge.2",
     "@rneui/themed": "^0.0.0-edge.2",
+    "@tanstack/react-query": "^4.29.12",
     "@visx/group": "^3.0.0",
     "@visx/mock-data": "^3.0.0",
     "@visx/scale": "^3.0.0",

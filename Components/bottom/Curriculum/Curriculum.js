@@ -6,6 +6,8 @@ import {COLORS} from "../../Utils/Colors/Colors";
 import AcitvityHandler from '../AcitvityHandler';
 import { Dimensions } from 'react-native';
 const { width, height } = Dimensions.get('window');
+import NotFoundText from '../NotFoundText';
+import { useQuery } from '@tanstack/react-query';
 
 const Screen1 = () => {
    
@@ -15,60 +17,107 @@ const Screen1 = () => {
  const  [schoolId,setSchoolId]=useState();
  const [classId,setClassId]=useState();
  const [url,setUrl]=useState(null);
- const [isLoading,setIsLoading]=useState(true);
-console.log(url);
- const getSchoolIdAndClassId=()=>
- {
-    axios.get(`https://school-management-api.azurewebsites.net/students/${childId}`)
-    .then((res)=>
-    {
+const [show,setShow]=useState(true);
+
+//  const getSchoolIdAndClassId=()=>
+//  {
+//     axios.get(`https://school-management-api.azurewebsites.net/students/${childId}`)
+//     .then((res)=>
+//     {
      
-      setClassId(res.data.studentDetails[0].class_id);
-      setSchoolId(res.data.studentDetails[0].school_id);
-     console.log(23,res.data.studentDetails[0].class_id);
-      getCurriculum(res.data.studentDetails[0].class_id,res.data.studentDetails[0].school_id);
-    }).catch(err=>
-      {
-        console.log(err);
-      })
- }
+//       setClassId(res.data.studentDetails[0].class_id);
+//       setSchoolId(res.data.studentDetails[0].school_id);
+//      console.log(23,res.data.studentDetails[0].class_id);
+//       getCurriculum(res.data.studentDetails[0].class_id,res.data.studentDetails[0].school_id);
+//     }).catch(err=>
+//       {
+//         console.log(err);
+//       })
+//  }
  const getCurriculum=(class_id,school_id)=>
  {
   console.log(32,class_id,school_id);
   axios.get(`https://school-management-api.azurewebsites.net/viewCurriculum`, {
     params: {
       school_id: school_id,
-      class_id: class_id
+      class_id:class_id
       }
    }).then(res=>
     {
-      // console.log(40,res.data);
+    console.log(40,res.data);
       setUrl(res.data.url);
       console.log(42,res.data.url);
-      setIsLoading(false);
+      setShow(false);
       // console.log(res.data.url);
     }).catch((err)=>
     {
       console.log(err);
-      setIsLoading(false);
+     setShow(false);
     })
  }
- useEffect(()=>
- {
-  getSchoolIdAndClassId();
+//  useEffect(()=>
+//  {
+//   getSchoolIdAndClassId();
  
 
- },[])
- if(isLoading)
+//  },[])
+// const getCurriculum=(class_id,school_id)=>
+// {
+//   const {data:res,isLoading:curriculumLoading,isError:curriculumErrorStatus,error:ErrorMsg}=useQuery({
+//     queryKey:['curriculum',class_id,school_id],
+//     queryFn:()=>
+//     {
+//       return  axios.get(`https://school-management-api.azurewebsites.net/viewCurriculum`, {
+//         params: {
+//           school_id: school_id,
+//           class_id:11
+//           }
+//        })
+//     }
+//   })
+ 
+// }
+
+ const {data:ClassIdAndSchoolId,isLoading:IdsLoading,isError:IdsError,error:Idserror}=useQuery({
+   queryKey:["fetch-class_id-school_id",childId],
+   queryFn:()=>
+   {
+   return  axios.get(`https://school-management-api.azurewebsites.net/students/${childId}`)
+   }
+ })
+ const class_id=ClassIdAndSchoolId?.data?.studentDetails[0].class_id;
+ const school_id=ClassIdAndSchoolId?.data?.studentDetails[0].school_id;
+ const {data:res,isLoading:curriculumLoading,isError:curriculumErrorStatus,error:ErrorMsg}=useQuery({
+      queryKey:['curriculum',class_id,school_id],
+      queryFn:()=>
+      {
+        return  axios.get(`https://school-management-api.azurewebsites.net/viewCurriculum`, {
+          params: {
+            school_id: school_id,
+            class_id:class_id
+            }
+         })
+      },
+      enabled:!! class_id && !!school_id
+ })
+  console.log(103,res?.data.url);
+ 
+
+
+ if(curriculumLoading)
  {
-  return <AcitvityHandler show={isLoading}/>
+  return <AcitvityHandler show={curriculumLoading}/>
+ }
+ if(curriculumErrorStatus)
+ {
+  console.log(error.message);
  }
   return (
     <ScrollView style={styles.ViewContainer}>
       <View style={styles.container}> 
   
    {
-    url!=null ? <Image style={styles.Image} source={ { uri: url }}/> :
+    res?.data.url!=null ? <Image style={styles.Image} source={ { uri: res?.data.url }}/> :
     <Text style={{
       fontSize:20,
       fontWeight:600,
@@ -87,7 +136,7 @@ const styles=StyleSheet.create(
   {
     ViewContainer:{
       height:height,
-      width:"100%",
+      width:width,
       padding:5,
       backgroundColor:COLORS.backgGroundColor
     

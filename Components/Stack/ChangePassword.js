@@ -4,6 +4,8 @@ import Toast from 'react-native-toast-message';
 import { View,Text ,StyleSheet,Image,TextInput,TouchableOpacity,ActivityIndicator} from "react-native";
 import axios from "axios";
 import { COLORS } from '../Utils/Colors/Colors'
+import { Dimensions } from 'react-native';
+const { width, height } = Dimensions.get('window');
 
 const Login=({navigation})=>
 {
@@ -47,12 +49,9 @@ const Login=({navigation})=>
           }
           else 
           {
-            showToast("success","SuccesFull","Password changed successfully")
-            setTimeout(() =>   navigation.navigate("login"),2000);
-            setNewPassword("");
-            setOldPassword("");
-            setUserName("");
-            setConfirmPassword("");
+           
+          navigation.navigate("success");
+           
           }
           
          
@@ -105,7 +104,12 @@ const Login=({navigation})=>
     <View style={style.main_container}>
      <ActivityIndicator size={50} color={"#1377c0"} animating={show}/>
     <View style={style.Logo_container}>
-     <Image source={logo} style={style.image}/>
+    <Text style={
+      {
+        fontSize:30,
+        color:"black"
+      }
+    }>Reset Password</Text>
     </View>
     <View style={style.Info_container}>
      <TextInput
@@ -149,7 +153,7 @@ const Login=({navigation})=>
     </View>
     <View style={style.btn}>
       <TouchableOpacity style={style.button} onPress={loginHandler}>
-        <Text style={style.text}>Change Password</Text>
+        <Text style={style.text}>CHANGE PASSWORD</Text>
       </TouchableOpacity>
     </View>
     <Toast/>
@@ -162,27 +166,29 @@ const style=StyleSheet.create({
       height:"100%",
       width:"100%",
       display:"flex",
-      justifyContent:"center",
+    
       alignItems:"center",
       backgroundColor:COLORS.backgGroundColor,
-      rowGap:20
+   
 
 
   },
  Logo_container:{
-  height:100,
+  marginTop:20,
+  height:30,
   width:"80%",
   borderRadius:9,
 
   display:"flex",
-  alignItems:"center",
-  justifyContent:"center"
+  alignItems:"flex-start",
+  justifyContent:"flex-start"
   
 
   
  },
  Info_container:{
   height:300,
+
   width:"80%",
   borderRadius:9,
 borderBottomColor:"black",
@@ -204,7 +210,7 @@ display:"flex",
  },
  btn:{
      height:100,
-     width:"80%",
+     width:width-60,
      borderRadius:9,
      fontSize:20,
      padding:10,

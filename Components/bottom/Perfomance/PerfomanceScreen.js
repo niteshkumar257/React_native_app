@@ -9,6 +9,7 @@ import TableComponent from './TableComponent';
 import BarGraphCompnent from './BarGraphCompnent';
 import Icon from "react-native-vector-icons/Ionicons";
 import { Dimensions } from 'react-native';
+import { useQuery } from '@tanstack/react-query';
 
 const { width, height } = Dimensions.get('window');
 
@@ -21,31 +22,33 @@ const PerfomanceScreen = () => {
   const { id: child_id } = useContext(DataContext);
 
   console.log("hey", child_id);
-  const getTestDetails = () => {
 
-    axios.get(`https://school-management-api.azurewebsites.net/students/${child_id}/performance`)
-      .then((res) => {
-        setTestDetails(res.data.allmarksDetail);
-        setdataFetchStatus(false);
-        console.log(res.data.allmarksDetail);
-      })
-      .catch((err) => {
-        console.log(err);
+  const {data:res,isLoading,isError,error} = useQuery({
+    queryKey: ['perfomance', child_id],
+    queryFn: () => {
+      return axios.get(`https://school-management-api.azurewebsites.net/students/${child_id}/performance`);
+    }
+  })
 
-      })
+  // if (isLoading) {
+  //   return <ActivityIndicator show={isLoading} />;
+  // }
+
+  if (isError) {
+    return <View>
+      <Text>Error: {error.message}</Text>
+    </View>;
   }
-  useEffect(() => {
-  console.log("hell")
-    getTestDetails();
-  }, [])
+
+ 
+console.log(res?.data?.allmarksDetail);
   const showGraphicalAnalysis = () => {
-    
+  
     setGraphShow(true);
   }
-  if(dataFecthStatus)
-  {
-    return <AcitvityHandler show={dataFecthStatus}/>
-  }
+ 
+
+ 
   return (
 
     <SafeAreaView>
@@ -55,45 +58,42 @@ const PerfomanceScreen = () => {
           <View style={styles.perfomanceScreenContainer} >
             <View style={styles.titleContainer}>
               <Text style={styles.title}>Performance</Text>
-            <TouchableOpacity onPress={showGraphicalAnalysis}>
-            <Icon
-                name='analytics-outline'
-                size={30}
-                color="black"
-
-               
-              />
-            </TouchableOpacity>
-             
-            
-             
+              {
+                  res?.data?.allmarksDetail.length!=0 && 
+              <TouchableOpacity onPress={showGraphicalAnalysis}>
+                <Icon
+                  name='analytics-outline'
+                  size={30}
+                  color="black"
+                />
+              </TouchableOpacity>
+              }
             </View>
             {
-             
-                  
-                (<View style={styles.perforomanceContainer}>
-                  {
-                    testDetails.length == 0 &&
-                    <Text style={{
-                      textAlign: "center",
-                      fontSize: 20,
-                      color: "black",
-                      fontWeight: 700,
-                      marginTop: 250
-                    }}>No test Given</Text>
-                  }
-                  <View style={styles.topContainer}>
-                    <TableComponent data={testDetails} />
+              (isLoading &&  !res?.data?.allmarksDetail) ?<AcitvityHandler show={isLoading}/> :
+              (<View style={styles.perforomanceContainer}>
+                {
+                   res?.data?.allmarksDetail.length===0 &&
+                  <Text style={{
+                    textAlign: "center",
+                    fontSize: 20,
+                    color: "black",
+                    fontWeight: 700,
+                    marginTop: 250
+                  }}>No test Given</Text>
+                }
+                <View style={styles.topContainer}>
+                  <TableComponent data={res?.data?.allmarksDetail} />
+                </View>
+                {
+                  graphShow &&
+                  <View style={styles.bottomContainer}>
+                    <BarGraphCompnent data={res?.data?.allmarksDetail}></BarGraphCompnent>
+
                   </View>
-                  {
-                      graphShow && 
-                    <View style={styles.bottomContainer}>
-                      <BarGraphCompnent data={testDetails}></BarGraphCompnent>
 
-                    </View>
-
-                  }
-                </View>)
+                }
+              </View>)
             }
           </View>
         </View>

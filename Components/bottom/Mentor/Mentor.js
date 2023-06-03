@@ -57,7 +57,7 @@ const Mentor = ({ name, qualification, exp,email, details, mentor_id ,mobile,che
       <View style={styles.container}>
         <View style={styles.topContainer}>
           <View style={styles.profileContainer}>
-            <Icon name="people-sharp" size={60} color={COLORS.mainColor1}/>
+            <Icon name="people-sharp" size={60} color={"black"}/>
           </View>
           <View style={styles.InfoContainer}>
             <View style={styles.InfoSubContainer}>
