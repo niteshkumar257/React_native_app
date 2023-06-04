@@ -107,7 +107,7 @@ const [show,setShow]=useState(true);
  
  if(curriculumErrorStatus)
  {
-  console.log(error.message);
+  console.log(ErrorMsg.message);
  }
   return (
     <ScrollView style={styles.ViewContainer}>

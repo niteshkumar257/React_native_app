@@ -65,6 +65,13 @@ const header = ({navigation}) => {
   //   return acc+cur;
   // },0);
   // setNotificatinList(countUnseenNotification);
+  let containerStyle = { position: 'absolute', top: -2, right: -5 };
+
+if (count===0) {
+  containerStyle = { ...containerStyle, top:2,right:4};
+} else {
+  containerStyle = { ...containerStyle};
+}
   return (
     <View style={styles.container}>
       
@@ -90,14 +97,18 @@ const header = ({navigation}) => {
        style={styles.rightContainer}>
         
        <Icon name="notifications-sharp" size={30} color={"white"}/>
-       <Badge
-            status="error"
-              value={count}
-            // value={notificationList?.filter(item=> {
-            //   return item.is_seen===false;
-            // }).length }
-            containerStyle={{ position: 'absolute', top: -2, right:-5 }}
-          />
+       {
+        count!=0 &&   <Badge
+        status="error"
+        value={count}
+         
+        // value={notificationList?.filter(item=> {
+        //   return item.is_seen===false;
+        // }).length }
+        containerStyle={{ position: 'absolute', top: -2, right:-5 }}
+      />
+       }
+      
       </View>
       
     </View>

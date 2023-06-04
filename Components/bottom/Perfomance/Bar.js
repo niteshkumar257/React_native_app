@@ -2,6 +2,7 @@ import { BarChart } from "react-native-gifted-charts";
 import {View,Text} from "react-native"
         
 const Bar = ({d,name}) => {
+  console.log(d);
    
 
   const data = [

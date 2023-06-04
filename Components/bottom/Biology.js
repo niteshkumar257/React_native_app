@@ -4,6 +4,9 @@ import axios from 'axios'
 import VideoList from './VideoList'
 import { create } from 'react-test-renderer'
 import AcitvityHandler from './AcitvityHandler'
+import { Dimensions } from 'react-native'
+import { COLORS } from '../Utils/Colors/Colors'
+const {width,height}=Dimensions.get('screen')
 
 const Biology = ({navigation,route}) => {
    
@@ -75,15 +78,16 @@ export default Biology;
 const styles=StyleSheet.create({
      videoContainer:{
         height:"100%",
+        minHeight:height,
         width:"100%",
         display:"flex",
-        justifyContent:"center",
+        justifyContent:"flex-start",
         alignItems:"center",
         rowGap:20,
-      
+        marginTop:5,
         backgroundColor:"red",
         paddingTop:0,
-        backgroundColor:"#E9F3FD",
+        backgroundColor:COLORS.backgGroundColor,
      },
      ViewContainer:{
       height:700,
@@ -101,7 +105,7 @@ const styles=StyleSheet.create({
   flex:1,
   paddingLeft:10,
   justifyContent:"center",
-  backgroundColor:"#E9F3FD",
+  backgroundColor:COLORS.backgGroundColor,
  
 },
 headerText:{

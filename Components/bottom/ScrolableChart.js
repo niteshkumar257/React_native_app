@@ -4,13 +4,23 @@ import { Chart, Line, Area, HorizontalAxis, VerticalAxis,Tooltip } from 'react-n
 import Icon from "react-native-vector-icons/Ionicons";
 import {COLORS} from "../Utils/Colors/Colors";
 
-const ScrolableChart = ({color1,color2,name}) => {
+const ScrolableChart = ({color1,color2,name,d}) => {
   console.log(name);
   let months=["Jan","Feb","March","April","May","June","July","Aug","Sep","Oct","Nov","Dec"]
   const [month,setMonth]=useState(0);
   const [score,setScore]=useState(0);
   const [total,setTotal]=useState(0);
   const [show,setShow]=useState(false);
+  const data = [
+    { x: 1, y: 90 },
+    { x: 2, y: 70 },
+    { x: 8, y: 73 },
+    { x: 9, y: 95 },
+    { x: 10, y: 80 }
+  ]
+  const xValues = data.map(item => item.x);
+  const horizontal=[];
+ 
   const toolTip=(object)=>
   {
    
@@ -48,33 +58,7 @@ const ScrolableChart = ({color1,color2,name}) => {
     <View style={{padding: 20, alignItems: 'center'}}>
     <Chart
   style={{ height: 200, width: 350 }}
-  data={[
-    { x: 0, y: 89 ,meta:100 },
-    { x: 1, y: 89 ,meta:100 },
-    { x: 2, y: 56,meta:100 },
-    { x: 3, y: 89,meta:100 },
-    { x: 4, y: 73,meta:100 },
-    { x: 5, y: 60,meta:100 },
-    { x: 6, y: 85 ,meta:100},
-    { x: 7, y: 90 ,meta:100},
-    { x: 8, y: 86,meta:100 },
-    { x: 9, y: 52,meta:100 },
-    { x:10, y: 54,meta:100 },
-    { x:11, y: 92,meta:100 },
-    { x: 12, y: 89 ,meta:100 },
-    { x: 13, y: 56,meta:100 },
-    { x: 14, y: 89,meta:100 },
-    { x: 15, y: 73,meta:100 },
-    { x: 16, y: 60,meta:100 },
-    { x: 17, y: 85 ,meta:100},
-    { x: 18, y: 90 ,meta:100},
-    { x: 19, y: 86,meta:100 },
-    { x: 20, y: 52,meta:100 },
-    { x:21, y: 54,meta:100 },
-    { x:22, y: 92,meta:100 },
-   
-   
-  ]}
+  data={data}
   padding={{ left: 20, bottom: 20, right: 20, top: 20 }}
   xDomain={{ min: 0, max: 22 }}
   yDomain={{ min: 0, max: 100 }}
@@ -83,7 +67,7 @@ const ScrolableChart = ({color1,color2,name}) => {
   <VerticalAxis
     tickValues={[ 1, 25,50,75,100]}
     theme={{
-      axis: {visible:false, stroke: { color: '#aaa', width: 2 } },
+      axis: {visible:true, stroke: { color: 'black', width: 2 } },
       ticks: { visible:false, stroke: { color: '#aaa', width: 2 } },
       grid: {
         visible: false,
@@ -94,10 +78,10 @@ const ScrolableChart = ({color1,color2,name}) => {
           dashArray: [2]
         },
         labels: {
-          visible:false,
+          visible:true,
           label: {
-            color: '#000',
-            fontSize: 10,
+            color: 'black',
+            fontSize: 20,
             fontWeight:600,
             textAnchor: 'middle',
             opacity: 1,
@@ -114,14 +98,14 @@ const ScrolableChart = ({color1,color2,name}) => {
     }}
   />
   <HorizontalAxis
-    tickValues={[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22]}
+    tickValues={xValues}
     theme={{
-      axis: { visible:false, stroke: { color: '#aaa', width: 2 } },
+      axis: { visible:true, stroke: { color: 'black', width: 2 } },
       ticks: {visible:false, stroke: { color: 'black', width: 2,fontWeight:600 } },
       grid: {
         visible: false,
         stroke: {
-          color: '#ccc',
+          color: 'black',
           width: 1.5,
           opacity: 1,
           dashArray: [2]
@@ -146,9 +130,9 @@ const ScrolableChart = ({color1,color2,name}) => {
     }}
   />
   <Line
-   onTooltipSelect={(x,y,meta)=>
+   onTooltipSelect={(Month,Mark)=>
     {
-      toolTip(x,y,meta);
+      toolTip(Month,Mark);
     }}
     tooltipComponent={<Tooltip 
      
@@ -156,14 +140,15 @@ const ScrolableChart = ({color1,color2,name}) => {
     hideTooltipAfter={1000}
     hideTooltipOnDragEnd={false}
    theme={{
-    stroke: { color: 'black', width: 0.5 },
+    stroke: { color: 'white', width: 0.5 },
     scatter: {
       default: {
-        width: 5,
-        height: 5,
+        width: 10,
+        height: 10,
         rx: 20,
-        fill: 'none',
-        stroke: 'black',
+        color:"#8c92ac",
+        fill: 'red',
+        stroke: 'red',
         strokeWidth: 10,
       },
       selected: {
@@ -173,7 +158,7 @@ const ScrolableChart = ({color1,color2,name}) => {
   }}
     smoothing="cubic-spline"
   />
-  <Area theme={{ gradient: { from: { color:COLORS.mainColor3, opacity: 0.4 }, to: { color: COLORS.backgGroundColor, opacity: 0.4 } } }} smoothing="cubic-spline" />
+  <Area theme={{ gradient: { from: { color:COLORS.mainColor3, opacity: 1 }, to: { color: COLORS.backgGroundColor, opacity: 0.4 } } }} smoothing="cubic-spline" />
 </Chart>
 </View>
     </View>

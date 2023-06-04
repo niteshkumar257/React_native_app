@@ -3,6 +3,7 @@ import React ,{useState} from 'react'
 import { Chart, Line, Area, HorizontalAxis, VerticalAxis ,Tooltip} from 'react-native-responsive-linechart'
 import Icon from "react-native-vector-icons/Ionicons";
 import { Svg, Circle } from 'react-native-svg';
+import {COLORS} from "../Utils/Colors/Colors";
 
 
 
@@ -32,7 +33,28 @@ const ChartC = ({type,color1,color2,subject,data}) => {
     setScore(0);
   }
  
- 
+  const data1 = [
+    { x: 1, y: 90 ,meta:100},
+    { x: 2, y: 80 ,meta:100},
+    { x: 3, y: 73 ,meta:100},
+    { x: 9, y: 85 ,meta:100},
+    { x: 10, y: 92,meta:100 },
+    {
+      x:11,y:78,meta:100
+    },{
+      x:12,y:90,meta:100
+    }
+  ]
+  
+  const data2 = [
+    { x: -2, y: 15 },
+    { x: -1, y: 10 },
+    { x: 0, y: 12 },
+    { x: 1, y: 7 },
+    { x: 8, y: 12 },
+    { x: 9, y: 13.5 },
+    { x: 10, y: 18 }
+  ]
   return (
    
     <View style={styles.chartContainer}>
@@ -54,10 +76,11 @@ const ChartC = ({type,color1,color2,subject,data}) => {
       <Text style={styles.valueText}>{subject}</Text>
       <Chart
   style={{ height: 200, width:360 }}
-  data={data.markInfo}
+  data={data1}
   padding={{ left: 20, bottom: 20, right: 20, top: 20 }}
   xDomain={{ min: 0, max: 12 }}
   yDomain={{ min: 0, max: 100 }}
+  
 >
   <VerticalAxis tickCount={6} theme={{ 
        axis: {
@@ -159,7 +182,7 @@ const ChartC = ({type,color1,color2,subject,data}) => {
   />
   <Area
   smoothing={type}
-   theme={{ gradient: { from: { color:color1,opacity:1}, to: { color:"white",opacity:1} , stops: [0.8, 1],}}} />
+   theme={{ gradient: { from: { color:COLORS.mainColor3,opacity:1}, to: { color:"white",opacity:1} , stops: [0.8, 1],}}} />
     <Line   smoothing={type}  
     onTooltipSelect={(x,y,meta)=>{toolTip(x,y,meta);}}
     tooltipComponent={<Tooltip/>}
@@ -185,8 +208,8 @@ const styles=StyleSheet.create(
   {
     chartContainer:{
 
-      height:"auto",
-      width: '97%',
+      height:300,
+      width: width-10,
       backgroundColor: 'white',
       elevation: 5,
       shadowColor: '#000',
@@ -196,7 +219,8 @@ const styles=StyleSheet.create(
       borderRadius:9,
       paddingTop:10,
       paddingBottom:10,
-      paddingLeft:5
+      paddingLeft:5,
+      
     },
     scoreContainer:{
         display:"flex",

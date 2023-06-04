@@ -44,19 +44,19 @@ const Children = ({ navigation }) => {
       return   axios.get(`https://school-management-api.azurewebsites.net/parents/${parentId}/getChildren`);
     }
   })
-  useEffect(()=>
-  {
+  
     if(!isLoading)
     {
       
       console.log("data loads succesffuly")
-      setChildren(data?.data?.allChildren);
+      
     }
     if(isError)
     {
+      navigation.navigate("notfound")
       console.log(error.message);
     }
-  },[data])
+  
 
  const showToast = (type, header, msg = "") => {
 
@@ -70,14 +70,14 @@ const Children = ({ navigation }) => {
  return (
     <View style={styles.mainContainer}>
       <Headers navigation={navigation} />
-      {isLoading ? <AcitvityHandler /> :
+      {isLoading ? <AcitvityHandler shos={isLoading} /> :
         <View style={styles.ChildrenListContainer}>
           
            <View style={styles.titleContainer}>
             <Text style={styles.title}>Children's Details</Text>
            </View>
           {
-            children.map((item, index) =>
+            data?.data?.allChildren?.map((item, index) =>
             (
               <Student key={item.child_id} name={item.child_name} child_id={item.child_id}
                 navigation={navigation}

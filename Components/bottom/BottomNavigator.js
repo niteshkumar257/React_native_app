@@ -38,6 +38,7 @@ const BottomNavigator = ({id}) => {
       tabBarStyle: {
         borderTopWidth: 0.552,
         borderTopColor: "#333333",
+        height:40
       
   },
       
@@ -58,7 +59,7 @@ const BottomNavigator = ({id}) => {
     },
    
 
-      tabBarIcon: ({color, size=50, focused}) => {
+      tabBarIcon: ({color, size=30, focused}) => {
         let iconName;
 
         if (route.name === "Curriculum") {
@@ -78,7 +79,7 @@ const BottomNavigator = ({id}) => {
             : 'videocam-outline';
         }
 
-        return <Icon name={iconName} size={35}  color={"#333333"} style={{
+        return <Icon name={iconName} size={28}  color={"#333333"} style={{
          
         }}/>;
         

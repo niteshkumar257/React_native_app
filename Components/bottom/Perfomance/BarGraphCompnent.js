@@ -5,6 +5,10 @@ import Area from '../Area'
 import Area1 from '../Area1'
 import LineChart from '../LineChart'
 import ScrolableChart from '../ScrolableChart'
+import Victory from './Victory'
+import ChartC from '../Chart'
+import BarGraph from '../BarGraph'
+
 
 const months=['Jan','Feb','Mar','Apr','May','June','July','Aug','Sep','Oct','Nov','Dec']
 const BarGraphCompnent = ({data}) => {
@@ -44,69 +48,19 @@ const BarGraphCompnent = ({data}) => {
     dataList.map((item,index)=> console.log(item));
   return (
     <View>
-      <View>
-      {
-          dataList.map((item,index)=>(
-            <Bar
-            key={index}
-            d={item.markInfo}
-           name={item.subjectName}></Bar>
-          ))
-     }
-      </View>
-      <View>
-      {
-          dataList.map((item,index)=>(
-            <Area
-            key={index}
-            d={item.markInfo}
-           name={item.subjectName}></Area>
-          ))
-     }
-      </View>
     
-     <View>
-     {
-          dataList.map((item,index)=>(
-            <Area1
-            key={index}
-            d={item.markInfo}
-           name={item.subjectName}></Area1>
-          ))
-     }
-     </View>
-     <View>
-    {
-          dataList.map((item,index)=>(
-            <LineChart
-            key={index}
-            d={item.markInfo}
-           name={item.subjectName}></LineChart>
-          ))
-     }
-    </View>
   <View>
     {
           dataList.map((item,index)=>(
-            <ScrolableChart
+            <Area
             key={index}
-            d={item.markInfo}
-           name={item.subjectName}></ScrolableChart>
+            data={item.markInfo}
+           name={item.subjectName}></Area>
           ))
      }
     </View>
-    {/* <View>
-    {
-          dataList.map((item,index)=>(
-            <BarGraph
-            key={index}
-            d={item.markInfo}
-           name={item.subjectName}></BarGraph>
-          ))
-     }
-    </View> */}
-       
     
+   
     </View>
   )
 }

@@ -73,7 +73,13 @@ const AppNavigator = () => {
           <Stack.Screen
           name="notfound"
           component={Notfound}
-          options={{title:'Notfound',headerShown:false}}
+          ptions={{ title: '' ,headerShown:true,
+          headerStyle: {
+            backgroundColor: COLORS.backgGroundColor, // Change this to your desired color
+          },
+          headerTintColor:"black",
+          headerShadowVisible:false,
+        }}
           
           />
          <Stack.Screen
