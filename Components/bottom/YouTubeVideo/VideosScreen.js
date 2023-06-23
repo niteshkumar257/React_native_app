@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { COLORS } from '../../Utils/Colors/Colors'
 
 import { Dimensions } from 'react-native';
-
+import { GW_URL } from '../../config';
 const { width, height } = Dimensions.get('window');
 
 const Video = ({ navigation }) => {

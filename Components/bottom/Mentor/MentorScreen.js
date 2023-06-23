@@ -8,7 +8,7 @@ import jwtDecode from 'jwt-decode';
 import { COLORS } from '../../Utils/Colors/Colors'
 import { Dimensions } from 'react-native';
 const { width, height } = Dimensions.get('window');
-
+import { GW_URL } from '../../config';
 const Screen4 = ({navigation}) => {
   const [MentorDetails,setMentorDetails]=useState([]);
   const [parentMentor,setParentMentor]=useState(false);
@@ -25,7 +25,7 @@ const Screen4 = ({navigation}) => {
 
   
     setIsLoding(true);
-     axios.get("https://school-management-api.azurewebsites.net/mentors")
+     axios.get(`${GW_URL}/mentors`)
      .then((res)=>{
     
       let mentor=res.data.mentors; 
@@ -34,7 +34,7 @@ const Screen4 = ({navigation}) => {
            element.check=false;  
            element.check2 = false;
       });
-      axios.get(`https://school-management-api.azurewebsites.net/parents/${parentId}/getSchedule`).then((res)=>
+      axios.get(`${GW_URL}/parents/${parentId}/getSchedule`).then((res)=>
     { 
       let schduledMentorId = res.data.schedules[0]?.mentor_id[res.data.schedules[0]?.mentor_id.length - 1]; 
        mentor.forEach(element => {         

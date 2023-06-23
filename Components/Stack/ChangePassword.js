@@ -6,6 +6,7 @@ import axios from "axios";
 import { COLORS } from '../Utils/Colors/Colors'
 import { Dimensions } from 'react-native';
 const { width, height } = Dimensions.get('window');
+import { GW_URL } from "../config";
 
 const Login=({navigation})=>
 {
@@ -34,7 +35,7 @@ const Login=({navigation})=>
       else {
         setShow(true);
       // api call
-      axios.post("https://school-management-api.azurewebsites.net/parents/changePassword", {
+      axios.post(`${GW_URL}/parents/changePassword`, {
         username:username,
         old_password:oldPassword,
         new_password:newPassword

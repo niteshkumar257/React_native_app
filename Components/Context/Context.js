@@ -1,7 +1,7 @@
 import React ,{createContext,useState,useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 export const  AuthContext =createContext();
-
+import { GW_URL } from '../config';
 import axios from 'axios';
 
 import Toast from 'react-native-toast-message';
@@ -31,7 +31,7 @@ export const AuthProvider=({children})=>
           {
             setShow(true);
               setIsLoding(true);
-               axios.post('https://school-management-api.azurewebsites.net/parent/login',{
+               axios.post(`${GW_URL}/parent/login`,{
                 username:username,
                 password:password
                }).then((res)=>

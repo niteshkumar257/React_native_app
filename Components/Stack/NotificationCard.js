@@ -5,7 +5,7 @@ import axios from 'axios';
 import {COLORS} from "../Utils/Colors/Colors";
 import { fetchContent } from '../Redux/NotificationSlice';
 import { useDispatch } from 'react-redux';
-
+import { GW_URL } from '../config';
 
 const NotificationCard = ({icon,msg,NotificationId,NotificationStatus,getNotification,date,parentId}) => {
  
@@ -13,7 +13,7 @@ const NotificationCard = ({icon,msg,NotificationId,NotificationStatus,getNotific
     const feeIcon=require("../../assets/notificationFee.png")
     const updateNotificationStatus=async (notificationId)=>{
       try {
-        const response = await axios.put(`https://school-management-api.azurewebsites.net/parents/${notificationId}/markNotificationSeen`);
+        const response = await axios.put(`${GW_URL}/parents/${notificationId}/markNotificationSeen`);
         console.log('Notification updated successfully:', response.data);
         dispatch(fetchContent(parentId));
         

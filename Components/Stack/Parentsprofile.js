@@ -7,7 +7,7 @@ import jwtDecode from 'jwt-decode';
 import { AuthContext } from '../Context/Context';
 import { COLORS } from '../Utils/Colors/Colors'
 import { useQuery } from '@tanstack/react-query';
-
+import { GW_URL } from '../config';
 
 const parent = require("../../assets/mother.png");
 const Parentsprofile = ({ navigation }) => {
@@ -42,7 +42,7 @@ const Parentsprofile = ({ navigation }) => {
     queryKey:["parentProfile",parentId],
     queryFn:()=>
     {
-      return    axios.get(`https://school-management-api.azurewebsites.net/parents/${parentId}`)
+      return    axios.get(`${GW_URL}/parents/${parentId}`)
     }
   })
   useEffect(()=>

@@ -9,7 +9,7 @@ import jwtDecode from 'jwt-decode'
 import { COLORS } from '../Utils/Colors/Colors'
 import { Dimensions } from 'react-native';
 import { useDispatch,useSelector } from 'react-redux'
-
+import { GW_URL } from '../config'
 import { fetchContent } from '../Redux/NotificationSlice'
 
 const { width, height } = Dimensions.get('window');

@@ -7,7 +7,7 @@ import { AuthContext } from '../Context/Context';
 import {COLORS} from "../Utils/Colors/Colors";
 import axios from 'axios';
 import { Badge } from '@rneui/themed';
-
+import { GW_URL } from '../config';
 import { useDispatch,useSelector } from 'react-redux';
 import { fetchContent } from '../Redux/NotificationSlice';
 
@@ -23,7 +23,7 @@ const header = ({navigation}) => {
   const [fatherName,setFatherName]=useState("");
   const getParentInfo=()=>
   {
-       axios.get(`https://school-management-api.azurewebsites.net/parents/${parentId}`).then((res)=>
+       axios.get(`${GW_URL}/parents/${parentId}`).then((res)=>
        {
          setFatherName(res.data.parentDetails.father_name);
          console.log(res.data.parentDetails.father_name);

@@ -8,7 +8,7 @@ import { Dimensions } from 'react-native';
 const { width, height } = Dimensions.get('window');
 import NotFoundText from '../NotFoundText';
 import { useQuery } from '@tanstack/react-query';
-
+import { GW_URL } from '../../config';
 const Screen1 = () => {
    
   const {id}=useContext(DataContext);
@@ -37,7 +37,7 @@ const [show,setShow]=useState(true);
  const getCurriculum=(class_id,school_id)=>
  {
   console.log(32,class_id,school_id);
-  axios.get(`https://school-management-api.azurewebsites.net/viewCurriculum`, {
+  axios.get(`${GW_URL}/viewCurriculum`, {
     params: {
       school_id: school_id,
       class_id:class_id

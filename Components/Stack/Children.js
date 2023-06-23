@@ -9,6 +9,7 @@ import jwtDecode from 'jwt-decode';
 import AcitvityHandler from '../bottom/AcitvityHandler';
 import { COLORS } from '../Utils/Colors/Colors'
 import { useQuery } from '@tanstack/react-query';
+import { GW_URL } from '../config';
 
 
 
@@ -41,7 +42,7 @@ const Children = ({ navigation }) => {
     queryKey:["childrenlist",parentId],
     queryFn:()=>
     {
-      return   axios.get(`https://school-management-api.azurewebsites.net/parents/${parentId}/getChildren`);
+      return   axios.get(`${GW_URL}/parents/${parentId}/getChildren`);
     }
   })
   

@@ -1,5 +1,6 @@
 import { createSlice ,createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
+import { GW_URL } from '../config';
 
 const initialState = {
  notificationList:[],
@@ -12,7 +13,7 @@ export const fetchContent = createAsyncThunk(
   'content/fetchContent',
   async (state,action) => {
    
-    const res = await axios(`https://school-management-api.azurewebsites.net/parents/${state}/getNotification`)
+    const res = await axios(`${GW_URL}/parents/${state}/getNotification`)
     const data = await res.data;
   
     return data

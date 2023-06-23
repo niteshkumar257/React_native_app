@@ -6,7 +6,7 @@ import AcitvityHandler from '../AcitvityHandler';
 import DataContext from '../../Context/DataContext';
 import NotFoundText from '../NotFoundText';
 import { useQuery } from '@tanstack/react-query';
-
+import { GW_URL } from '../../config';
 import { COLORS } from '../../Utils/Colors/Colors'
 
 
@@ -60,7 +60,7 @@ const Screen2 = ({navigation}) => {
     queryKey:['fee-details',childId],
     queryFn:()=>
     {
-      return  axios.get(`https://school-management-api.azurewebsites.net/students/${childId}/fees`)
+      return  axios.get(`${GW_URL}/students/${childId}/fees`)
     }
   })
   useEffect(()=>

@@ -10,7 +10,7 @@ import BarGraphCompnent from './BarGraphCompnent';
 import Icon from "react-native-vector-icons/Ionicons";
 import { Dimensions } from 'react-native';
 import { useQuery } from '@tanstack/react-query';
-
+import { GW_URL } from '../../config';
 const { width, height } = Dimensions.get('window');
 
 
@@ -26,7 +26,7 @@ const PerfomanceScreen = () => {
   const {data:res,isLoading,isError,error} = useQuery({
     queryKey: ['perfomance', child_id],
     queryFn: () => {
-      return axios.get(`https://school-management-api.azurewebsites.net/students/${child_id}/performance`);
+      return axios.get(`${GW_URL}/students/${child_id}/performance`);
     }
   })
 
