@@ -11,7 +11,7 @@ const DrawerNavigator = ({child_name,child_id}) => {
   return (
     <Drawer.Navigator
   
-     drawerContent={props => <CustomDrawer {...props} child_name={child_name} />}
+     drawerContent={props => <CustomDrawer {...props} child_name={child_name} child_id={child_id} />}
      screenOptions={
       {
         swipeEnabled: false,

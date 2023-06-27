@@ -13,6 +13,9 @@ import Student from "./Stack/Student"
 import Logo from "./Stack/Logo";
 import Success from './Stack/Success';
 import {COLORS} from "./Utils/Colors/Colors"
+import Calendar from './Stack/Calendar';
+import Ticket from './Stack/Ticket';
+import TicketStatus from './Stack/TicketStatus';
   
 const Stack = createNativeStackNavigator();
 
@@ -23,7 +26,10 @@ const AppNavigator = () => {
       <Stack.Navigator
        screenOptions={{
         headerTintColor: 'white',
+        animation: 'slide_from_right', //<-- this is what will do the trick
+        presentation: 'card',
         headerStyle: { backgroundColor:COLORS.mainColor3 },
+
        
       }}
       >
@@ -70,6 +76,16 @@ const AppNavigator = () => {
           component={Notification}
           options={{ title: 'Notifications' }}
         />
+         <Stack.Screen
+          name="ticket"
+          component={Ticket}
+          options={{ title: 'Ticket Form' }}
+        />
+          <Stack.Screen
+          name="ticketStatus"
+          component={TicketStatus}
+          options={{ title: 'Ticket Status' }}
+        />
           <Stack.Screen
           name="notfound"
           component={Notfound}
@@ -86,6 +102,11 @@ const AppNavigator = () => {
           name="student"
           component={Student}
           options={{ title: 'Student' ,headerShown:false}}
+        />
+          <Stack.Screen
+          name="calendar"
+          component={Calendar}
+          options={{ title: 'Attendance' ,headerShown:true}}
         />
          <Stack.Screen
           name="success"

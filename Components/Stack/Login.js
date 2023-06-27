@@ -90,7 +90,8 @@ const Login=({navigation})=>
     <TouchableOpacity onPress={changePassword}>
         <Text style={{
           color:"black",
-          fontSize:17
+          fontSize:17,
+          textDecorationLine:"underline"
         }}>Change password</Text>
       </TouchableOpacity>
    <Toast/>
@@ -182,7 +183,7 @@ button:{
   
 },
 text:{
-fontSize:25,
+fontSize:18,
 color:"white",
 fontWeight:500
 

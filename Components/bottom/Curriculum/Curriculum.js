@@ -19,70 +19,14 @@ const Screen1 = () => {
  const [url,setUrl]=useState(null);
 const [show,setShow]=useState(true);
 
-//  const getSchoolIdAndClassId=()=>
-//  {
-//     axios.get(`https://school-management-api.azurewebsites.net/students/${childId}`)
-//     .then((res)=>
-//     {
-     
-//       setClassId(res.data.studentDetails[0].class_id);
-//       setSchoolId(res.data.studentDetails[0].school_id);
-//      console.log(23,res.data.studentDetails[0].class_id);
-//       getCurriculum(res.data.studentDetails[0].class_id,res.data.studentDetails[0].school_id);
-//     }).catch(err=>
-//       {
-//         console.log(err);
-//       })
-//  }
- const getCurriculum=(class_id,school_id)=>
- {
-  console.log(32,class_id,school_id);
-  axios.get(`${GW_URL}/viewCurriculum`, {
-    params: {
-      school_id: school_id,
-      class_id:class_id
-      }
-   }).then(res=>
-    {
-    console.log(40,res.data);
-      setUrl(res.data.url);
-      console.log(42,res.data.url);
-      setShow(false);
-      // console.log(res.data.url);
-    }).catch((err)=>
-    {
-      console.log(err);
-     setShow(false);
-    })
- }
-//  useEffect(()=>
-//  {
-//   getSchoolIdAndClassId();
- 
 
-//  },[])
-// const getCurriculum=(class_id,school_id)=>
-// {
-//   const {data:res,isLoading:curriculumLoading,isError:curriculumErrorStatus,error:ErrorMsg}=useQuery({
-//     queryKey:['curriculum',class_id,school_id],
-//     queryFn:()=>
-//     {
-//       return  axios.get(`https://school-management-api.azurewebsites.net/viewCurriculum`, {
-//         params: {
-//           school_id: school_id,
-//           class_id:11
-//           }
-//        })
-//     }
-//   })
- 
-// }
+
 
  const {data:ClassIdAndSchoolId,isLoading:IdsLoading,isError:IdsError,error:Idserror}=useQuery({
    queryKey:["fetch-class_id-school_id",childId],
    queryFn:()=>
    {
-   return  axios.get(`https://school-management-api.azurewebsites.net/students/${childId}`)
+   return  axios.get(`${GW_URL}/students/${childId}`)
    }
  })
  const class_id=ClassIdAndSchoolId?.data?.studentDetails[0].class_id;
@@ -91,7 +35,7 @@ const [show,setShow]=useState(true);
       queryKey:['curriculum',class_id,school_id],
       queryFn:()=>
       {
-        return  axios.get(`https://school-management-api.azurewebsites.net/viewCurriculum`, {
+        return  axios.get(`${GW_URL}/viewCurriculum`, {
           params: {
             school_id: school_id,
             class_id:class_id
@@ -100,7 +44,7 @@ const [show,setShow]=useState(true);
       },
       enabled:!! class_id && !!school_id
  })
-  console.log(103,res?.data.url);
+ 
  
 
 
@@ -132,10 +76,11 @@ const [show,setShow]=useState(true);
 const styles=StyleSheet.create(
   {
     ViewContainer:{
-      height:height,
+      height:height-50,
       width:width,
       padding:5,
-      backgroundColor:COLORS.backgGroundColor
+      backgroundColor:COLORS.backgGroundColor,
+
     
 },
     container:{
@@ -188,8 +133,9 @@ const styles=StyleSheet.create(
     Image:
 
     {
-      height:300,
-      width:"100%",
+      height:height-50,
+      width:width-20,
+      
       padding:10
     }
 

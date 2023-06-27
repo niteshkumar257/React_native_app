@@ -8,9 +8,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Student from 'react-native-vector-icons/MaterialIcons'
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
+import Calendar from "react-native-vector-icons/AntDesign";
 import { AuthContext } from "../Context/Context";
 import { COLORS } from '../Utils/Colors/Colors'
+import Ticket from '../Stack/Ticket';
 
 const student=require("../../assets/Student.png");
 
@@ -21,17 +22,29 @@ const student=require("../../assets/Student.png");
 
 
 
-const CustomDrawer = ({ navigation,child_name }) => {
+const CustomDrawer = ({ navigation,child_name,child_id }) => {
 
   // const logOutHandler = () => {
   //   navigation.navigate("login");
   // }
-  console.log(child_name);
+ 
   const childrenHandler = () => {
-    navigation.navigate("children");
+    navigation.navigate("children",{
+      child_id:child_id
+    });
+  }
+  const calendarHandler = () => {
+    navigation.navigate("calendar",{child_id:child_id});
   }
   const {logoutHandler}=useContext(AuthContext);
-  console.log(logoutHandler);
+  const ticketHandler=()=>
+  {
+    navigation.navigate("ticket");
+  }
+  const ticketStatusHandler=()=>
+  {
+    navigation.navigate("ticketStatus");
+  }
   return (
     <SafeAreaView >
       <View style={styles.mainContainer}>
@@ -57,6 +70,19 @@ const CustomDrawer = ({ navigation,child_name }) => {
            <Icon name="person-circle-sharp" size={25} color={COLORS.mainColor1}/>
           <Text style={styles.text1}>Childrens</Text>
         </View>
+        <View onStartShouldSetResponder={calendarHandler} style={styles.ListItemContainer} >
+           <Calendar name="calendar" size={25} color={COLORS.mainColor1} />
+          <Text style={styles.text1}>Attendance</Text>
+        </View>
+        <View onStartShouldSetResponder={ticketHandler} style={styles.ListItemContainer} >
+           <Calendar name="calendar" size={25} color={COLORS.mainColor1} />
+          <Text style={styles.text1}>Ticket</Text>
+        </View>
+        <View onStartShouldSetResponder={ticketStatusHandler} style={styles.ListItemContainer} >
+           <Calendar name="calendar" size={25} color={COLORS.mainColor1} />
+          <Text style={styles.text1}>Status</Text>
+        </View>
+        
         </View>
         <View style={styles.logOutMainContainer}>
         <View style={styles.logoutContainer}>
@@ -124,8 +150,11 @@ const styles = StyleSheet.create(
     listContainer:{
       flex:3,
       width:"80%",
-      marginTop:20
+      marginTop:20,
+      display:'flex',
+      rowGap:10
      
+
 
     },
     ListItemContainer:{

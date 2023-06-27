@@ -26,7 +26,7 @@ export const AuthProvider=({children})=>
     const loginHandler= async(username,password,navigation,setPassword,setUserName,showToast,setShow)=>
     {
      
-         console.log(navigation);
+        
           if(username && password)
           {
             setShow(true);
@@ -36,7 +36,7 @@ export const AuthProvider=({children})=>
                 password:password
                }).then((res)=>
                {
-                console.log(res.data);
+               
             setUserToken(res.data.token);
             
             AsyncStorage.setItem('userToken',res.data.token);
@@ -113,14 +113,14 @@ export const AuthProvider=({children})=>
             const value = await AsyncStorage.getItem('userToken');
             if(value) {
                 
-                console.log(value);
+                
                setUserToken(value);
               navigation.navigate("children");
               
             
             } else {
               navigation.navigate("login");
-              console.log('No data found');
+            
             }
           } catch(e) {
             

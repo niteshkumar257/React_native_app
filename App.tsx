@@ -2,6 +2,7 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import AppNavigator from './Components/AppNavigator'
 import { AuthProvider } from './Components/Context/Context'
+import { StudentProvider } from './Components/Context/StudentConext'
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Store from "./Components/Redux/Store";
 import { Provider } from 'react-redux';
@@ -26,7 +27,10 @@ const App = () => {
 <Provider store={Store}>
 
 <AuthProvider>
-      <AppNavigator/>
+  <StudentProvider>
+  <AppNavigator/>
+  </StudentProvider>
+    
 </AuthProvider>
 </Provider>
 </SafeAreaProvider>

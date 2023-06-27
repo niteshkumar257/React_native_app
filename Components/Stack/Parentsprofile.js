@@ -22,8 +22,9 @@ const Parentsprofile = ({ navigation }) => {
   const [altPhone, setAltPhone] = useState("");
   const { logoutHandler, userToken } = useContext(AuthContext);
   let userInfo = jwtDecode(userToken);
+  console.log(25,userInfo);
   let parentId = (userInfo.result.parent_id);
- console.log(parentId)
+
   // useEffect(() => {
   //   axios.get(`https://school-management-api.azurewebsites.net/parents/${parentId}`)
   //     .then((res) => {
@@ -49,13 +50,13 @@ const Parentsprofile = ({ navigation }) => {
   {
        if(!isLoading)
        {
-        console.log("Loading done");
+        
         
         setName(res?.data?.parentDetails.father_name);
         setEmail(res?.data?.parentDetails.email);
         setPhone(res?.data?.parentDetails.whatsapp_no);
         setAltPhone(res?.data?.parentDetails.alternative_mobile)
-        console.log(name,email,phone,altPhone)
+       
        }
        if(isError)
        {

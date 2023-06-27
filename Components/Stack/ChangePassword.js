@@ -40,7 +40,7 @@ const Login=({navigation})=>
         old_password:oldPassword,
         new_password:newPassword
       }).then((data) => {
-          console.log(data.data);
+         
         
           if(data.data.success==0)
           {
@@ -107,7 +107,7 @@ const Login=({navigation})=>
     <View style={style.Logo_container}>
     <Text style={
       {
-        fontSize:30,
+        fontSize:20,
         color:"black"
       }
     }>Reset Password</Text>
@@ -245,7 +245,7 @@ button:{
  
 },
 text:{
-fontSize:25,
+fontSize:18,
 color:"white",
 fontWeight:500
 

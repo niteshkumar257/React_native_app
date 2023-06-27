@@ -21,7 +21,7 @@ const PerfomanceScreen = () => {
   const [graphShow, setGraphShow] = useState(false);
   const { id: child_id } = useContext(DataContext);
 
-  console.log("hey", child_id);
+ 
 
   const {data:res,isLoading,isError,error} = useQuery({
     queryKey: ['perfomance', child_id],

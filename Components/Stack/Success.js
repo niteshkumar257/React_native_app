@@ -70,7 +70,7 @@ container:{
         shadowRadius: 5,
         
       },text:{
-        fontSize:25,
+        fontSize:15,
         color:"white",
         fontWeight:500
         

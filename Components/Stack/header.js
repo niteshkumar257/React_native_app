@@ -26,7 +26,7 @@ const header = ({navigation}) => {
        axios.get(`${GW_URL}/parents/${parentId}`).then((res)=>
        {
          setFatherName(res.data.parentDetails.father_name);
-         console.log(res.data.parentDetails.father_name);
+       
        }).catch(err=>
         {
           console.log(err);

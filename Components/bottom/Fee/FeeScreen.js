@@ -67,8 +67,7 @@ const Screen2 = ({navigation}) => {
   {
      if(!isLoading)
      {
-      console.log(70,res);
-      console.log("load succesfully")
+      
       setFeeArray(res?.data?.studentFees);
       setFirst(res?.data?.studentFees[0]?.first_installment);
       setSecond(res?.data?.studentFees[0]?.second_installment);

@@ -1,16 +1,19 @@
 import { View, Text,StyleSheet } from 'react-native'
-import React from 'react'
+import React ,{useContext}from 'react'
 import Icon from "react-native-vector-icons/Ionicons";
 import { COLORS } from '../Utils/Colors/Colors'
+import { StudentContext } from '../Context/StudentConext';
 
 const Student = ({navigation,name,child_id}) => {
 
-
-  console.log(child_id);
+const {setChildIdHandler}=useContext(StudentContext);
+ 
    const clickHandler =(child_id)=>
    {
    
-     console.log(child_id);
+   
+    
+    setChildIdHandler(child_id);
      navigation.navigate("home",
       {
          child_id:child_id,

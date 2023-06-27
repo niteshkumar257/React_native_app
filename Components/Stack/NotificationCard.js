@@ -14,7 +14,7 @@ const NotificationCard = ({icon,msg,NotificationId,NotificationStatus,getNotific
     const updateNotificationStatus=async (notificationId)=>{
       try {
         const response = await axios.put(`${GW_URL}/parents/${notificationId}/markNotificationSeen`);
-        console.log('Notification updated successfully:', response.data);
+       
         dispatch(fetchContent(parentId));
         
       } catch (error) {

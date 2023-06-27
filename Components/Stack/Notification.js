@@ -21,7 +21,7 @@ const Notification = () => {
   const {userToken}=useContext(AuthContext);
   const dispatch=useDispatch();
   const notificationListRedux=useSelector((state)=>state.Notification.notificationList.messages);
- console.log(notificationListRedux,24);
+ 
   const isLoading = useSelector((state) => state.Notification.isLoading)
   const Error = useSelector((state) => state.Notification.error)
   const count=useSelector((state)=>state.Notification.count);
@@ -71,7 +71,7 @@ const Notification = () => {
   //   return error
   // }
 
- console.log(notificationListRedux);  
+ 
   return (
 
     <SafeAreaView>

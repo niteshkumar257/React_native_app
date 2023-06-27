@@ -55,7 +55,7 @@ const Screen4 = ({navigation}) => {
                 return 0; // Maintain the original order
               }
             });
-             console.log(58,mentor);
+            
         setMentorDetails(mentor);
           setParentMentor(true);
         setIsLoding(false);
@@ -67,8 +67,7 @@ const Screen4 = ({navigation}) => {
         } 
       });  
      
-      console.log("mentor array")
-      console.log(mentor);
+    
    
     
     }).catch((err)=>
