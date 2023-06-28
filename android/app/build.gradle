@@ -95,10 +95,10 @@ android {
 
     namespace "com.awesomeproject"
     defaultConfig {
-        applicationId "com.Gw3.parents"
+        applicationId "com.Gw.parents"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 5
+        versionCode 10
         versionName "1.0.1"
     }
 
