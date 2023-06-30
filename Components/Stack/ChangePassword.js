@@ -157,7 +157,7 @@ const Login=({navigation})=>
         <Text style={style.text}>CHANGE PASSWORD</Text>
       </TouchableOpacity>
     </View>
-    <Toast/>
+    <Toast position="top"/>
 </View>
   );
 }
