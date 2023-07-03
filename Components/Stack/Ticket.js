@@ -49,7 +49,7 @@ const Ticket = () => {
             message:"Issue Raised succesfully",
             type:"success",
             autoHide:2000,
-            floating:true,
+            floating:false,
             width:width
           })
           setMsg("");
@@ -67,7 +67,7 @@ const Ticket = () => {
           message:"Something went wrong",
           type:"error",
           autoHide:2000,
-          floating:true
+          floating:false
         })
       })
     }else 
@@ -76,7 +76,7 @@ const Ticket = () => {
         message:"Meesage field is Required",
         type:'error',
         autoHide:2000,
-        floating:true,
+        floating:false,
         width:width
        })
     }
