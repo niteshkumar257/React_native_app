@@ -1,95 +1,135 @@
 import { View, Text, StyleSheet, ScrollView, ActivityIndicator, Image } from 'react-native'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect ,useContext} from 'react'
 import { COLORS } from '../../Utils/Colors/Colors'
 
 import { Dimensions } from 'react-native';
 import { GW_URL } from '../../config';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 const { width, height } = Dimensions.get('window');
+import DataContext from '../../Context/DataContext';
+import Loader from '../../Loader';
+import NoData from '../../NoData';
+
+
+const renderSubjectImage = (subjectName) => {
+  switch (subjectName) {
+    case 'Physics':
+      return <Image source={require('../../../assets/Physics.png')} />;
+    case 'Chemistry':
+      return <Image source={require('../../../assets/chemistry.png')} />;
+    case 'Mathematics':
+      return <Image source={require('../../../assets/Math.png')} />;
+    case 'Biology':
+      return <Image source={require('../../../assets/Biology.png')} />;
+  
+    default:
+      return null;
+  }
+};
 
 const Video = ({ navigation }) => {
+  const {id}=useContext(DataContext);
+  const [childId,setChildId]=useState(id);
   const [startPlay, setStartPlay] = useState(false);
   const [videoId, setVideoId] = useState(null);
   const [playStatus, setPlayStatus] = useState(false);
   const [videoList, setVideoList] = useState(null);
   const [showActivity, setShowActitvity] = useState(false);
+
+  const [row,setRows]=useState();
+  
   const [url, setUrl] = useState("");
-  const subjectVideoList = [
+
+  const {data:ClassIdAndSchoolId,isLoading:IdsLoading,isError:IdsError,error:Idserror}=useQuery({
+    queryKey:["fetch-class_id-school_id",childId],
+    queryFn:()=>
     {
-      subjectName: "Physics",
-      chapter: [
-        "Motions", "Rotation", "Work Energy", "Power", "Current electricity"
-      ]
-    },
-    {
-      subjectName: "Mathematics",
-      chapter: [
-        "Algebara", "Differentitation", "Sequence and Series", "Intergration", "Hyperbola"
-      ]
+    return  axios.get(`${GW_URL}/students/${childId}`)
     }
-  ]
+  })
+  
+  const class_id=ClassIdAndSchoolId?.data?.studentDetails[0].class_id;
+  const school_id=ClassIdAndSchoolId?.data?.studentDetails[0].school_id;
+
+ 
+  
+  const {data:StudentSubjectList,isLoading:StudentSubjectLoading,isError:StudentSubjectError}=useQuery({
+    queryKey:['fetch-student-sujectlist',class_id,school_id],
+    queryFn:()=>
+    {
+      return   axios.get(`${GW_URL}/schools/${school_id}/${class_id}/getClassSubjects`)
+    }, enabled:!! class_id && !!school_id
+   } )
+
+ useEffect(()=>
+ {
+     if(!StudentSubjectLoading)
+     {
+      
+      console.log("sujectlist",StudentSubjectList?.data);
+     }
+ },[])
+  
 
 
 
-  const subjectList = [
-    { id: 1, subject: "Physics" },
-    { id: 2, subject: "Chemistry" },
-    { id: 3, subject: "Mathematics" },
-    { id: 4, subject: "Biology" },
-    { id: 5, subject: "Histroy" },
-  ]
-  const subjectSelectHandlerBiology = () => {
+  const renderVideoList=(subject_id,subject_name)=>
+  {
+    console.log(subject_id,subject_name);
+     axios.get(`${GW_URL}/videos/${class_id}/${subject_id}/getVideos`).
+     then((res)=>
+     {
+      
+     console.log(res.data);
+      if(res.data.data[0]!=undefined)
+      {
+        navigation.navigate('subject', {
+          subject_name: subject_name,
+          video_url: res.data.data[0].video_url
+        });
+      }
+      else 
+      {
+         navigation.navigate('noVideos')
+      }
+    
 
-    navigation.navigate('subject', {
-      subject_name: "Biology",
-      playList_Id: 'PL5ABW4Ea26ZSAWmLQ4aoB3_LI82wOp7Z7'
-    });
+     }).catch((err)=>
+     {
+      console.log(err);
+     })
   }
-  const subjectSelectHandlerMath = () => {
-
-    navigation.navigate('subject', {
-
-      subject_name: "Math",
-      playList_Id: 'PL5ABW4Ea26ZSAWmLQ4aoB3_LI82wOp7Z7'
+ 
+ 
 
 
-    });
-  }
-  const subjectSelectHandlerPhysics = () => {
-
-    navigation.navigate('subject', {
-      subject_name: "Physics",
-      playList_Id: "PL5ABW4Ea26ZSoXZTG3LBt6iGCh_tnSA78"
-    });
-  }
-  const subjectSelectHandlerChemistry = () => {
-
-    navigation.navigate('subject', {
-      subject_name: "Chemistry",
-      playList_Id: 'PL5ABW4Ea26ZSzfUq9VGWfv9iJqbOPOO7j'
-    });
-  }
   return (
     <ScrollView >
       <View style={styles.videoContainer} removeClippedSubviews={true}>
 
         <View style={styles.subjectContainer}>
-          <View style={styles.imageContainer} onStartShouldSetResponder={subjectSelectHandlerBiology}>
-            <Image source={require('../../../assets/microscope.png')} />
-            <Text style={styles.subejctText}>Biology</Text>
-          </View>
-          <View style={styles.imageContainer} onStartShouldSetResponder={subjectSelectHandlerPhysics}>
-            <Image source={require('../../../assets/pendulum.png')} />
-            <Text style={styles.subejctText}>Physics</Text>
-          </View>
-          <View style={styles.imageContainer} onStartShouldSetResponder={subjectSelectHandlerMath}>
-            <Image source={require('../../../assets/design.png')} />
-            <Text style={styles.subejctText}>Math</Text>
-          </View>
-          <View style={styles.imageContainer} onStartShouldSetResponder={subjectSelectHandlerChemistry}>
-            <Image size={48} source={require('../../../assets/atom.png')} />
-            <Text style={styles.subejctText}>Chemistry</Text>
-          </View>
+
+       
+
+{
+   StudentSubjectLoading ? <Loader isLoading={StudentSubjectLoading}/>: (
+     StudentSubjectList?.data?.subjects?.length>0 ? (
+      StudentSubjectList?.data?.subjects?.map((item,index)=>(
+        <View key={item.subject_id} style={styles.imageContainer} onStartShouldSetResponder={()=>renderVideoList(item.subject_id,item.subject_name)}>
+       {renderSubjectImage(item.subject_name)}
+        <Text style={styles.subejctText}>{item.subject_name}</Text>
+      </View>
+      ))
+     ) :<NoData message={"No Subjects"}/>
+   )
+}
+
+
+
+         
+         
 
         </View>
       </View>
@@ -130,7 +170,7 @@ const styles = StyleSheet.create(
       shadowOffset: { width: 0, height: 0 },
       shadowOpacity: 0.1,
       shadowRadius: 5,
-      backgroundColor: "red"
+     
     },
     imageContainer: {
       display: "flex",

@@ -29,6 +29,7 @@ const [show,setShow]=useState(true);
    return  axios.get(`${GW_URL}/students/${childId}`)
    }
  })
+ 
  const class_id=ClassIdAndSchoolId?.data?.studentDetails[0].class_id;
  const school_id=ClassIdAndSchoolId?.data?.studentDetails[0].school_id;
  const {data:res,isLoading:curriculumLoading,isError:curriculumErrorStatus,error:ErrorMsg}=useQuery({

@@ -4,6 +4,7 @@ import Video from './VideosScreen'
 import Biology from '../Biology';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import NoVideos from './NoVideos';
 
 const VideoStackNavigator = () => {
     const Stack = createNativeStackNavigator();
@@ -24,6 +25,11 @@ const VideoStackNavigator = () => {
           name="subject"
           component={Biology}
           options={{ title: 'Subject wise'}}
+        />
+         <Stack.Screen 
+          name="noVideos"
+          component={NoVideos}
+          options={{ title: 'No Videos'}}
         />
     </Stack.Navigator>
   )
