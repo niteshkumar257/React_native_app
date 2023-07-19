@@ -1,4 +1,4 @@
-export const GW_URL = 'https://api.gaanvwala.com/api/api';
+export const GW_URL = 'https://api.gaanvwala.com/api';
 
 export const ToStringDateFormatter=(dateStr)=>
 {

@@ -17,7 +17,8 @@ const AcitvityHandler = ({show}) => {
        
     
     }}>
-      <ActivityIndicator size={50} color={"#1377c0"} animating={show}/>
+      <ActivityIndicator size={50} color={"black"} animating={show}/>
+      <Text>Loading</Text>
     </View>
   )
 }

@@ -11,6 +11,7 @@ import { Dimensions } from 'react-native';
 import { useDispatch,useSelector } from 'react-redux'
 import { GW_URL } from '../config'
 import { fetchContent } from '../Redux/NotificationSlice'
+import { fetchPTMContent } from '../Redux/PtmNotificationSlice'
 
 const { width, height } = Dimensions.get('window');
 
@@ -21,7 +22,9 @@ const Notification = () => {
   const {userToken}=useContext(AuthContext);
   const dispatch=useDispatch();
   const notificationListRedux=useSelector((state)=>state.Notification.notificationList.messages);
- 
+const ptmNotificationListRedux=useSelector((state)=>state.PTMNotification.PTMnotificationList.notifications);
+
+ const ptmListLoading=useSelector((state)=>state.PTMNotification.isLoading);
   const isLoading = useSelector((state) => state.Notification.isLoading)
   const Error = useSelector((state) => state.Notification.error)
   const count=useSelector((state)=>state.Notification.count);
@@ -34,7 +37,7 @@ const Notification = () => {
   //   .then((res)=>
   //   {
      
-  //     setIsLodiging(false);
+  //     setIsLodiging(false);"PTMnotificationList
   //     // setNotificatinList(
   //     //   (res.data.messages).sort((a, b) => {
   //     //     const dateA = new Date(a.created_on);
@@ -59,9 +62,12 @@ const Notification = () => {
   //     console.log(err)
   //   })
   //  }
+  
    useEffect(()=>
    {
+    
    dispatch(fetchContent(parentId));
+   dispatch(fetchPTMContent(parentId));
    },[dispatch]);
   //  if (isLoading) {
   //   return <Text>Loding</Text>
@@ -77,11 +83,11 @@ const Notification = () => {
     <SafeAreaView>
     <ScrollView overScrollMode="never" removeClippedSubviews={true}>
       {
-        isLoading  ? <AcitivityhandlerStack show={isLoading}/> :
+        isLoading && ptmListLoading  ? <AcitivityhandlerStack show={isLoading}/> :
          <View style={styles.mainContainer} >
       {
 
-      notificationListRedux.length===0 ? <Text style={{
+      notificationListRedux?.length===0 && ptmNotificationListRedux.length===0 ? <Text style={{
            fontSize:20,
            fontWeight:500,
            color:"black"
@@ -89,6 +95,7 @@ const Notification = () => {
         notificationListRedux?.map((item,index)=>(
           <NotificationCard  key={index}
            NotificationId={item.notification_id}
+           meetingId={null}
            NotificationStatus={item.is_seen}
           icon={feeIcon} msg={item.messages}
           date={item.created_on}
@@ -98,6 +105,28 @@ const Notification = () => {
 
         ))
       }
+       {
+
+ptmNotificationListRedux?.length===0 && notificationListRedux.length===0 ? <Text style={{
+     fontSize:20,
+     fontWeight:500,
+     color:"black"
+  }} >No notifcations !</Text> :
+  ptmNotificationListRedux?.map((item,index)=>(
+    <NotificationCard  key={index}
+     NotificationId={null}
+     meetingId={item.meeting_id}
+    
+     NotificationStatus={item.is_seen}
+    icon={feeIcon} msg={item.messages}
+    date={item.created_on}
+    parentId={parentId}
+    />
+    
+
+  ))
+}
+      
     
     
     

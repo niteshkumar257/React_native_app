@@ -10,6 +10,7 @@ import AcitvityHandler from '../bottom/AcitvityHandler'
 import Loader from '../Loader'
 import { Dimensions } from 'react-native';
 const { width, height } = Dimensions.get('window');
+import NoData from '../NoData'
 
 const TicketStatus = () => {
     const { logoutHandler, userToken } = useContext(AuthContext);
@@ -21,7 +22,7 @@ const TicketStatus = () => {
     {
          axios.get(`${GW_URL}/parents/${parent_id}/getStatus`).then((res)=>
          {
-            console.log(res.data);
+            console.log("status",res.data);
             setIssueInfo(res.data.tickerInfo);
             setIsLoading(false);
          })
@@ -40,9 +41,9 @@ const TicketStatus = () => {
       <Loader show={isLoading} />
     ) : (
       <ScrollView>
-        {issueInfo.map((item, index) => (
+        {issueInfo.length!=0 ? issueInfo.map((item, index) => (
           <IssueDetailsComponent key={index} issue={item} />
-        ))}
+        )) :<NoData message={"No active ticket"}/>}
       </ScrollView>
     )}
   </View>

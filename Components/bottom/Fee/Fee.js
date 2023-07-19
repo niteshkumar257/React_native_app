@@ -46,14 +46,7 @@ const Fee = ({nthInstallMent,status,amount,date,totalFees}) => {
               <Text style={[styles.valueText]}>{formattedDate}</Text>
             
             </View>
-            {
-              status==="Paid" && 
-              <View style={styles.dateContainer}>
-              <Text style={[styles.keyText]}>Paid Date</Text>
-              <Text style={[styles.valueText]}>{formattedDate}</Text>
-            
-            </View>
-             }
+           
            
 
           </View>

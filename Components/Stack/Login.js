@@ -56,7 +56,7 @@ const Login=({navigation})=>
  
   return (
     <View style={style.main_container}>
-      <ActivityIndicator size={50} color={"#1377c0"} animating={show}/>
+    
     <View style={style.Logo_container}>
     <Image source={gwlogo}  style={style.logo}/>
      <Image source={gwbanner} style={style.banner}/>
@@ -84,7 +84,7 @@ const Login=({navigation})=>
     </View>
     <View style={style.btn}>
       <TouchableOpacity style={style.button} onPress={()=>loginHandler(username,password,navigation,setPassword,setUserName,showToast,setShow)}>
-        <Text style={style.text}>LOG IN</Text>
+        <Text style={style.text}>{show?  <ActivityIndicator size={30} color={"white"} animating={show}/>:"LOGIN"}</Text>
       </TouchableOpacity>
     </View>
     <TouchableOpacity onPress={changePassword}>
@@ -101,15 +101,17 @@ const Login=({navigation})=>
 export default Login;
 const style=StyleSheet.create({
   main_container:{
-      height:"100%",
-      width:"100%",
+      height:height,
+      width:width,
       // backgroundColor:"lightgreen",
       display:"flex",
       // justifyContent:"center",
       alignItems:"center",
+    justifyContent:'center',
+    
       backgroundColor:COLORS.backgGroundColor,
       rowGap:15,
-      paddingTop:80
+      
    },
  Logo_container:{
   height:100,
@@ -139,6 +141,7 @@ display:"flex",
   height:60,
   width:width-60,
   padding:20,
+  resizeMode:'contain'
  
 },
  btn:{
@@ -192,7 +195,8 @@ fontWeight:500
 logo:{
    height:100,
    width:100,
-   backgroundColor:"red"
+   backgroundColor:"red",
+   resizeMode:"container"
   
    
    
@@ -220,6 +224,8 @@ logo: {
   width: 60,
   height: 60,
   marginRight: 8,
+ 
+  resizeMode:'contain'
 },
 
 

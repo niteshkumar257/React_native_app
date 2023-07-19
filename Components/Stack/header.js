@@ -10,6 +10,7 @@ import { Badge } from '@rneui/themed';
 import { GW_URL } from '../config';
 import { useDispatch,useSelector } from 'react-redux';
 import { fetchContent } from '../Redux/NotificationSlice';
+import { fetchPTMContent } from '../Redux/PtmNotificationSlice';
 
 
 const header = ({navigation}) => {
@@ -19,7 +20,8 @@ const header = ({navigation}) => {
   const dispatch=useDispatch();
   
   const count=useSelector((state)=>state.Notification.count);
-   
+  const ptmNotificationCount=useSelector((state)=>state.PTMNotification.count);
+   console.log(ptmNotificationCount);
   const [fatherName,setFatherName]=useState("");
   const getParentInfo=()=>
   {
@@ -59,6 +61,7 @@ const header = ({navigation}) => {
   {
     getParentInfo();
     dispatch(fetchContent(parentId));
+    dispatch(fetchPTMContent(parentId));
     
   },[dispatch])
   // const countUnseenNotification=notificationList?.filter((item)=> item.is_seen==true).reduce((acc,cur)=> {
@@ -67,7 +70,7 @@ const header = ({navigation}) => {
   // setNotificatinList(countUnseenNotification);
   let containerStyle = { position: 'absolute', top: -2, right: -5 };
 
-if (count===0) {
+if (count+ptmNotificationCount===0) {
   containerStyle = { ...containerStyle, top:2,right:4};
 } else {
   containerStyle = { ...containerStyle};
@@ -98,9 +101,9 @@ if (count===0) {
         
        <Icon name="notifications-sharp" size={30} color={"white"}/>
        {
-        count!=0 &&   <Badge
+        count+ptmNotificationCount!=0 &&   <Badge
         status="error"
-        value={count}
+        value={count+ptmNotificationCount}
          
         // value={notificationList?.filter(item=> {
         //   return item.is_seen===false;

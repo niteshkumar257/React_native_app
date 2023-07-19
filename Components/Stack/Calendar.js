@@ -9,7 +9,7 @@ const { width, height } = Dimensions.get('window');
 
 import { StudentContext } from '../Context/StudentConext';
 import { Dropdown } from 'react-native-element-dropdown';
-
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {FONTS} from "../Utils/Colors/fonts";
 import { COLORS } from '../Utils/Colors/Colors';
 
@@ -341,8 +341,8 @@ const Calendar = ({route}) => {
 export default Calendar;
 const styles = StyleSheet.create({
   calendar: {
-     width:width,
-     height:height-200,
+     width:wp("99%"),
+     height:hp("75%"),
    
      display:"flex",
      
@@ -380,13 +380,18 @@ const styles = StyleSheet.create({
   width:width
  },
  cellClass:{
-  height:50,
-  width:50,
+  height:wp('10%'),
+  width:hp('10%'),
 },squareBoxOfDay:{
-  width:width-10,
+  height:hp('47%'),
+  width:wp('99%'),
+
   display:'flex',
   flexDirection:"row",
+  justifyContent:'center',
+  alignItems:'center',
   flexWrap:"wrap",
+  paddingLeft:10,
   rowGap:5,
  },
  date:{
@@ -445,6 +450,7 @@ const styles = StyleSheet.create({
  },
  symbolContainer:{
    height:150,
+ 
    paddingLeft:20,
    display:"flex",
    flexDirection:"column",

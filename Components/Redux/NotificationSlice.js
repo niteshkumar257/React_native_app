@@ -31,6 +31,7 @@ const counterSlice = createSlice({
     })
     builder.addCase(fetchContent.fulfilled, (state, action) => {
   
+      console.log(34,action.payload.messages);
       state.isLoading = false
       state.notificationList = action.payload
       state.count=action.payload.messages.filter(item=> {

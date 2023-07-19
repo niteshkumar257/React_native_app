@@ -1,7 +1,14 @@
-import { configureStore } from "@reduxjs/toolkit";
-
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import NotificationReducer from "./NotificationSlice";
-const store=configureStore({
-    reducer:{Notification:NotificationReducer}
-})
+import PTMNotificationReducer from "./PtmNotificationSlice";
+
+const rootReducer = combineReducers({
+  Notification: NotificationReducer,
+  PTMNotification: PTMNotificationReducer,
+});
+
+const store = configureStore({
+  reducer: rootReducer,
+});
+
 export default store;

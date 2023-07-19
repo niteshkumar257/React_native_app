@@ -58,7 +58,7 @@ const [show,setShow]=useState(true);
       <View style={styles.container}> 
   {curriculumLoading && <AcitvityHandler show={curriculumLoading}/>}
    {
-    res?.data.url!=null ? <Image style={styles.Image} source={ { uri: res?.data.url }}/> :
+    res?.data.url!=null ? <Image  style={styles.Image} source={ { uri: res?.data.url }}/> :
     <Text style={{
       fontSize:20,
       fontWeight:600,
@@ -84,8 +84,8 @@ const styles=StyleSheet.create(
     
 },
     container:{
-      height:height,
-      width:"100%",
+      height:height-50,
+      width:width-20,
        display:"flex",
        justifyContent:"center",
        alignItems:"center",
@@ -133,9 +133,9 @@ const styles=StyleSheet.create(
     Image:
 
     {
-      height:height-50,
+      height:height-200,
       width:width-20,
-      
+      resizeMode: "contain",
       padding:10
     }
 

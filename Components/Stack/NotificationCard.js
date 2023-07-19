@@ -6,12 +6,15 @@ import {COLORS} from "../Utils/Colors/Colors";
 import { fetchContent } from '../Redux/NotificationSlice';
 import { useDispatch } from 'react-redux';
 import { GW_URL } from '../config';
+import { fetchPTMContent } from '../Redux/PtmNotificationSlice';
 
-const NotificationCard = ({icon,msg,NotificationId,NotificationStatus,getNotification,date,parentId}) => {
+const NotificationCard = ({icon,msg,NotificationId,NotificationStatus,getNotification,date,parentId,meetingId}) => {
  
   const dispatch=useDispatch();
     const feeIcon=require("../../assets/notificationFee.png")
     const updateNotificationStatus=async (notificationId)=>{
+      if(meetingId==null)
+      {
       try {
         const response = await axios.put(`${GW_URL}/parents/${notificationId}/markNotificationSeen`);
        
@@ -20,6 +23,18 @@ const NotificationCard = ({icon,msg,NotificationId,NotificationStatus,getNotific
       } catch (error) {
         console.error('Error updating notification:', error);
       } 
+    }
+    else 
+    {
+      try {
+        const response = await axios.put(`${GW_URL}/parents/${meetingId}/markPTMNotificationSeen`);
+       
+        dispatch(fetchPTMContent(parentId));
+        
+      } catch (error) {
+        console.error('Error updating notification:', error);
+      } 
+    }
     }
   return (
     <View  
