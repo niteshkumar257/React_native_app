@@ -11,9 +11,15 @@ const { width, height } = Dimensions.get('window');
 import DataContext from '../../Context/DataContext';
 import Loader from '../../Loader';
 import NoData from '../../NoData';
+import BookIcon from "react-native-vector-icons/Ionicons";
+import {FONTS }from "../../Utils/Colors/fonts";
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 
-const renderSubjectImage = (subjectName) => {
+
+const Video = ({ navigation }) => {
+
+  const renderSubjectImage = (subjectName) => {
   switch (subjectName) {
     case 'Physics':
       return <Image source={require('../../../assets/Physics.png')} />;
@@ -29,7 +35,6 @@ const renderSubjectImage = (subjectName) => {
   }
 };
 
-const Video = ({ navigation }) => {
   const {id}=useContext(DataContext);
   const [childId,setChildId]=useState(id);
   const [startPlay, setStartPlay] = useState(false);
@@ -107,31 +112,36 @@ const Video = ({ navigation }) => {
 
   return (
     <ScrollView >
-      <View style={styles.videoContainer} removeClippedSubviews={true}>
+      <View style={styles.videoContainer}>
 
         <View style={styles.subjectContainer}>
 
-       
+        {/* {StudentSubjectLoading ? (
+        <Loader show={StudentSubjectLoading} x={110} />
+      ) : StudentSubjectList?.data?.subjects?.length > 0 ? (
+        StudentSubjectList?.data?.subjects.map((item, index) => (
+          <View key={item.subject_id} style={styles.subject} onStartShouldSetResponder={renderVideoList(item.subject_id,item.subject_name)}>
+            <View><Text style={styles.subjectName}>{item.subject_name}</Text></View>
+            <BookIcon name="book-outline" size={30} color={"black"} />
+          </View>
+        ))
+      ) : (
+        <Text>No subjects</Text>
+      )} */}
 
 {
-   StudentSubjectLoading ? <Loader isLoading={StudentSubjectLoading}/>: (
+   StudentSubjectLoading ? <Loader show={StudentSubjectLoading} x={110}/>: (
      StudentSubjectList?.data?.subjects?.length>0 ? (
       StudentSubjectList?.data?.subjects?.map((item,index)=>(
-        <View key={item.subject_id} style={styles.imageContainer} onStartShouldSetResponder={()=>renderVideoList(item.subject_id,item.subject_name)}>
+        <View key={item.subject_id} style={styles.imageContainer} >
        {renderSubjectImage(item.subject_name)}
         <Text style={styles.subejctText}>{item.subject_name}</Text>
       </View>
       ))
-     ) :<NoData message={"No Subjects"}/>
+     ) :<Text>No videos</Text>
    )
 }
-
-
-
-         
-         
-
-        </View>
+ </View>
       </View>
 
     </ScrollView>
@@ -140,82 +150,40 @@ const Video = ({ navigation }) => {
 }
 
 export default Video;
-const styles = StyleSheet.create(
-  {
-    videoContainer: {
-
-      flex: 1,
-      width: width,
-      height: height,
-      flexDirection: "column",
-     backgroundColor:"red",
-      alignItems:"center",
-      rowGap: 10,
-      borderRadius: 9,
-      paddingTop: 20,
-     
-      display: "flex",
-    
-      backgroundColor: COLORS.backgGroundColor,
-     
-    },
-    VideoPlayerContainer: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      height: 280,
-      backgroundColor: 'black',
-      elevation: 0,
-      shadowColor: '#000',
-      shadowOffset: { width: 0, height: 0 },
-      shadowOpacity: 0.1,
-      shadowRadius: 5,
-     
-    },
-    imageContainer: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      height: 140,
-      width: 140,
-      //  backgroundColor:"#e1ffff",
-      rowGap: 5,
-      backgroundColor: 'black',
-      elevation: 0,
-      shadowColor: '#000',
-     
-      shadowOffset: { width: 0, height: 0 },
-      shadowOpacity: 0.1,
-      shadowRadius: 5,
-      borderRadius: 9
-
-
-
-    },
-    subjectContainer: {
-
-      height: "100%",
-      width: width,
-      display: "flex",
-      justifyContent:"center",
-      alignItems:"center",
-      flexDirection: "row",
-    
-      columnGap: 40,
-      flexWrap: "wrap",
-      rowGap: 20,
-      height: "auto",
-    
-      padding:10,
-
-
-    },
-    subejctText: {
-      fontSize: 13,
-      color: "white",
-      fontWeight: 600
-    }
-
+const styles = StyleSheet.create({
+  videoContainer: {
+     height:height-110,
+     width:width,
+     padding:10,
+  },
+ 
+ 
+  subjectContainer: {
+       display:'flex',
+       justifyContent:'center',
+       alignContent:'center',
+       rowGap:10
+  },
+  subjectName:{
+    fontSize:FONTS.TextTitle,
+    color:"black",
+    fontWeight:FONTS.TextTitleWeight
+  },
+  subject:{
+    display:'flex',
+    height:50,
+    flexDirection:'row',
+    justifyContent:'space-between',
+    backgroundColor: 'white',
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 0},
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    padding:10,
+    borderRadius:9
 
   }
-)
+ 
+});
+  

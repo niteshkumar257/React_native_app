@@ -37,6 +37,7 @@
     "react-native-gifted-charts": "^1.2.42",
     "react-native-linear-gradient": "^2.6.2",
     "react-native-paper": "^5.3.1",
+    "react-native-pinchable": "^0.2.1",
     "react-native-reanimated": "^3.0.1",
     "react-native-rename": "^3.2.12",
     "react-native-responsive-linechart": "^5.7.1",

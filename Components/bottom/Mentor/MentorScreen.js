@@ -57,6 +57,7 @@ const Screen4 = ({navigation}) => {
             });
             
         setMentorDetails(mentor);
+        console.log(mentor);
           setParentMentor(true);
         setIsLoding(false);
       });   
@@ -115,6 +116,7 @@ const Screen4 = ({navigation}) => {
            exp={item.details}
            mobile={item.mobile}
            email={item.gmail}
+           photo={item.photo}
            />
 }) :
         <View style={{

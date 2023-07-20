@@ -10,7 +10,7 @@ import { COLORS } from '../../Utils/Colors/Colors'
 
 
 
-const Mentor = ({ name, qualification, exp,email, details, mentor_id ,mobile,check,getMentorsDetails,item,setStatus,status}) => {
+const Mentor = ({ name, qualification, exp,email, details, mentor_id ,mobile,check,getMentorsDetails,item,setStatus,status,photo}) => {
 
  
  
@@ -57,7 +57,8 @@ const Mentor = ({ name, qualification, exp,email, details, mentor_id ,mobile,che
       <View style={styles.container}>
         <View style={styles.topContainer}>
           <View style={styles.profileContainer}>
-            <Icon name="people-outline" size={60} color={"black"} fontWeight={400}/>
+           
+            <Image  style={styles.Image} source={ { uri:photo }}/>
           </View>
           <View style={styles.InfoContainer}>
             <View style={styles.InfoSubContainer}>
@@ -313,6 +314,11 @@ const styles = StyleSheet.create(
     active_border:{
       borderWidth:2,
       borderColor:"green",  
+    },
+    Image:{
+      height:60,
+      width:60,
+      resizeMode:'contain'
     }
 
 

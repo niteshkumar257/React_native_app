@@ -9,6 +9,7 @@ const { width, height } = Dimensions.get('window');
 import NotFoundText from '../NotFoundText';
 import { useQuery } from '@tanstack/react-query';
 import { GW_URL } from '../../config';
+import Pinchable from 'react-native-pinchable';
 const Screen1 = () => {
    
   const {id}=useContext(DataContext);
@@ -59,7 +60,11 @@ const [show,setShow]=useState(true);
       <View style={styles.container}> 
   {curriculumLoading && <AcitvityHandler show={curriculumLoading}/>}
    {
-    res?.data.url!=null ? <Image  style={styles.Image} source={ { uri: res?.data.url }}/> :
+    res?.data.url!=null ?
+    <Pinchable>
+  <Image  style={styles.Image} source={ { uri: res?.data.url }}/>
+    </Pinchable>
+    :
     <Text style={{
       fontSize:20,
       fontWeight:600,
