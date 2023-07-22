@@ -13,6 +13,7 @@ const VideoStackNavigator = () => {
     screenOptions={{
         headerTintColor: 'black',
         headerShown:false,
+        animation: 'slide_from_right',
         headerStyle: { backgroundColor: 'white' },
       }}
     >

@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
 
     },
     text:{
-        fontSize:15,
+        fontSize:17,
         fontWeight:500,
         color:"black"
 

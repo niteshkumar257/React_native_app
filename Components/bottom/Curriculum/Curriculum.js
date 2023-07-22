@@ -7,6 +7,7 @@ import axios from 'axios';
 import { COLORS } from "../../Utils/Colors/Colors";
 import AcitvityHandler from '../AcitvityHandler';
 import { GW_URL } from '../../config';
+import NoData from '../../NoData';
 
 const { width, height } = Dimensions.get('window');
 
@@ -14,6 +15,7 @@ const Screen1 = () => {
   const { id } = useContext(DataContext);
   const [childId, setChildId] = useState(id);
   const [show, setShow] = useState(true);
+
 
   const { data: ClassIdAndSchoolId, isLoading: IdsLoading, isError: IdsError, error: Idserror } = useQuery({
     queryKey: ["fetch-class_id-school_id", childId],
@@ -37,19 +39,25 @@ const Screen1 = () => {
     },
     enabled: !!class_id && !!school_id
   });
+  const handleLoad = () => {
+    // When the image finishes loading
+    setShow(false);
+  };
 
   return (
     <ScrollView style={styles.ViewContainer}>
       <View style={styles.container}>
-        {curriculumLoading && <AcitvityHandler show={curriculumLoading} />}
+        {curriculumLoading && show && <AcitvityHandler show={curriculumLoading} />}
         {res?.data?.url != null ? (
           <View style={styles.imageContainer}>
             <Pinchable>
-              <Image style={styles.image} source={{ uri: res?.data?.url }} />
+              <Image style={styles.image}
+                onLoad={handleLoad}
+               source={{ uri: res?.data?.url }} />
             </Pinchable>
           </View>
         ) : (
-          <Text style={styles.noCurriculumText}>No curriculum is assigned</Text>
+         <NoData message={"Curriculum is not assigned"} x={110}/>
         )}
       </View>
     </ScrollView>

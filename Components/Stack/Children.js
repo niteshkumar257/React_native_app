@@ -75,7 +75,7 @@ const Children = ({ navigation }) => {
         <View style={styles.ChildrenListContainer}>
           
            <View style={styles.titleContainer}>
-            <Text style={styles.title}>Children's Details</Text>
+            <Text style={styles.title}>Childrens Details</Text>
            </View>
           {
             data?.data?.allChildren?.map((item, index) =>

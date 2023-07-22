@@ -38,12 +38,12 @@ const TicketStatus = () => {
   return (
     <View style={styles.mainContainer}>
     {isLoading ? (
-      <Loader show={isLoading} />
+      <Loader show={isLoading} x={60} />
     ) : (
       <ScrollView>
         {issueInfo.length!=0 ? issueInfo.map((item, index) => (
           <IssueDetailsComponent key={index} issue={item} />
-        )) :<NoData message={"No active ticket"}/>}
+        )) :<NoData message={"No active ticket"} />}
       </ScrollView>
     )}
   </View>

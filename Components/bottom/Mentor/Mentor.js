@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { AuthContext } from '../../Context/Context';
 import jwtDecode from 'jwt-decode';
 import { COLORS } from '../../Utils/Colors/Colors'
+import { GW_URL } from '../../config';
 
 
 
@@ -26,7 +27,7 @@ const Mentor = ({ name, qualification, exp,email, details, mentor_id ,mobile,che
    
      if(!item.check)
      {  
-    axios.post(`https://school-management-api.azurewebsites.net/parents/${parentId}/requestMentor`,
+    axios.post(`${GW_URL}/parents/${parentId}/requestMentor`,
       {
         mentor_id: mentor_id
       }).then((res) => {
@@ -34,6 +35,7 @@ const Mentor = ({ name, qualification, exp,email, details, mentor_id ,mobile,che
          setDisableButton(true);
         setStatus(true);
         getMentorsDetails();
+        console.log(res.data);
         
       })
       .catch((err) => console.log(err))

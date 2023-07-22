@@ -19,7 +19,7 @@ const renderSubjectImage = (subjectName) => {
       return <Image source={require('../../../assets/Physics.png')} />;
     case 'Chemistry':
       return <Image source={require('../../../assets/chemistry.png')} />;
-    case 'Mathematics':
+    case 'Math':
       return <Image source={require('../../../assets/Math.png')} />;
     case 'Biology':
       return <Image source={require('../../../assets/Biology.png')} />;
@@ -109,8 +109,11 @@ const Video = ({ navigation }) => {
     <ScrollView >
       <View style={styles.videoContainer} removeClippedSubviews={true}>
 
+             <View style={styles.headingContainer}>
+              <Text style={styles.titleText}>Subject Videos</Text>
+             </View>
         <View style={styles.subjectContainer}>
-
+    
        
 
 {
@@ -175,13 +178,16 @@ const styles = StyleSheet.create(
     imageContainer: {
       display: "flex",
       alignItems: "center",
-      justifyContent: "center",
-      height: 140,
-      width: 140,
+      justifyContent: "space-between",
+      flexDirection:"row",
+      height: 70,
+      width: width-20,
+      paddingLeft:20,
+      paddingRight:20,
       //  backgroundColor:"#e1ffff",
       rowGap: 5,
-      backgroundColor: 'black',
-      elevation: 0,
+      backgroundColor: 'white',
+      elevation: 10,
       shadowColor: '#000',
      
       shadowOffset: { width: 0, height: 0 },
@@ -192,6 +198,11 @@ const styles = StyleSheet.create(
 
 
     },
+    titleText:{
+      fontSize:20,
+      fontWeight:500,
+      color:"black"
+    },
     subjectContainer: {
 
       height: "100%",
@@ -199,7 +210,7 @@ const styles = StyleSheet.create(
       display: "flex",
       justifyContent:"center",
       alignItems:"center",
-      flexDirection: "row",
+      flexDirection: "column",
     
       columnGap: 40,
       flexWrap: "wrap",
@@ -210,9 +221,17 @@ const styles = StyleSheet.create(
 
 
     },
+    headingContainer:{
+      width:width,
+       display:'flex',
+       flexDirection:"row",
+       justifyContent:"flex-start",
+       alignItems:'flex-start',
+       paddingLeft:20,
+    },
     subejctText: {
-      fontSize: 13,
-      color: "white",
+      fontSize: 16,
+      color: "black",
       fontWeight: 600
     }
 
