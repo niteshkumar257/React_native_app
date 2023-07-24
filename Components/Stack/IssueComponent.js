@@ -1,10 +1,14 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-import { ToStringDateFormatter,capitalizeFirstLetter,getStatusStyle } from '../config';
+import {View, Text} from 'react-native';
+import {
+  ToStringDateFormatter,
+  capitalizeFirstLetter,
+  getStatusStyle,
+} from '../config';
 
-const IssueDetailsComponent = ({ issue }) => {
-  const { created_on, description, title, status_name, resolved_on } = issue;
-  const getColorForStatus = (resolved_on) => {
+const IssueDetailsComponent = ({issue}) => {
+  const {created_on, description, title, status_name, resolved_on} = issue;
+  const getColorForStatus = resolved_on => {
     switch (resolved_on) {
       case null:
         return 'orange'; // Change 'red' to the desired color for status_id 1
@@ -18,15 +22,23 @@ const IssueDetailsComponent = ({ issue }) => {
     <View style={styles.container}>
       <Text style={styles.title}>{capitalizeFirstLetter(title)}</Text>
       <Text style={styles.description}>{description}</Text>
-      <View style={[styles.status,{backgroundColor:containerColor}]}>
-
-      <Text style={{
-        color:'white',
-        fontWeight:500,
-      }}>{resolved_on===null?"Pending":"Resolved"}</Text>
+      <View style={[styles.status, {backgroundColor: containerColor}]}>
+        <Text
+          style={{
+            color: 'white',
+            fontWeight: 500,
+          }}>
+          {resolved_on === null ? 'Pending' : 'Resolved'}
+        </Text>
       </View>
-      {resolved_on && <Text style={styles.resolvedOn}>Resolved on: {ToStringDateFormatter(resolved_on)}</Text>}
-      <Text style={styles.createdOn}>Created on: {ToStringDateFormatter(created_on)}</Text>
+      {resolved_on && (
+        <Text style={styles.resolvedOn}>
+          Resolved on: {ToStringDateFormatter(resolved_on)}
+        </Text>
+      )}
+      <Text style={styles.createdOn}>
+        Created on: {ToStringDateFormatter(created_on)}
+      </Text>
     </View>
   );
 };
@@ -49,35 +61,28 @@ const styles = {
     marginBottom: 8,
   },
   status: {
-   width:80,
-   height:25,
-   borderRadius:4,
-  
-   marginBottom:3,
-   display:"flex",
-   justifyContent:"center",
-   alignItems:"center",
-   backgroundColor:"green"
-  
-   
+    width: 80,
+    height: 25,
+    borderRadius: 4,
 
+    marginBottom: 3,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'green',
   },
   resolvedOn: {
-   
     marginBottom: 8,
-    color:'black'
+    color: 'black',
   },
   createdOn: {
     color: 'black',
   },
   pending: {
-backgroundColor:"orange",
-
+    backgroundColor: 'orange',
   },
   resolved: {
-   backgroundColor:"#50C878",
-  
-   
+    backgroundColor: '#50C878',
   },
 };
 

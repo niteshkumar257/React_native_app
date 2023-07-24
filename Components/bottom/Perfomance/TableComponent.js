@@ -5,8 +5,9 @@ import  Mark from "./Mark";
 
 const TableComponent = ({data}) => {
     const tableDataConverter = (markList) => {
-        const tableList = markList?.map((mark) => ({
+        const tableList = markList?.map((mark,index) => ({
           test_id: mark.test_id,
+          serialNo:index+1,
           test_date: new Date(mark.test_date).toISOString().substr(0, 10),
           subjectMarkList: mark.subject_name.map((subject, i) => ({
             subjectName: subject,
@@ -22,7 +23,7 @@ const TableComponent = ({data}) => {
       {
               RenderData.map((item,index)=>(
                 <Mark key={item.test_id} data={item.subjectMarkList} testId={item.test_id}
-                testDate={item.test_date}/>
+                testDate={item.test_date} serialNo={item.serialNo}/>
               ))
       }
     </View>

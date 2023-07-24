@@ -56,6 +56,7 @@ const Screen2 = ({navigation}) => {
   //     console.log(err);
   //    })
   // },[])
+  console.log(childId);
   const {data:res,isLoading,isError,error}=useQuery({
     queryKey:['fee-details',childId],
     queryFn:()=>
@@ -92,7 +93,7 @@ const Screen2 = ({navigation}) => {
     </View>
     {
        
-      showActivity ? <AcitvityHandler show={showActivity}/> : feeArray.length!=0 ?
+      showActivity ? <AcitvityHandler show={showActivity}/> : feeArray?.length!=0 ?
     
     <View style={styles.container}>
       
