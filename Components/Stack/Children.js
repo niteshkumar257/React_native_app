@@ -1,24 +1,32 @@
-import {View, Text, StyleSheet, TextInput} from 'react-native';
-import React, {useEffect, useState, useContext} from 'react';
+import React, { useState, useContext } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity,Image } from 'react-native';
 import Student from './Student';
 import Headers from './header';
 import Toast from 'react-native-toast-message';
 import axios from 'axios';
-import {AuthContext} from '../Context/Context';
+import { AuthContext } from '../Context/Context';
 import jwtDecode from 'jwt-decode';
 import AcitvityHandler from '../bottom/AcitvityHandler';
-import {COLORS} from '../Utils/Colors/Colors';
-import {useQuery} from '@tanstack/react-query';
-import {GW_URL} from '../config';
+import { StudentContext } from '../Context/StudentConext';
+import { useQuery } from '@tanstack/react-query';
+import { GW_URL } from '../config';
+import {FONTS} from "../Utils/Colors/fonts";
+import {COLORS} from "../Utils/Colors/Colors";
+import { Dimensions } from 'react-native';
+const { width, height } = Dimensions.get('window');
+import { StudentDetailsContext } from '../Context/StudentDetailsContext';
 
-const Children = ({navigation}) => {
+
+const Children = ({ navigation }) => {
+  const [childrenDetails, setChildrenDetails] = useState({});
+  const { userToken } = useContext(AuthContext);
+  const [showActivity, setShowActivity] = useState(true);
   const [children, setChildren] = useState([]);
-  const {userToken} = useContext(AuthContext);
-  const [showActivity, setShowActitvity] = useState(true);
+  const {setChildIdHandler} = useContext(StudentContext);
   let userInfo = jwtDecode(userToken);
   let parentId = userInfo.result.parent_id;
-
-  const {isLoading, isError, error, data} = useQuery({
+const {studentData}=useContext(StudentDetailsContext);
+  const { isLoading, isError, error, data } = useQuery({
     queryKey: ['childrenlist', parentId],
     queryFn: () => {
       return axios.get(`${GW_URL}/parents/${parentId}/getChildren`);
@@ -26,8 +34,9 @@ const Children = ({navigation}) => {
   });
 
   if (!isLoading) {
-    console.log(data.data);
-    console.log('data loads succesffuly');
+   
+    
+    console.log('data loads successfully');
   }
   if (isError) {
     navigation.navigate('notfound');
@@ -42,23 +51,45 @@ const Children = ({navigation}) => {
     });
   };
 
+  const toggleDetails = (childId) => {
+    setChildrenDetails((prevDetails) => ({
+      ...prevDetails,
+      [childId]: !prevDetails[childId],
+    }));
+  };
+
+  const clickHandler = (child_id,name,photo_url )=> {
+  
+    setChildIdHandler(child_id);
+    navigation.navigate('home', {
+      child_id: child_id,
+      child_name: name,
+      photo_url:photo_url
+     
+    });
+  };
   return (
     <View style={styles.mainContainer}>
       <Headers navigation={navigation} />
       {isLoading ? (
-        <AcitvityHandler shos={isLoading} />
+        <AcitvityHandler show={isLoading} />
       ) : (
-        <View style={styles.ChildrenListContainer}>
+        <View style={styles.childrenListContainer}>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>Children Details</Text>
           </View>
-          {data?.data?.allChildren?.map((item, index) => (
-            <Student
-              key={item.child_id}
-              name={item.child_name}
-              child_id={item.child_id}
-              navigation={navigation}
-            />
+          {data?.data?.allChildren?.map((item) => (
+           
+              <View  key={item.student_id} onStartShouldSetResponder={() => clickHandler(item.student_id,item.student_name,item.photo_url)} style={styles.childContainer}>
+                <View style={styles.topContainer}>
+                <Image style={styles.imageContainer} source={{uri:item.photo_url}}/>
+                <Text style={styles.childName}>{item.student_name}</Text>
+            
+                </View>
+             
+                
+              </View>
+           
           ))}
         </View>
       )}
@@ -66,21 +97,17 @@ const Children = ({navigation}) => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   mainContainer: {
-    width: '100%',
-    height: '100%',
-    display: 'flex',
+    flex: 1,
     backgroundColor: COLORS.backgGroundColor,
   },
-  ChildrenListContainer: {
-    height: '80%',
-    width: '100%',
-    display: 'flex',
+  childrenListContainer: {
+    flex: 1,
     paddingTop: 30,
-    padding: 5,
-    rowGap: 30,
-    alignItems: 'center',
+     display:"flex",
+     alignItems:'center'
   },
   titleContainer: {
     width: '100%',
@@ -88,42 +115,54 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
   },
   title: {
-    color: 'black',
-
     fontSize: 20,
-    fontWeight: 500,
+    fontWeight: '500',
     color: 'black',
   },
-  container: {
-    height: 140,
-    width: 140,
+  childContainer: {
+    height: 'auto',
+    width: width-20,
     display: 'flex',
     flexDirection: 'row',
-    columnGap: 20,
-    justifyContent: 'center',
+    columnGap: 40,
+    justifyContent: 'space-evenly',
     alignItems: 'center',
+    backgroundColor: 'white',
+    paddingTop: 20,
+    paddingBottom: 20,
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 0},
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    borderRadius: 9,
+    marginBottom:10,
+    marginTop:10
   },
-  subContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  infoContainer: {
-    width: 200,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignContent: 'center',
-    columnGap: 10,
-
-    paddingLeft: 10,
-  },
-  text: {
-    fontSize: 13,
-    fontWeight: 500,
+  childName: {
+    fontSize: 18,
+    fontWeight: 'bold',
     color: 'black',
-    textAlign: 'center',
   },
+  detailsContainer: {
+    marginTop: 10,
+    paddingBottom: 10,
+  },
+  detailText: {
+    fontSize:FONTS.TextSubTitle ,
+    fontWeight:FONTS.TextSubTitleWeight,
+    color: 'black',
+    marginBottom: 5,
+  },
+  imageContainer:{
+    width:50,height:50,resizeMode:"contain"
+  },
+  topContainer:{
+   
+  display:"flex",
+  justifyContent:"center",
+  alignItems:"center",flexDirection:'row',columnGap:60,padding:5,justifyContent:'flex-start'
+  }
 });
 
 export default Children;

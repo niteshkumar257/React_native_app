@@ -22,7 +22,7 @@ const header = ({navigation}) => {
   const ptmNotificationCount = useSelector(
     state => state.PTMNotification.count,
   );
-  console.log(ptmNotificationCount);
+  
   const [fatherName, setFatherName] = useState('');
   const getParentInfo = () => {
     axios

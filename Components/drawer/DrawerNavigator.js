@@ -5,13 +5,13 @@ import Main from './Main';
 import CustomDrawer from './CustomDrawer';
 import Children from '../Stack/Children';
 const Drawer = createDrawerNavigator();
-const DrawerNavigator = ({child_name,child_id}) => {
+const DrawerNavigator = ({child_name,child_id,photo_url}) => {
     console.log("drawer"+child_name,child_id);
 
   return (
     <Drawer.Navigator
   
-     drawerContent={props => <CustomDrawer {...props} child_name={child_name} child_id={child_id} />}
+     drawerContent={props => <CustomDrawer {...props} child_name={child_name} child_id={child_id} photo_url={photo_url}/>}
      screenOptions={
       {
         swipeEnabled: false,

@@ -12,10 +12,17 @@ import Calendar from 'react-native-vector-icons/AntDesign';
 import {AuthContext} from '../Context/Context';
 import {COLORS} from '../Utils/Colors/Colors';
 import Ticket from '../Stack/Ticket';
+import {StudentDetailsContext} from '../Context/StudentDetailsContext';
 
 const student = require('../../assets/Student.png');
 
-const CustomDrawer = ({navigation, child_name, child_id}) => {
+const CustomDrawer = ({navigation, child_name, child_id, photo_url}) => {
+  const {studentDetails}=useContext(StudentDetailsContext);
+  
+ const image=studentDetails?.allChildren?.find((item)=>item.student_id===child_id);
+ console.log(image)
+ 
+ 
   const childrenHandler = () => {
     navigation.navigate('children', {
       child_id: child_id,
@@ -37,7 +44,7 @@ const CustomDrawer = ({navigation, child_name, child_id}) => {
         <View style={styles.profileContainer}>
           <View style={styles.ImageContainer}>
             <Image
-              source={student}
+              source={{uri:photo_url}}
               style={{
                 height: 70,
                 width: 70,
@@ -70,13 +77,13 @@ const CustomDrawer = ({navigation, child_name, child_id}) => {
             onStartShouldSetResponder={ticketHandler}
             style={styles.ListItemContainer}>
             <Calendar name="calendar" size={25} color={COLORS.mainColor1} />
-            <Text style={styles.text1}>Ticket</Text>
+            <Text style={styles.text1}>Ticket Raise</Text>
           </View>
           <View
             onStartShouldSetResponder={ticketStatusHandler}
             style={styles.ListItemContainer}>
             <Calendar name="calendar" size={25} color={COLORS.mainColor1} />
-            <Text style={styles.text1}>Status</Text>
+            <Text style={styles.text1}>Ticket Status</Text>
           </View>
         </View>
         <View style={styles.logOutMainContainer}>

@@ -19,6 +19,7 @@ import {StudentContext} from '../Context/StudentConext';
 import {useQuery} from '@tanstack/react-query';
 import axios from 'axios';
 import {GW_URL} from '../config';
+import Snackbar from 'react-native-snackbar';
 
 const Ticket = () => {
   const {logoutHandler, userToken} = useContext(AuthContext);
@@ -52,12 +53,17 @@ const Ticket = () => {
         })
         .then(res => {
           console.log(res.data);
-          showMessage({
-            message: 'Issue Raised succesfully',
-            type: 'success',
-            autoHide: 2000,
-            floating: false,
-            width: width,
+          // showMessage({
+          //   message: 'Issue Raised succesfully',
+          //   type: 'success',
+          //   autoHide: 2000,
+          //   floating: false,
+          //   width: width,
+          // });
+          Snackbar.show({
+            text: 'Issued Raised SuccessFully',
+            duration: Snackbar.LENGTH_SHORT,
+            backgroundColor:"green"
           });
           setMsg('');
           setSubject('');
@@ -68,11 +74,16 @@ const Ticket = () => {
           setMsg('');
           setSubject('');
           setHeight(100);
-          showMessage({
-            message: 'Something went wrong',
-            type: 'error',
-            autoHide: 2000,
-            floating: false,
+          // showMessage({
+          //   message: 'Something went wrong',
+          //   type: 'error',
+          //   autoHide: 2000,
+          //   floating: false,
+          // });
+          Snackbar.show({
+            text: 'Something went wrong',
+            duration: Snackbar.LENGTH_SHORT,
+            backgroundColor:"red"
           });
         });
     } else {

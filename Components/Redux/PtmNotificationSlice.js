@@ -13,7 +13,7 @@ const initialState = {
 export const fetchPTMContent = createAsyncThunk(
   'content/fetchPTMContent',
   async (state,action) => {
-    console.log(16,state);
+  
     const res = await axios(`https://api.gaanvwala.com/api/parents/77/getPTMNotification`);
     const data = await res.data;
 

@@ -18,7 +18,7 @@ const NotificationCard = ({
   parentId,
   meetingId,
 }) => {
-  console.log(msg.split(' 00:00:00')[0]);
+  
 
   const dispatch = useDispatch();
   const feeIcon = require('../../assets/notificationFee.png');
