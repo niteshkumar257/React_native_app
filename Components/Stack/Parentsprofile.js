@@ -9,6 +9,7 @@ import {COLORS} from '../Utils/Colors/Colors';
 import {useQuery} from '@tanstack/react-query';
 import {GW_URL} from '../config';
 
+
 const parent = require('../../assets/mother.png');
 const Parentsprofile = ({navigation}) => {
   const logOutHandler = () => {
@@ -21,6 +22,11 @@ const Parentsprofile = ({navigation}) => {
   const [phone, setPhone] = useState('');
   const [altPhone, setAltPhone] = useState('');
   const {logoutHandler, userToken} = useContext(AuthContext);
+
+const PARENT="PARENT";
+ const parentConfig = {
+  headers: { 'Authorization': 'Bearer ' +userToken , 'User': PARENT }
+};
   let userInfo = jwtDecode(userToken);
   
   let parentId = userInfo.result.parent_id;
@@ -34,7 +40,7 @@ const Parentsprofile = ({navigation}) => {
   } = useQuery({
     queryKey: ['parentProfile', parentId],
     queryFn: () => {
-      return axios.get(`${GW_URL}/parents/${parentId}`);
+      return axios.get(`${GW_URL}/parents/${parentId}`,parentConfig);
     },
   });
   useEffect(() => {

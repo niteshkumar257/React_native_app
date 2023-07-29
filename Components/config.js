@@ -1,4 +1,48 @@
-export const GW_URL = 'https://api.gaanvwala.com/api';
+//export const GW_URL = 'https://api.gaanvwala.com/api';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { useState, useContext } from 'react';
+import { AuthContext } from "./Context/Context";
+
+
+ export const GW_URL="http://192.168.1.188:8080/api";
+ export const PARENT = "PARENT";
+
+
+//  const isLogin= async(navigation)=>
+//  {
+//      try {
+//          const value = await AsyncStorage.getItem('userToken');
+//          if(value) {
+             
+             
+//             setUserToken(value);
+//            navigation.navigate("children");
+           
+         
+//          } else {
+//            navigation.navigate("login");
+         
+//          }
+//        } catch(e) {
+         
+//          console.log(e);
+//        }
+
+//  }
+const getuserToken=async()=>{
+  try {
+    const value = await AsyncStorage.getItem('userToken');
+    if(value) console.log(30,value)
+  } catch(e) {
+    console.log(e);
+  }
+}
+console.log(getuserToken());
+
+
+export const parentConfig = {
+  headers: { 'Authorization': 'Bearer ' + AsyncStorage.getItem('userToken'), 'User': PARENT }
+};
 
 export const ToStringDateFormatter=(dateStr)=>
 {

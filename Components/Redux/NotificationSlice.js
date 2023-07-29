@@ -2,6 +2,7 @@ import { createSlice ,createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
 import { GW_URL } from '../config';
 
+
 const initialState = {
  notificationList:[],
  isLoading:false,
@@ -11,9 +12,10 @@ error:null,
 
 export const fetchContent = createAsyncThunk(
   'content/fetchContent',
-  async (state,action) => {
+  async ({ parentId, parentConfig }, thunkAPI) => {
+    console.log(parentConfig);
    
-    const res = await axios(`${GW_URL}/parents/${state}/getNotification`)
+    const res = await axios(`${GW_URL}/parents/${parentId}/getNotification`,parentConfig)
     const data = await res.data;
   
     return data

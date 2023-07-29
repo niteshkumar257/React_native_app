@@ -8,6 +8,7 @@ import { COLORS } from "../../Utils/Colors/Colors";
 import AcitvityHandler from '../AcitvityHandler';
 import { GW_URL } from '../../config';
 import NoData from '../../NoData';
+import { AuthContext } from '../../Context/Context';
 
 const { width, height } = Dimensions.get('window');
 
@@ -15,22 +16,29 @@ const Screen1 = () => {
   const { id } = useContext(DataContext);
   const [childId, setChildId] = useState(id);
   const [show, setShow] = useState(true);
+  const { userToken } = useContext(AuthContext);
+const PARENT="PARENT";
+ const parentConfig = {
+  headers: { 'Authorization': 'Bearer ' +userToken , 'User': PARENT }
+};
 
 
   const { data: ClassIdAndSchoolId, isLoading: IdsLoading, isError: IdsError, error: Idserror } = useQuery({
     queryKey: ["fetch-class_id-school_id", childId],
     queryFn: () => {
-      return axios.get(`${GW_URL}/students/${childId}`)
+      return axios.get(`${GW_URL}/students/${childId}`,parentConfig)
     }
   });
 
   const class_id = ClassIdAndSchoolId?.data?.studentDetails[0].class_id;
   const school_id = ClassIdAndSchoolId?.data?.studentDetails[0].school_id;
 
+  console.log(class_id,school_id);
+
   const { data: res, isLoading: curriculumLoading, isError: curriculumErrorStatus, error: ErrorMsg } = useQuery({
     queryKey: ['curriculum', class_id, school_id],
     queryFn: () => {
-      return axios.get(`${GW_URL}/viewCurriculum`, {
+      return axios.get(`${GW_URL}/viewCurriculum`,parentConfig, {
         params: {
           school_id: school_id,
           class_id: class_id
@@ -43,6 +51,11 @@ const Screen1 = () => {
     // When the image finishes loading
     setShow(false);
   };
+
+  if(!curriculumLoading)
+  {
+    console.log(res.data);
+  }
 
   return (
     <ScrollView style={styles.ViewContainer}>
@@ -82,7 +95,8 @@ const styles = StyleSheet.create({
   },
   image: {
     width: width - 20,
-    height: height - 200,
+    height: height -140,
+  
     resizeMode: "contain",
   },
   noCurriculumText: {

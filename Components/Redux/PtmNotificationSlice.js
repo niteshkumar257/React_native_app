@@ -12,9 +12,9 @@ const initialState = {
 // Create async thunk for /parents/:parent_id/getPTMNotification API
 export const fetchPTMContent = createAsyncThunk(
   'content/fetchPTMContent',
-  async (state,action) => {
-  
-    const res = await axios(`https://api.gaanvwala.com/api/parents/77/getPTMNotification`);
+  async ({ parentId, parentConfig }, thunkAPI) => {
+    console.log(17, parentId);
+    const res = await axios(`${GW_URL}/parents/${parentId}/getPTMNotification`, parentConfig);
     const data = await res.data;
 
     return data;

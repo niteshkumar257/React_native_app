@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import Video from './VideosScreen'
-import Biology from '../Biology';
+import Biology from './Subject';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import NoVideos from './NoVideos';

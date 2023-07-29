@@ -12,6 +12,7 @@ import { Dimensions } from 'react-native';
 import { useQuery } from '@tanstack/react-query';
 import { GW_URL } from '../../config';
 const { width, height } = Dimensions.get('window');
+import { AuthContext } from '../../Context/Context';
 
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -21,12 +22,16 @@ const PerfomanceScreen = () => {
   const [graphShow, setGraphShow] = useState(false);
   const { id: child_id } = useContext(DataContext);
 
- 
+  const { userToken } = useContext(AuthContext);
+  const PARENT="PARENT";
+   const parentConfig = {
+    headers: { 'Authorization': 'Bearer ' +userToken , 'User': PARENT }
+  };
 
   const {data:res,isLoading,isError,error} = useQuery({
     queryKey: ['perfomance', child_id],
     queryFn: () => {
-      return axios.get(`${GW_URL}/students/${child_id}/performance`);
+      return axios.get(`${GW_URL}/students/${child_id}/performance`,parentConfig);
     }
   })
 

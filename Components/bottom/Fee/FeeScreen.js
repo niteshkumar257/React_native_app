@@ -8,6 +8,7 @@ import NotFoundText from '../NotFoundText';
 import { useQuery } from '@tanstack/react-query';
 import { GW_URL } from '../../config';
 import { COLORS } from '../../Utils/Colors/Colors'
+import { AuthContext } from '../../Context/Context';
 
 
 
@@ -29,6 +30,12 @@ const Screen2 = ({navigation}) => {
   const [date3,setDate3]=useState("");
   const [showActivity,setShowsActivity]=useState(true);
   const [feeArray,setFeeArray]=useState([]);
+  const { userToken } = useContext(AuthContext);
+ 
+const PARENT="PARENT";
+ const parentConfig = {
+  headers: { 'Authorization': 'Bearer ' +userToken , 'User': PARENT }
+};
   // useEffect(()=>
   // {
     
@@ -61,7 +68,7 @@ const Screen2 = ({navigation}) => {
     queryKey:['fee-details',childId],
     queryFn:()=>
     {
-      return  axios.get(`${GW_URL}/students/${childId}/fees`)
+      return  axios.get(`${GW_URL}/students/${childId}/fees`,parentConfig)
     }
   })
   useEffect(()=>

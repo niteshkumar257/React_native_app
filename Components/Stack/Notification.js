@@ -12,6 +12,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {GW_URL} from '../config';
 import {fetchContent} from '../Redux/NotificationSlice';
 import {fetchPTMContent} from '../Redux/PtmNotificationSlice';
+import { StudentDetailsContext } from '../Context/StudentDetailsContext';
+import { GeneralNotificationFetchContent } from '../Redux/GeneralNotification';
 
 const {width, height} = Dimensions.get('window');
 
@@ -20,6 +22,16 @@ const Notification = () => {
 
   const [error, setError] = useState(false);
   const {userToken} = useContext(AuthContext);
+  const {studentDetails}=useContext(StudentDetailsContext);
+  const school_id=studentDetails[0].school_id;
+ 
+
+  const PARENT="PARENT";
+   const parentConfig = {
+    headers: { 'Authorization': 'Bearer ' +userToken , 'User': PARENT }
+  };
+
+
   const dispatch = useDispatch();
   const notificationListRedux = useSelector(
     state => state.Notification.notificationList.messages,
@@ -28,6 +40,10 @@ const Notification = () => {
     state => state.PTMNotification.PTMnotificationList.notifications,
   );
 
+  const GeneralNotificationRedux=useSelector(
+    state=>state.GeneralNotification
+  )
+  console.log(GeneralNotificationRedux)
   const ptmListLoading = useSelector(state => state.PTMNotification.isLoading);
   const isLoading = useSelector(state => state.Notification.isLoading);
   const Error = useSelector(state => state.Notification.error);
@@ -36,8 +52,9 @@ const Notification = () => {
   let parentId = userInfo.result.parent_id;
 
   useEffect(() => {
-    dispatch(fetchContent(parentId));
-    dispatch(fetchPTMContent(parentId));
+    dispatch(fetchContent(parentId,parentConfig));
+    dispatch(fetchPTMContent(parentId,parentConfig));
+   
   }, [dispatch]);
 
   return (

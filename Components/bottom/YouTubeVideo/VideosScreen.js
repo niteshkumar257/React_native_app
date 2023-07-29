@@ -9,6 +9,8 @@ import { COLORS } from '../../Utils/Colors/Colors';
 import DataContext from '../../Context/DataContext';
 import Loader from '../../Loader';
 import NoData from '../../NoData';
+import { AuthContext } from '../../Context/Context';
+
 
 
 
@@ -31,6 +33,12 @@ const renderSubjectImage = subjectName => {
 const Video = ({ navigation }) => {
   const { id } = useContext(DataContext);
   const [childId, setChildId] = useState(id);
+  const { userToken } = useContext(AuthContext);
+const PARENT="PARENT";
+ const parentConfig = {
+  headers: { 'Authorization': 'Bearer ' +userToken , 'User': PARENT }
+};
+
 
   const {
     data: ClassIdAndSchoolId,
@@ -39,7 +47,7 @@ const Video = ({ navigation }) => {
     error: Idserror,
   } = useQuery({
     queryKey: ['fetch-class_id-school_id', childId],
-    queryFn: () => axios.get(`${GW_URL}/students/${childId}`),
+    queryFn: () => axios.get(`${GW_URL}/students/${childId}`,{parentConfig}),
   });
 
   const class_id = ClassIdAndSchoolId?.data?.studentDetails[0]?.class_id;
@@ -52,7 +60,7 @@ const Video = ({ navigation }) => {
   } = useQuery({
     queryKey: ['fetch-student-sujectlist', class_id, school_id],
     queryFn: () =>
-      axios.get(`${GW_URL}/schools/${school_id}/${class_id}/getClassSubjects`),
+      axios.get(`${GW_URL}/schools/${school_id}/${class_id}/getClassSubjects`,parentConfig),
     enabled: !!class_id && !!school_id,
   });
 
@@ -72,7 +80,7 @@ const Video = ({ navigation }) => {
 
   const renderVideoList = (subject_id, subject_name) => {
     axios
-      .get(`${GW_URL}/videos/${class_id}/${subject_id}/getVideos`)
+      .get(`${GW_URL}/videos/${class_id}/${subject_id}/getVideos`,parentConfig)
       .then(res => {
         if (res.data.data[0] !== undefined) {
           navigation.navigate('subject', {

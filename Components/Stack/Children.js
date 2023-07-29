@@ -15,6 +15,7 @@ import {COLORS} from "../Utils/Colors/Colors";
 import { Dimensions } from 'react-native';
 const { width, height } = Dimensions.get('window');
 import { StudentDetailsContext } from '../Context/StudentDetailsContext';
+import { parentConfig } from '../config';
 
 
 const Children = ({ navigation }) => {
@@ -25,17 +26,28 @@ const Children = ({ navigation }) => {
   const {setChildIdHandler} = useContext(StudentContext);
   let userInfo = jwtDecode(userToken);
   let parentId = userInfo.result.parent_id;
-const {studentData}=useContext(StudentDetailsContext);
+const  { studentDetails,studentData,setStudentDetails}=useContext(StudentDetailsContext);
+
+const PARENT="PARENT";
+ const parentConfig = {
+  headers: { 'Authorization': 'Bearer ' +userToken , 'User': PARENT }
+};
+
+console.log("header",parentConfig);
   const { isLoading, isError, error, data } = useQuery({
     queryKey: ['childrenlist', parentId],
     queryFn: () => {
-      return axios.get(`${GW_URL}/parents/${parentId}/getChildren`);
+      return axios.get(`${GW_URL}/parents/${parentId}/getChildren`,parentConfig);
+    },
+    onSuccess: (data) => {
+      // Update the context with the fetched data
+       studentData(data?.data?.allChildren);
     },
   });
 
   if (!isLoading) {
    
-    
+  
     console.log('data loads successfully');
   }
   if (isError) {
@@ -64,7 +76,8 @@ const {studentData}=useContext(StudentDetailsContext);
     navigation.navigate('home', {
       child_id: child_id,
       child_name: name,
-      photo_url:photo_url
+      photo_url:photo_url,
+     
      
     });
   };
@@ -80,7 +93,7 @@ const {studentData}=useContext(StudentDetailsContext);
           </View>
           {data?.data?.allChildren?.map((item) => (
            
-              <View  key={item.student_id} onStartShouldSetResponder={() => clickHandler(item.student_id,item.student_name,item.photo_url)} style={styles.childContainer}>
+              <View  key={item.student_id} onStartShouldSetResponder={() => clickHandler(item.student_id,item.student_name,item.photo_url,item.school_id)} style={styles.childContainer}>
                 <View style={styles.topContainer}>
                 <Image style={styles.imageContainer} source={{uri:item.photo_url}}/>
                 <Text style={styles.childName}>{item.student_name}</Text>
@@ -124,9 +137,10 @@ const styles = StyleSheet.create({
     width: width-20,
     display: 'flex',
     flexDirection: 'row',
-    columnGap: 40,
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
+    columnGap: 50,
+    justifyContent: 'space-between',
+    paddingLeft:20,
+    alignItems: 'space-between',
     backgroundColor: 'white',
     paddingTop: 20,
     paddingBottom: 20,

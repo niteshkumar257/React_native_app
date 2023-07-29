@@ -18,6 +18,10 @@ const header = ({navigation}) => {
   let parentId = userInfo.result.parent_id;
   const dispatch = useDispatch();
 
+  const PARENT="PARENT";
+   const parentConfig = {
+    headers: { 'Authorization': 'Bearer ' +userToken , 'User': PARENT }
+  };
   const count = useSelector(state => state.Notification.count);
   const ptmNotificationCount = useSelector(
     state => state.PTMNotification.count,
@@ -26,7 +30,7 @@ const header = ({navigation}) => {
   const [fatherName, setFatherName] = useState('');
   const getParentInfo = () => {
     axios
-      .get(`${GW_URL}/parents/${parentId}`)
+      .get(`${GW_URL}/parents/${parentId}`,parentConfig)
       .then(res => {
         setFatherName(res.data.parentDetails.father_name);
       })
@@ -37,8 +41,8 @@ const header = ({navigation}) => {
 
   useEffect(() => {
     getParentInfo();
-    dispatch(fetchContent(parentId));
-    dispatch(fetchPTMContent(parentId));
+    dispatch(fetchContent(parentId,parentConfig));
+    dispatch(fetchPTMContent(parentId,parentConfig));
   }, [dispatch]);
 
   let containerStyle = {position: 'absolute', top: -2, right: -5};

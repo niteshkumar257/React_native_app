@@ -22,6 +22,11 @@ const Mentor = ({ name, qualification, exp,email, details, mentor_id ,mobile,che
   const { userToken } = useContext(AuthContext);
   let userInfo = jwtDecode(userToken);
   let parentId = (userInfo.result.parent_id);
+
+const PARENT="PARENT";
+ const parentConfig = {
+  headers: { 'Authorization': 'Bearer ' +userToken , 'User': PARENT }
+};
   const scheduleHandler = () => {
   
    
@@ -30,7 +35,7 @@ const Mentor = ({ name, qualification, exp,email, details, mentor_id ,mobile,che
     axios.post(`${GW_URL}/parents/${parentId}/requestMentor`,
       {
         mentor_id: mentor_id
-      }).then((res) => {
+      },parentConfig).then((res) => {
         
          setDisableButton(true);
         setStatus(true);

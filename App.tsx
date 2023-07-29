@@ -11,6 +11,8 @@ import DeviceInfo from 'react-native-device-info';
 import { StudentDetailsProvider } from './Components/Context/StudentDetailsContext';
 import ForceUpdateModal from './Components/ForceUpdate';
 
+
+
 import {
   useQuery,
   useMutation,
@@ -24,19 +26,23 @@ const queryClient = new QueryClient();
 const App = () => {
   const currentVersion = DeviceInfo.getVersion();
   const [forceUpdateVisible, setForceUpdateVisible] = useState(false);
-  const [latestVersion, setLatestVersion] = useState('');
+  const [latestVersion, setLatestVersion] = useState("");
 
   useEffect(() => {
     const checkForUpdates = async () => {
       try {
         const currentVersion = DeviceInfo.getVersion();
         const version = await checkVersion();
-
+        
+        console.log(version.version,currentVersion);
         if (version.needsUpdate) {
+          console.log(version.version,currentVersion);
           setLatestVersion(version.version);
           setForceUpdateVisible(true);
+         
         } else {
           console.log('App is up to date.');
+          setLatestVersion(version.version);
         }
       } catch (error) {
         console.error('Error checking for updates:', error);
@@ -52,7 +58,7 @@ const App = () => {
           <AuthProvider>
             <StudentProvider>
               <StudentDetailsProvider>
-                {forceUpdateVisible ? (
+                {!forceUpdateVisible ? (
                   <AppNavigator />
                 ) : (
                   <ForceUpdateModal

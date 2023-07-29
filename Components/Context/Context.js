@@ -13,6 +13,7 @@ export const AuthProvider=({children})=>
     const [userToken,setUserToken]=useState(null);
     const [isLogoShow,setLogoShow]=useState(false);
     const [userInfo,setUserInfo]=useState("");
+    
   
 
     const showToast = (type,header,msg="") => {
@@ -29,6 +30,7 @@ export const AuthProvider=({children})=>
         
           if(username && password)
           {
+            console.log(username,password);
             setShow(true);
               setIsLoding(true);
                axios.post(`${GW_URL}/parent/login`,{

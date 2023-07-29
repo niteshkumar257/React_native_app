@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { LineChart } from 'react-native-gifted-charts';
-import { COLORS } from '../Utils/Colors/Colors';
+import { COLORS } from '../../Utils/Colors/Colors';
 
 
 const customDataPoint = () => {

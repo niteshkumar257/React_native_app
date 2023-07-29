@@ -31,6 +31,11 @@ const Ticket = () => {
   const [msg, setMsg] = useState('');
   const [hei, setHeight] = useState(100);
 
+const PARENT="PARENT";
+ const parentConfig = {
+  headers: { 'Authorization': 'Bearer ' +userToken , 'User': PARENT }
+};
+
   const {
     data: ClassIdAndSchoolId,
     isLoading: IdsLoading,
@@ -39,14 +44,14 @@ const Ticket = () => {
   } = useQuery({
     queryKey: ['fetch-class_id-school_id', child_id],
     queryFn: () => {
-      return axios.get(`${GW_URL}/students/${child_id}`);
+      return axios.get(`${GW_URL}/students/${child_id}`,parentConfig);
     },
   });
 
   const submitForm = () => {
     if (msg != '' && subject != '') {
       axios
-        .post(`${GW_URL}/parents/${parent_id}/raiseTicket`, {
+        .post(`${GW_URL}/parents/${parent_id}/raiseTicket`,parentConfig, {
           title: subject,
           description: msg,
           school_id: ClassIdAndSchoolId?.data?.studentDetails[0].school_id,

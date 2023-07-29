@@ -1,13 +1,8 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import Bar from './Bar'
-import Area from '../Area'
-import Area1 from '../Area1'
-import LineChart from '../LineChart'
-import ScrolableChart from '../ScrolableChart'
-import Victory from './Victory'
-import ChartC from '../Chart'
-import BarGraph from '../BarGraph'
+
+import Area from "./Area";
+
 
 
 const months=['Jan','Feb','Mar','Apr','May','June','July','Aug','Sep','Oct','Nov','Dec']

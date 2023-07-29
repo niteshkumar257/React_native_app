@@ -1,14 +1,15 @@
 import { View, Text ,ScrollView,StyleSheet} from 'react-native'
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState,useContext} from 'react'
 import axios from 'axios'
 import VideoList from './VideoList'
 import { create } from 'react-test-renderer'
-import AcitvityHandler from './AcitvityHandler'
+import AcitvityHandler from '../AcitvityHandler'
 import { Dimensions } from 'react-native'
-import { COLORS } from '../Utils/Colors/Colors'
-import NoData from '../NoData'
-import Loader from '../Loader'
+import { COLORS } from '../../Utils/Colors/Colors'
+import NoData from '../../NoData'
+import Loader from '../../Loader'
 const {width,height}=Dimensions.get('screen')
+import { AuthContext } from '../../Context/Context'
 
 function extractPlaylistId(url) {
   const playlistRegex = /list=([a-zA-Z0-9_-]+)/;
@@ -52,6 +53,12 @@ const Biology = ({navigation,route}) => {
     const [video,setVideo]=useState(null);
     const [showActivity, setShowActitvity] = useState(false);
     const [url, setUrl] = useState("");
+    const { userToken } = useContext(AuthContext);
+const PARENT="PARENT";
+ const parentConfig = {
+  headers: { 'Authorization': 'Bearer ' +userToken , 'User': PARENT }
+};
+
     const getVideoList = () => {
         setShowActitvity(true);
         const options = {
@@ -62,10 +69,13 @@ const Biology = ({navigation,route}) => {
             part: 'snippet',
             maxResults: '50'
           },
+          
           headers: {
             'X-RapidAPI-Key': '5e3f97fa53msh82d042b85e64364p14f4adjsn766a04c950c7',
-            'X-RapidAPI-Host': 'youtube-v31.p.rapidapi.com'
-          }
+            'X-RapidAPI-Host': 'youtube-v31.p.rapidapi.com',
+           
+          },
+         
         };
     
         axios.request(options).then(function (response) {

@@ -18,9 +18,14 @@ const TicketStatus = () => {
   const parent_id = userInfo.result.parent_id;
   const [issueInfo, setIssueInfo] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+ 
+const PARENT="PARENT";
+ const parentConfig = {
+  headers: { 'Authorization': 'Bearer ' +userToken , 'User': PARENT }
+};
   const getTicketStatuDetails = () => {
     axios
-      .get(`${GW_URL}/parents/${parent_id}/getStatus`)
+      .get(`${GW_URL}/parents/${parent_id}/getStatus`,parentConfig)
       .then(res => {
         console.log('status', res.data);
         setIssueInfo(res.data.tickerInfo);
