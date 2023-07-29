@@ -19,12 +19,12 @@ function extractPlaylistId(url) {
   }
   return null;
 }
-const getVideoId=()=>
+const getVideoId=(video_url)=>
 {
   const pattern = /(?:\?v=|\/embed\/|\/\d{2}\/|\/embed\/|\.be\/|\/v\/|http:\/\/youtu.be\/)([^#\&\?]{11})/;
 
 // Extract the video ID using the pattern
-const matches = videoUrl.match(pattern);
+const matches = video_url.match(pattern);
 
 // Check if a match is found and retrieve the video ID
 if (matches && matches.length > 1) {
@@ -46,7 +46,7 @@ console.log("Playlist ID:", playlistId);
 const Biology = ({navigation,route}) => {
    
     const {subject_name,video_url}=route.params;
-   
+     console.log(49,video_url);
    
    
     const [videoList, setVideoList] = useState(null);
@@ -54,10 +54,7 @@ const Biology = ({navigation,route}) => {
     const [showActivity, setShowActitvity] = useState(false);
     const [url, setUrl] = useState("");
     const { userToken } = useContext(AuthContext);
-const PARENT="PARENT";
- const parentConfig = {
-  headers: { 'Authorization': 'Bearer ' +userToken , 'User': PARENT }
-};
+
 
     const getVideoList = () => {
         setShowActitvity(true);
@@ -83,7 +80,7 @@ const PARENT="PARENT";
           setVideoList(response.data.items);
           setShowActitvity(false);
         }).catch(function (error) {
-          console.error(error);
+          console.log(83,error);
         });
       }
     
@@ -110,14 +107,14 @@ const PARENT="PARENT";
           const response = await axios.request(options);
         
          
-  console.log(response.data.items[0].snippet.title);
-  console.log(response.data.items[0].id);
+  console.log(113,response.data.items[0].snippet.title);
+  console.log(114,response.data.items[0].id);
 
           setVideo(response.data.items[0]);
         
           setShowActitvity(false);
         } catch (error) {
-          console.error(error);
+          console.log(error);
           setShowActitvity(false);
         }
 

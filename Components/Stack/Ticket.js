@@ -51,11 +51,11 @@ const PARENT="PARENT";
   const submitForm = () => {
     if (msg != '' && subject != '') {
       axios
-        .post(`${GW_URL}/parents/${parent_id}/raiseTicket`,parentConfig, {
+        .post(`${GW_URL}/parents/${parent_id}/raiseTicket`,{
           title: subject,
           description: msg,
           school_id: ClassIdAndSchoolId?.data?.studentDetails[0].school_id,
-        })
+        },parentConfig)
         .then(res => {
           console.log(res.data);
           // showMessage({

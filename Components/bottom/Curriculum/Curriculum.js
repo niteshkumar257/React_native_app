@@ -17,6 +17,7 @@ const Screen1 = () => {
   const [childId, setChildId] = useState(id);
   const [show, setShow] = useState(true);
   const { userToken } = useContext(AuthContext);
+  console.log(userToken)
 const PARENT="PARENT";
  const parentConfig = {
   headers: { 'Authorization': 'Bearer ' +userToken , 'User': PARENT }
@@ -26,7 +27,9 @@ const PARENT="PARENT";
   const { data: ClassIdAndSchoolId, isLoading: IdsLoading, isError: IdsError, error: Idserror } = useQuery({
     queryKey: ["fetch-class_id-school_id", childId],
     queryFn: () => {
-      return axios.get(`${GW_URL}/students/${childId}`,parentConfig)
+      return axios.get(`${GW_URL}/students/${childId}`,{
+        headers: parentConfig.headers, // Pass the headers from parentConfig
+      })
     }
   });
 
@@ -35,15 +38,13 @@ const PARENT="PARENT";
 
   console.log(class_id,school_id);
 
+  console.log(parentConfig);
   const { data: res, isLoading: curriculumLoading, isError: curriculumErrorStatus, error: ErrorMsg } = useQuery({
     queryKey: ['curriculum', class_id, school_id],
     queryFn: () => {
-      return axios.get(`${GW_URL}/viewCurriculum`,parentConfig, {
-        params: {
-          school_id: school_id,
-          class_id: class_id
-        }
-      });
+      return axios.get(`${GW_URL}/viewCurriculum?school_id=${school_id}&class_id=${class_id}`,{
+        headers: parentConfig.headers, // Pass the headers from parentConfig
+      } );
     },
     enabled: !!class_id && !!school_id
   });
@@ -54,7 +55,7 @@ const PARENT="PARENT";
 
   if(!curriculumLoading)
   {
-    console.log(res.data);
+    console.log(57,res?.data);
   }
 
   return (

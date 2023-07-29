@@ -52,8 +52,8 @@ const Notification = () => {
   let parentId = userInfo.result.parent_id;
 
   useEffect(() => {
-    dispatch(fetchContent(parentId,parentConfig));
-    dispatch(fetchPTMContent(parentId,parentConfig));
+    dispatch(fetchContent({parentId,parentConfig}));
+    dispatch(fetchPTMContent({parentId,parentConfig}));
    
   }, [dispatch]);
 

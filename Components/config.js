@@ -1,10 +1,10 @@
-//export const GW_URL = 'https://api.gaanvwala.com/api';
+export const GW_URL = 'https://api.gaanvwala.com/api';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState, useContext } from 'react';
 import { AuthContext } from "./Context/Context";
 
 
- export const GW_URL="http://192.168.1.188:8080/api";
+//  export const GW_URL="http://192.168.1.188:8080/api";
  export const PARENT = "PARENT";
 
 

@@ -6,7 +6,7 @@ import { GW_URL } from '../config';
 import AcitvityHandler from '../bottom/AcitvityHandler';
 import { Dimensions } from 'react-native';
 const { width, height } = Dimensions.get('window');
-
+import { AuthContext } from '../Context/Context';
 import { StudentContext } from '../Context/StudentConext';
 import { Dropdown } from 'react-native-element-dropdown';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
@@ -18,6 +18,11 @@ import { COLORS } from '../Utils/Colors/Colors';
 const Calendar = ({route}) => {
     
    const [date,setDate]=useState(new Date());
+   const { userToken } = useContext(AuthContext);
+const PARENT="PARENT";
+ const parentConfig = {
+  headers: { 'Authorization': 'Bearer ' +userToken , 'User': PARENT }
+};
    
    
 
@@ -115,7 +120,7 @@ const Calendar = ({route}) => {
   const getAttendance = () => {
   
     axios
-      .get(`${GW_URL}/student/${child_id}/getMonthWiseAttendance?month=${Number(month) + 1}&year=${year}`)
+      .get(`${GW_URL}/student/${child_id}/getMonthWiseAttendance?month=${Number(month) + 1}&year=${year}`,parentConfig)
       .then((res) => {
       
         setAttendance(res.data.monthWiseAttendance);

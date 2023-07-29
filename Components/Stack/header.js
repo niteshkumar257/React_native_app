@@ -41,8 +41,8 @@ const header = ({navigation}) => {
 
   useEffect(() => {
     getParentInfo();
-    dispatch(fetchContent(parentId,parentConfig));
-    dispatch(fetchPTMContent(parentId,parentConfig));
+    dispatch(fetchContent({parentId,parentConfig}));
+    dispatch(fetchPTMContent({parentId,parentConfig}));
   }, [dispatch]);
 
   let containerStyle = {position: 'absolute', top: -2, right: -5};

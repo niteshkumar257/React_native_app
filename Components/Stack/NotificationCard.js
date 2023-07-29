@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 6,
     borderWidth: 0.5,
-    borderColor: 'lightgrey',
+    borderColor: COLORS.grayColorShade2,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   },
   disableViewContainer: {
     opacity: 0.8,
-    backgroundColor: 'lightgrey',
+    backgroundColor:COLORS.grayColorShade1,
   },
   icons: {
     flex: 1,

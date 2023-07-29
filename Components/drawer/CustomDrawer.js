@@ -8,11 +8,12 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Student from 'react-native-vector-icons/MaterialIcons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import Calendar from 'react-native-vector-icons/AntDesign';
+import Calendar from 'react-native-vector-icons/Ionicons';
 import {AuthContext} from '../Context/Context';
 import {COLORS} from '../Utils/Colors/Colors';
 import Ticket from '../Stack/Ticket';
 import {StudentDetailsContext} from '../Context/StudentDetailsContext';
+import TicketIcon from "react-native-vector-icons/MaterialCommunityIcons"
 
 const student = require('../../assets/Student.png');
 
@@ -65,7 +66,7 @@ const CustomDrawer = ({navigation, child_name, child_id, photo_url}) => {
               size={25}
               color={COLORS.mainColor1}
             />
-            <Text style={styles.text1}>Childrens</Text>
+            <Text style={styles.text1}>Children</Text>
           </View>
           <View
             onStartShouldSetResponder={calendarHandler}
@@ -76,13 +77,13 @@ const CustomDrawer = ({navigation, child_name, child_id, photo_url}) => {
           <View
             onStartShouldSetResponder={ticketHandler}
             style={styles.ListItemContainer}>
-            <Calendar name="calendar" size={25} color={COLORS.mainColor1} />
+            <TicketIcon name="ticket" size={25} color={COLORS.mainColor1} />
             <Text style={styles.text1}>Ticket Raise</Text>
           </View>
           <View
             onStartShouldSetResponder={ticketStatusHandler}
             style={styles.ListItemContainer}>
-            <Calendar name="calendar" size={25} color={COLORS.mainColor1} />
+            <TicketIcon name="ticket" size={25} color={COLORS.mainColor1} />
             <Text style={styles.text1}>Ticket Status</Text>
           </View>
         </View>
