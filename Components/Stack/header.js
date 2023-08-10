@@ -60,7 +60,7 @@ const header = ({navigation}) => {
           onStartShouldSetResponder={() => {
             navigation.navigate('parentProfile');
           }}>
-          <Icon name="person-circle-outline" size={35} color="white" />
+          <Icon name="person-circle-outline" size={35} color="black" />
         </View>
         <View style={styles.messager}>
           <Text style={styles.text}>{fatherName}</Text>
@@ -71,7 +71,7 @@ const header = ({navigation}) => {
           navigation.navigate('notification');
         }}
         style={styles.rightContainer}>
-        <Icon name="notifications-sharp" size={30} color={'white'} />
+        <Icon name="notifications-sharp" size={30} color={'black'} />
         {count + ptmNotificationCount != 0 && (
           <Badge
             status="error"
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
 
     alignItems: 'center',
     padding: 10,
-    backgroundColor: COLORS.mainColor3,
+    backgroundColor: "white",
   },
   leftContainer: {
     flex: 1,
@@ -124,6 +124,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 15,
     fontWeight: 500,
-    color: 'white',
+    color: 'black',
   },
 });

@@ -16,6 +16,7 @@ import {COLORS} from './Utils/Colors/Colors';
 import Calendar from './Stack/Calendar';
 import Ticket from './Stack/Ticket';
 import TicketStatus from './Stack/TicketStatus';
+import SchoolDetailsUI from './Stack/SchoolDetails';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,10 +25,10 @@ const AppNavigator = () => {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          headerTintColor: 'white',
+          headerTintColor: 'black',
           animation: 'slide_from_right', //<-- this is what will do the trick
           presentation: 'card',
-          headerStyle: {backgroundColor: COLORS.mainColor3},
+          headerStyle: {backgroundColor:"white"},
         }}>
         <Stack.Screen
           name="login"
@@ -105,6 +106,11 @@ const AppNavigator = () => {
           name="calendar"
           component={Calendar}
           options={{title: 'Attendance', headerShown: true}}
+        />
+           <Stack.Screen
+          name="schoolDetails"
+          component={SchoolDetailsUI}
+          options={{title: 'SchoolDetails', headerShown: true}}
         />
         <Stack.Screen
           name="success"

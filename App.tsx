@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import { checkVersion } from 'react-native-check-version';
 import DeviceInfo from 'react-native-device-info';
 import { StudentDetailsProvider } from './Components/Context/StudentDetailsContext';
+import { SchoolDataContext, SchoolProvider } from './Components/Context/SchoolData';
 import ForceUpdateModal from './Components/ForceUpdate';
 
 
@@ -34,9 +35,9 @@ const App = () => {
         const currentVersion = DeviceInfo.getVersion();
         const version = await checkVersion();
         
-        console.log(version.version,currentVersion);
+      
         if (version.needsUpdate) {
-          console.log(version.version,currentVersion);
+         
           setLatestVersion(version.version);
           setForceUpdateVisible(true);
          
@@ -56,7 +57,9 @@ const App = () => {
       <SafeAreaProvider>
         <Provider store={Store}>
           <AuthProvider>
+            <SchoolProvider>
             <StudentProvider>
+              
               <StudentDetailsProvider>
                 {!forceUpdateVisible ? (
                   <AppNavigator />
@@ -70,6 +73,8 @@ const App = () => {
                 )}
               </StudentDetailsProvider>
             </StudentProvider>
+            </SchoolProvider>
+           
           </AuthProvider>
         </Provider>
       </SafeAreaProvider>

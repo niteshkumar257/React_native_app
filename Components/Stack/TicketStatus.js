@@ -64,5 +64,9 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.backgGroundColor,
     height: height - 50,
     width: width,
+    marginLeft:0,marginRight:10,
+    paddingTop:10,
+    display:'flex',
+    justifyContent:'center',alignItems:'center'
   },
 });

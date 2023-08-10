@@ -9,6 +9,9 @@ import AcitvityHandler from '../AcitvityHandler';
 import { GW_URL } from '../../config';
 import NoData from '../../NoData';
 import { AuthContext } from '../../Context/Context';
+import { StudentDetailsContext } from '../../Context/StudentDetailsContext';
+import Header from '../Header';
+
 
 const { width, height } = Dimensions.get('window');
 
@@ -17,7 +20,10 @@ const Screen1 = () => {
   const [childId, setChildId] = useState(id);
   const [show, setShow] = useState(true);
   const { userToken } = useContext(AuthContext);
-  console.log(userToken)
+const {studentDetails}=useContext(StudentDetailsContext);
+
+
+
 const PARENT="PARENT";
  const parentConfig = {
   headers: { 'Authorization': 'Bearer ' +userToken , 'User': PARENT }
@@ -36,9 +42,7 @@ const PARENT="PARENT";
   const class_id = ClassIdAndSchoolId?.data?.studentDetails[0].class_id;
   const school_id = ClassIdAndSchoolId?.data?.studentDetails[0].school_id;
 
-  console.log(class_id,school_id);
-
-  console.log(parentConfig);
+ 
   const { data: res, isLoading: curriculumLoading, isError: curriculumErrorStatus, error: ErrorMsg } = useQuery({
     queryKey: ['curriculum', class_id, school_id],
     queryFn: () => {
@@ -53,13 +57,10 @@ const PARENT="PARENT";
     setShow(false);
   };
 
-  if(!curriculumLoading)
-  {
-    console.log(57,res?.data);
-  }
 
   return (
     <ScrollView style={styles.ViewContainer}>
+    
       <View style={styles.container}>
         {curriculumLoading && show && <AcitvityHandler show={curriculumLoading} />}
         {res?.data?.url != null ? (

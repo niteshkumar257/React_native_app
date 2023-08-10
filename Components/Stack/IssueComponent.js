@@ -1,89 +1,94 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text,StyleSheet} from 'react-native';
 import {
   ToStringDateFormatter,
   capitalizeFirstLetter,
   getStatusStyle,
 } from '../config';
+import {Dimensions} from 'react-native';
+const {width, height} = Dimensions.get('window');
 
 const IssueDetailsComponent = ({issue}) => {
   const {created_on, description, title, status_name, resolved_on} = issue;
+
+  console.log(status_name);
   const getColorForStatus = resolved_on => {
-    switch (resolved_on) {
-      case null:
-        return 'orange'; // Change 'red' to the desired color for status_id 1
-      case !null:
-        return 'green'; // Change 'green' to the desired color for status_id 2
+    switch (status_name) {
+      case "resolved":
+        return 'green'; // Change 'red' to the desired color for status_id 1
+      case "pending":
+        return 'orange'; // Change 'green' to the desired color for status_id 2
       // Change 'gray' to the default color when status_id is not matched
     }
   };
   const containerColor = getColorForStatus(resolved_on);
   return (
     <View style={styles.container}>
+    <View style={styles.header}>
       <Text style={styles.title}>{capitalizeFirstLetter(title)}</Text>
-      <Text style={styles.description}>{description}</Text>
-      <View style={[styles.status, {backgroundColor: containerColor}]}>
-        <Text
-          style={{
-            color: 'white',
-            fontWeight: 500,
-          }}>
+      <View style={[styles.status, { backgroundColor: containerColor }]}>
+        <Text style={styles.statusText}>
           {resolved_on === null ? 'Pending' : 'Resolved'}
         </Text>
       </View>
-      {resolved_on && (
-        <Text style={styles.resolvedOn}>
-          Resolved on: {ToStringDateFormatter(resolved_on)}
-        </Text>
-      )}
-      <Text style={styles.createdOn}>
-        Created on: {ToStringDateFormatter(created_on)}
-      </Text>
     </View>
+    <Text style={styles.description}>{description}</Text>
+    {resolved_on && (
+      <Text style={styles.resolvedOn}>
+        Resolved on: {ToStringDateFormatter(resolved_on)}
+      </Text>
+    )}
+    <Text style={styles.createdOn}>
+      Created on: {ToStringDateFormatter(created_on)}
+    </Text>
+  </View>
+  
   );
 };
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     padding: 16,
-    backgroundColor: '#fff',
-    marginVertical: 8,
-    marginHorizontal: 16,
+    borderWidth: 1,
+    borderColor: '#ccc',
     borderRadius: 8,
-    elevation: 2,
+    marginBottom: 16,
+    width:width-10
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 8,
   },
   title: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 8,
-  },
-  description: {
-    marginBottom: 8,
+    marginRight: 16,
   },
   status: {
-    width: 80,
-    height: 25,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
     borderRadius: 4,
-
-    marginBottom: 3,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'green',
+  },
+  statusText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  description: {
+    fontSize: 16,
+    marginBottom: 8,
   },
   resolvedOn: {
-    marginBottom: 8,
-    color: 'black',
+    fontSize: 14,
+    color: '#555',
+    marginBottom: 4,
   },
   createdOn: {
-    color: 'black',
+    fontSize: 14,
+    color: '#555',
   },
-  pending: {
-    backgroundColor: 'orange',
-  },
-  resolved: {
-    backgroundColor: '#50C878',
-  },
-};
+});
+
 
 export default IssueDetailsComponent;

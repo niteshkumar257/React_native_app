@@ -21,7 +21,7 @@ const CustomDrawer = ({navigation, child_name, child_id, photo_url}) => {
   const {studentDetails}=useContext(StudentDetailsContext);
   
  const image=studentDetails?.allChildren?.find((item)=>item.student_id===child_id);
- console.log(image)
+ 
  
  
   const childrenHandler = () => {
@@ -38,6 +38,9 @@ const CustomDrawer = ({navigation, child_name, child_id, photo_url}) => {
   };
   const ticketStatusHandler = () => {
     navigation.navigate('ticketStatus');
+  };
+  const schoolDetailsHandler = () => {
+    navigation.navigate('schoolDetails');
   };
   return (
     <SafeAreaView>
@@ -64,39 +67,40 @@ const CustomDrawer = ({navigation, child_name, child_id, photo_url}) => {
             <Icon
               name="person-circle-sharp"
               size={25}
-              color={COLORS.mainColor1}
+              color={COLORS.IconColor}
             />
             <Text style={styles.text1}>Children</Text>
           </View>
           <View
             onStartShouldSetResponder={calendarHandler}
             style={styles.ListItemContainer}>
-            <Calendar name="calendar" size={25} color={COLORS.mainColor1} />
+            <Calendar name="calendar" size={25} color={COLORS.IconColor} />
             <Text style={styles.text1}>Attendance</Text>
           </View>
           <View
             onStartShouldSetResponder={ticketHandler}
             style={styles.ListItemContainer}>
-            <TicketIcon name="ticket" size={25} color={COLORS.mainColor1} />
+            <TicketIcon name="ticket" size={25} color={COLORS.IconColor} />
             <Text style={styles.text1}>Ticket Raise</Text>
           </View>
           <View
             onStartShouldSetResponder={ticketStatusHandler}
             style={styles.ListItemContainer}>
-            <TicketIcon name="ticket" size={25} color={COLORS.mainColor1} />
+            <TicketIcon name="ticket" size={25} color={COLORS.IconColor} />
             <Text style={styles.text1}>Ticket Status</Text>
           </View>
+         
         </View>
         <View style={styles.logOutMainContainer}>
           <View style={styles.logoutContainer}>
             <View style={styles.boxContainer}>
-              <Icon name="settings-sharp" size={25} color={COLORS.mainColor1} />
+              <Icon name="settings-sharp" size={25} color={COLORS.IconColor} />
               <Text style={styles.text1}>Settings</Text>
             </View>
             <View
               onStartShouldSetResponder={() => logoutHandler(navigation)}
               style={styles.boxContainer}>
-              <Icon name="log-out-sharp" size={25} color={COLORS.mainColor1} />
+              <Icon name="log-out-sharp" size={25} color={COLORS.IconColor} />
 
               <Text style={styles.text1}>Logout</Text>
             </View>
@@ -129,7 +133,7 @@ const styles = StyleSheet.create({
     borderColor: 'lightgrey',
     borderLeftWidth: 0,
     borderRightWidth: 0,
-    backgroundColor: '#006DFF',
+    backgroundColor:"white",
   },
   subProfileContainer: {
     display: 'flex',
@@ -187,7 +191,7 @@ const styles = StyleSheet.create({
 
   text: {
     fontSize: 20,
-    color: 'white',
+    color:COLORS.IconColor,
   },
   subtext: {},
   text1: {

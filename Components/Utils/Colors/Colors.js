@@ -6,5 +6,6 @@ export const COLORS = {
     backgGroundColor:'#f6fbff',
     succesColor:"lightgreen",
     grayColorShade1:"#EFEFEF",
-    grayColorShade2:"white"
+    grayColorShade2:"white",
+    IconColor:"black"
   }
