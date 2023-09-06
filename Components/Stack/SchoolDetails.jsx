@@ -35,7 +35,7 @@ const SchoolDetailsUI = () => {
   {
     if(!Loading)
     {
-     console.log(59,school.data);
+    
      setSchoolImage(school.data.schoolDetail.photo_url);
      setSchoolData(school.data.schoolDetail);
     

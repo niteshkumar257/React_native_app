@@ -29,7 +29,7 @@ const matches = video_url.match(pattern);
 // Check if a match is found and retrieve the video ID
 if (matches && matches.length > 1) {
   const videoId = matches[1];
-  console.log(videoId); // Output: uzldSDFrCC8
+ // Output: uzldSDFrCC8
   return videoId;
 }
 return null;
@@ -42,11 +42,11 @@ const  isPlaylistLink=(url) =>{
 
 const videoUrl = "https://www.youtube.com/watch?v=IaCVUKEJ3Lc&list=PL1234567890";
 const playlistId = extractPlaylistId(videoUrl);
-console.log("Playlist ID:", playlistId);
+
 const Biology = ({navigation,route}) => {
    
     const {subject_name,video_url}=route.params;
-     console.log(49,video_url);
+   
    
    
     const [videoList, setVideoList] = useState(null);
@@ -107,8 +107,7 @@ const Biology = ({navigation,route}) => {
           const response = await axios.request(options);
         
          
-  console.log(113,response.data.items[0].snippet.title);
-  console.log(114,response.data.items[0].id);
+
 
           setVideo(response.data.items[0]);
         
@@ -134,7 +133,7 @@ const Biology = ({navigation,route}) => {
     //        getVideoList();
         
     // }, []);
-    console.log(isPlaylistLink(video_url));
+    
   return (
     <ScrollView style={styles.ViewContainer} overScrollMode='never'>
        <View style={styles.header}>

@@ -33,7 +33,7 @@ const PARENT="PARENT";
   headers: { 'Authorization': 'Bearer ' +userToken , 'User': PARENT }
 };
 
-console.log("header",parentConfig);
+
   const { isLoading, isError, error, data } = useQuery({
     queryKey: ['childrenlist', parentId],
     queryFn: () => {
@@ -45,15 +45,8 @@ console.log("header",parentConfig);
     },
   });
 
-  if (!isLoading) {
-   
   
-    console.log('data loads successfully');
-  }
-  if (isError) {
-    navigation.navigate('notfound');
-    console.log(error.message);
-  }
+  
 
   const showToast = (type, header, msg = '') => {
     Toast.show({

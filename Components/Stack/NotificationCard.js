@@ -1,5 +1,5 @@
 import {View, Text, StyleSheet, Image} from 'react-native';
-import React from 'react';
+import React ,{useContext} from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
 import {COLORS} from '../Utils/Colors/Colors';
@@ -7,6 +7,7 @@ import {fetchContent} from '../Redux/NotificationSlice';
 import {useDispatch} from 'react-redux';
 import {GW_URL} from '../config';
 import {fetchPTMContent} from '../Redux/PtmNotificationSlice';
+import { AuthContext } from '../Context/Context';
 
 const NotificationCard = ({
   icon,
@@ -20,15 +21,25 @@ const NotificationCard = ({
 }) => {
   
 
+   
+
+  const { userToken } = useContext(AuthContext);
+  const PARENT="PARENT";
+   const parentConfig = {
+    headers: { 'Authorization': 'Bearer ' +userToken , 'User': PARENT }
+  };
+ 
   const dispatch = useDispatch();
   const feeIcon = require('../../assets/notificationFee.png');
   const updateNotificationStatus = async notificationId => {
+   
     if (meetingId == null) {
+      
       try {
         const response = await axios.put(
-          `${GW_URL}/parents/${notificationId}/markNotificationSeen`,
+          `${GW_URL}/parents/${notificationId}/markNotificationSeen`, ``, parentConfig
         );
-
+           
         dispatch(fetchContent(parentId));
       } catch (error) {
         console.error('Error updating notification:', error);
@@ -36,7 +47,7 @@ const NotificationCard = ({
     } else {
       try {
         const response = await axios.put(
-          `${GW_URL}/parents/${meetingId}/markPTMNotificationSeen`,
+          `${GW_URL}/parents/${meetingId}/markPTMNotificationSeen`, '', parentConfig
         );
 
         dispatch(fetchPTMContent(parentId));
@@ -44,6 +55,8 @@ const NotificationCard = ({
         console.error('Error updating notification:', error);
       }
     }
+
+    
   };
   return (
     <View

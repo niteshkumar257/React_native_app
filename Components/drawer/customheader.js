@@ -8,13 +8,21 @@ import {FONTS} from '../Utils/Colors/fonts';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {StudentDetailsContext} from '../Context/StudentDetailsContext';
 import {useQuery} from '@tanstack/react-query';
-import { AuthContext } from '../Context/Context';
+import {AuthContext} from '../Context/Context';
 import axios from 'axios';
-import { GW_URL } from '../config';
+import {GW_URL} from '../config';
 
-const customHeader = ({navigation, title, photo_url,schoolData}) => {
- 
-    console.log(16,schoolData);
+
+function createAbbreviatedName(fullName) {
+  const words = fullName.split(' ');
+   const abbreviation=words[0]+" "+"School";
+
+  return abbreviation;
+}
+const customHeader = ({navigation, title, photo_url, data,isLoading}) => {
+
+  const dummYImage=require("../../assets/WhiteBack.jpg");
+
   return (
     <View style={styles.headerContainer}>
       <View style={styles.LeftContainer}>
@@ -29,20 +37,28 @@ const customHeader = ({navigation, title, photo_url,schoolData}) => {
         </View>
       </View>
       {/* <TouchableOpacity onPress={()=> navigation.navigate("schoolDetails",schoolData)} style={styles.container}> */}
-      <View    style={styles.rightContainer}>
-       {photo_url!=undefined &&
-       <Image
-       source={{uri:photo_url}}
-       style={{
-         height: 40,
-         width: 40,
-         resizeMode: 'contain',
-       }}
-     />
-        }
+      <View style={styles.rightContainer}>
+      {!isLoading && 
+          <View style={{
+            display:"flex",
+            flexDirection:"row",
+            columnGap:10,
+            justifyContent:"center",
+            alignItems:"center",
+           
+          }}>
+             <Image
+         style={{ width:20, height:20,borderRadius:50,resizeMode:"contain" }}
+         source={{
+           uri:data?.schoolDetail?.photo_url
+             ? data?.schoolDetail?.photo_url
+             : dummYImage,
+         }}
+       />
+        <Text style={{fontSize:15,fontWeight:500,color:'black'}}>{createAbbreviatedName(data?.schoolDetail?.school_name)}</Text>
+          </View>
         
-     
-        
+}
       </View>
       {/* </TouchableOpacity> */}
     </View>

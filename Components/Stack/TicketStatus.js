@@ -27,7 +27,7 @@ const PARENT="PARENT";
     axios
       .get(`${GW_URL}/parents/${parent_id}/getStatus`,parentConfig)
       .then(res => {
-        console.log('status', res.data);
+      
         setIssueInfo(res.data.tickerInfo);
         setIsLoading(false);
       })

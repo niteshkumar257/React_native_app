@@ -13,7 +13,9 @@ import { useQuery } from '@tanstack/react-query';
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = ({ child_name, child_id, photo_url }) => {
-  console.log('drawer' + child_name, child_id);
+  
+ 
+ 
   const {studentDeails, school_id} = useContext(StudentDetailsContext);
   const {userToken} = useContext(AuthContext);
   const [schoolImage,setSchoolImage]=useState("");
@@ -23,39 +25,17 @@ const DrawerNavigator = ({ child_name, child_id, photo_url }) => {
   const parentConfig = {
     headers: {Authorization: 'Bearer ' + userToken, User: PARENT},
   };
-console.log(22,school_id)
-  const {
-    data:school,
-    isLoading: Loading,
-    isError: error,
-    error: errormessage,
-  } = useQuery({
-    queryKey: ['school-image-school_id', school_id],
-    queryFn: () => {
-      return axios.get(`${GW_URL}/schools/${school_id}`,parentConfig);
-    },
-    
-  });
-  const getSchoolDetails=()=>
-  {
-    setImageLoading(true);
-     axios.get(`${GW_URL}/schools/${school_id}`,parentConfig).then((res)=>
-     {
-      console.log(res.data);
-      setSchoolImage(res.data.schoolDetail.photo_url);
-      setSchoolData(res.data);
-      setImageLoading(false);
-     }).catch((err)=>{
-      console.log(err);
-      setImageLoading(false);
-     })
-  }
- 
-  useEffect(()=>
-  {
 
-     getSchoolDetails();
-  },[])
+
+  const fetchSchoolDetails = async (school_id) => {
+    const res = await axios.get(`${GW_URL}/schools/${school_id}`, parentConfig);
+     
+    return res.data;
+  };
+
+  const { data:schoolDetails, isLoading, isError, error } = useQuery(['school_id', school_id], () =>
+    fetchSchoolDetails(school_id)
+  );
 
   return (
     <Drawer.Navigator
@@ -77,7 +57,7 @@ console.log(22,school_id)
         initialParams={{ child_id }}
         options={({ navigation, route }) => ({
           header: () => (
-            <CustomHeader navigation={navigation} title={child_name} photo_url={schoolImage} data={schoolData} />
+            <CustomHeader navigation={navigation} title={child_name} photo_url={schoolImage} data={schoolDetails} isLoading={isLoading} />
           ),
           headerStyle: {
             backgroundColor: 'white',

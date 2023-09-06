@@ -8,36 +8,16 @@ import { AuthContext } from "./Context/Context";
  export const PARENT = "PARENT";
 
 
-//  const isLogin= async(navigation)=>
-//  {
-//      try {
-//          const value = await AsyncStorage.getItem('userToken');
-//          if(value) {
-             
-             
-//             setUserToken(value);
-//            navigation.navigate("children");
-           
-         
-//          } else {
-//            navigation.navigate("login");
-         
-//          }
-//        } catch(e) {
-         
-//          console.log(e);
-//        }
 
-//  }
 const getuserToken=async()=>{
   try {
     const value = await AsyncStorage.getItem('userToken');
-    if(value) console.log(30,value)
+  
   } catch(e) {
     console.log(e);
   }
 }
-console.log(getuserToken());
+
 
 
 export const parentConfig = {
@@ -60,7 +40,7 @@ export const ToStringDateFormatter=(dateStr)=>
       
       const formattedDateWithSuffix = formattedDate.replace(/\b(\d{1,2})\b/g, `$1${daySuffix}`);
       
-      console.log(formattedDateWithSuffix); // Output: "24th June 2023"
+       // Output: "24th June 2023"
       
       // Function to get the day suffix (st, nd, rd, th)
       function getDaySuffix(day) {
@@ -105,6 +85,35 @@ export const  capitalizeFirstLetter=(str)=> {
   
     return statusStyle;
   }
+  export   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  export  const MonthLabel = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'June',
+    'July',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
+  export   const months = [
+    {label: 'Jan', value: '0'},
+    {label: 'Feb', value: '1'},
+    {label: 'Mar', value: '2'},
+    {label: 'Apr', value: '3'},
+    {label: 'May', value: '4'},
+    {label: 'Jun', value: '5'},
+    {label: 'Jul', value: '6'},
+    {label: 'Aug', value: '7'},
+    {label: 'Sep', value: '8'},
+    {label: 'Oct', value: '9'},
+    {label: 'Nov', value: '10'},
+    {label: 'Dec', value: '11'},
+  ];
   
 
 

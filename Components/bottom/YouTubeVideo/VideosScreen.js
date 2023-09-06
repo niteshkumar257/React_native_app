@@ -10,43 +10,61 @@ import DataContext from '../../Context/DataContext';
 import Loader from '../../Loader';
 import NoData from '../../NoData';
 import {AuthContext} from '../../Context/Context';
+import BookIcon from "react-native-vector-icons/Ionicons";
+import { StudentDetailsContext } from '../../Context/StudentDetailsContext';
 
+
+const imageCommonStyle = {
+  width: 50, 
+  height: 50, 
+  resizeMode: 'contain',
+};
 const renderSubjectImage = subjectName => {
   switch (subjectName) {
     case 'Physics':
-      return <Image source={require('../../../assets/Physics.png')} />;
+      return <Image style={imageCommonStyle} source={require('../../../assets/Physics.png')} />;
     case 'Chemistry':
-      return <Image source={require('../../../assets/chemistry.png')} />;
+      return <Image style={imageCommonStyle} source={require('../../../assets/chemistry.png')} />;
     case 'Math':
-      return <Image source={require('../../../assets/Math.png')} />;
+      return <Image style={imageCommonStyle} source={require('../../../assets/Math.png')} />;
     case 'Biology':
-      return <Image source={require('../../../assets/Biology.png')} />;
+      return <Image style={imageCommonStyle} source={require('../../../assets/Biology.png')} />;
     default:
       return null;
   }
 };
 
+const formatData = (data, numColumns) => {
+
+ 
+  const numberOfFullRows = Math.floor(data.length / numColumns);
+
+  let numberOfElementsLastRow = data.length - (numberOfFullRows * numColumns);
+  // while (numberOfElementsLastRow !== numColumns && numberOfElementsLastRow !== 0) {
+  //   data.push({ key: `blank-${numberOfElementsLastRow}`, empty: true });
+  //   numberOfElementsLastRow++;
+  // }
+
+  return data;
+};
 const Video = ({navigation}) => {
   const {id} = useContext(DataContext);
   const [childId, setChildId] = useState(id);
   const {userToken} = useContext(AuthContext);
+  const {studentDetails,school_id:schoolID}=useContext(StudentDetailsContext);
+
   const PARENT = 'PARENT';
   const parentConfig = {
     headers: {Authorization: 'Bearer ' + userToken, User: PARENT},
   };
 
-  const {
-    data: ClassIdAndSchoolId,
-    isLoading: IdsLoading,
-    isError: IdsError,
-    error: Idserror,
-  } = useQuery({
-    queryKey: ['fetch-class_id-school_id', childId],
-    queryFn: () => axios.get(`${GW_URL}/students/${childId}`, {parentConfig}),
-  });
+  const student_detatils=studentDetails.find((student)=>student.student_id==childId);
+ const class_id=student_detatils.class_id;
+ const school_id=student_detatils.school_id;
 
-  const class_id = ClassIdAndSchoolId?.data?.studentDetails[0]?.class_id;
-  const school_id = ClassIdAndSchoolId?.data?.studentDetails[0]?.school_id;
+ 
+
+ 
 
   const {
     data: StudentSubjectList,
@@ -70,7 +88,9 @@ const Video = ({navigation}) => {
         onStartShouldSetResponder={() =>
           renderVideoList(item.subject_id, item.subject_name)
         }>
-        {renderSubjectImage(item.subject_name)}
+        { renderSubjectImage(item.subject_name)!=null?renderSubjectImage(item.subject_name):<View>
+        <BookIcon name="book-sharp" size={30} color={"black"}/>
+          </View>}
         <Text style={styles.subjectText}>{item.subject_name}</Text>
       </View>
     );
@@ -93,6 +113,9 @@ const Video = ({navigation}) => {
         console.log(err);
       });
   };
+  const numColums=2;
+
+ 
 
   return (
     <View style={styles.videoContainer}>
@@ -104,9 +127,11 @@ const Video = ({navigation}) => {
           <Loader show={StudentSubjectLoading} x={110} />
         ) : StudentSubjectList?.data?.subjects?.length > 0 ? (
           <FlatList
-            data={StudentSubjectList?.data?.subjects}
-            keyExtractor={item => item.subject_id.toString()}
+            data={formatData(StudentSubjectList?.data?.subjects,numColums)}
+            keyExtractor={item => item?.subject_id?.toString()}
             renderItem={renderSubjectItem}
+            numColumns={numColums}
+            
           />
         ) : (
           <NoData message={'No Subjects'} />
@@ -146,32 +171,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 5,
   },
-  imageContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    height: 70,
-    width: width - 20,
-    paddingLeft: 20,
-    paddingRight: 20,
-    //  backgroundColor:"#e1ffff",
-    rowGap: 5,
-    backgroundColor: 'white',
-    elevation: 10,
-    shadowColor: '#000',
-
-    shadowOffset: {width: 0, height: 0},
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    borderRadius: 9,
-  },
+  
   titleText: {
     fontSize: 20,
     fontWeight: 500,
     color: 'black',
   },
   subjectContainer: {
+    flex:1,
     height: '100%',
     width: width,
     display: 'flex',
@@ -194,7 +201,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     paddingLeft: 20,
   },
-  subejctText: {
+  subjectText: {
     fontSize: 16,
     color: 'black',
     fontWeight: 600,
@@ -205,7 +212,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     height: 70,
-    width: width - 20,
+    width:"47%",
     paddingLeft: 20,
     paddingRight: 20,
     backgroundColor: 'white',
@@ -215,6 +222,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 5,
     borderRadius: 9,
-    marginBottom: 20, // Set the row gap to 20 pixels
+    marginBottom: 20,
+    margin:6 // Set the row gap to 20 pixels
+  
   },
+ 
 });

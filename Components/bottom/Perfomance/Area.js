@@ -46,8 +46,9 @@ const customDataPointLabel = (value,totalMark) => {
 
 
 const Area = ({name,data}) => {
+  console.log(data);
   const transformData = data.map(item => ({
-    value: item.totalMark,
+    value: item.value,
     totalmark: item.totalMark,
     labelComponent: () => customLabel(item.label),
     customDataPoint: customDataPoint,
@@ -62,6 +63,8 @@ const Area = ({name,data}) => {
       dataPointLabelComponent: () => null,
     });
   }
+
+ 
   return (
     <View
     style={{

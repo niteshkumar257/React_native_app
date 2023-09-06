@@ -46,7 +46,7 @@ const PerfomanceScreen = () => {
   }
 
  
-console.log(res?.data?.allmarksDetail);
+
   const showGraphicalAnalysis = () => {
   
     setGraphShow(true);

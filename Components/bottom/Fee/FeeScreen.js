@@ -36,34 +36,8 @@ const PARENT="PARENT";
  const parentConfig = {
   headers: { 'Authorization': 'Bearer ' +userToken , 'User': PARENT }
 };
-  // useEffect(()=>
-  // {
-    
-  //    axios.get(`https://school-management-api.azurewebsites.net/students/${childId}/fees`).then((res)=>
-  //    {
-    
-        
-  //     console.log(res.data?.studentFees);
-  //     setFeeArray(res.data?.studentFees);
-  //      setFirst(res?.data?.studentFees[0].first_installment);
-  //      setSecond(res?.data?.studentFees[0].second_installment);
-  //      setThird(res?.data?.studentFees[0].third_installment);
-  //      setFirstStatus(res?.data?.studentFees[0].first_installment_status);
-  //      setSecondStatus(res?.data?.studentFees[0].second_installment_status);
-  //      setThridStatus(res?.data?.studentFees[0].third_installment_status);
-  //      setDate1(res?.data?.studentFees[0].first_installment_eta.slice(0, 10));
-  //      setDate2(res?.data?.studentFees[0].second_installment_eta.slice(0,10));
-  //      setDate3(res?.data?.studentFees[0].third_installment_eta.slice(0,10));
-  //      setShowsActivity(false);
-
-  //    }).catch((err)=>
-  //    {
-  //     setShowsActivity(false);
-    
-  //     console.log(err);
-  //    })
-  // },[])
-  console.log(childId);
+ 
+  
   const {data:res,isLoading,isError,error}=useQuery({
     queryKey:['fee-details',childId],
     queryFn:()=>

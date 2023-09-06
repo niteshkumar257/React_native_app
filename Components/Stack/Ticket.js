@@ -26,7 +26,7 @@ const Ticket = () => {
   const {child_id} = useContext(StudentContext);
   const userInfo = jwtDecode(userToken);
   const parent_id = userInfo.result.parent_id;
-  console.log(child_id, parent_id);
+ 
   const [subject, setSubject] = useState('');
   const [msg, setMsg] = useState('');
   const [hei, setHeight] = useState(100);
@@ -57,14 +57,8 @@ const PARENT="PARENT";
           school_id: ClassIdAndSchoolId?.data?.studentDetails[0].school_id,
         },parentConfig)
         .then(res => {
-          console.log(res.data);
-          // showMessage({
-          //   message: 'Issue Raised succesfully',
-          //   type: 'success',
-          //   autoHide: 2000,
-          //   floating: false,
-          //   width: width,
-          // });
+        
+          
           Snackbar.show({
             text: 'Issued Raised SuccessFully',
             duration: Snackbar.LENGTH_SHORT,

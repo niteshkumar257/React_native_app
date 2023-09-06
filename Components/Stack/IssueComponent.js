@@ -11,7 +11,6 @@ const {width, height} = Dimensions.get('window');
 const IssueDetailsComponent = ({issue}) => {
   const {created_on, description, title, status_name, resolved_on} = issue;
 
-  console.log(status_name);
   const getColorForStatus = resolved_on => {
     switch (status_name) {
       case "resolved":
@@ -53,7 +52,9 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderRadius: 8,
     marginBottom: 16,
-    width:width-10
+    width:width-10,
+    color:'black',
+    backgroundColor:"white"
   },
   header: {
     flexDirection: 'row',
@@ -65,11 +66,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginRight: 16,
+    color:'black'
   },
   status: {
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 4,
+    
+    
   },
   statusText: {
     color: 'white',
@@ -78,15 +82,22 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 16,
     marginBottom: 8,
+    color:'black',
+    fontWeight:400,
+
+    
   },
   resolvedOn: {
     fontSize: 14,
     color: '#555',
     marginBottom: 4,
+    color:'black'
   },
   createdOn: {
     fontSize: 14,
-    color: '#555',
+    color: 'black',
+    fontWeight:400,
+    
   },
 });
 

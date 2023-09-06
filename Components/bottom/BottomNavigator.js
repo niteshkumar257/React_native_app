@@ -53,7 +53,7 @@ const BottomNavigator = ({id}) => {
             } else if (route.name === 'Mentor') {
               iconName = focused ? 'people-sharp' : 'people-outline';
             } else if (route.name === 'Subjects') {
-              iconName = focused ? 'videocam-sharp' : 'videocam-outline';
+              iconName = focused ? 'play-sharp' : 'play-outline';
             }
 
             return (

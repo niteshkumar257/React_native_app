@@ -58,7 +58,7 @@ export default Fee;
 const styles=StyleSheet.create(
   { 
     mainContainer:{
-      height:120,
+      height:80,
       width:"100%",
      flex:1,
      flexDirection:"row",
@@ -66,7 +66,7 @@ const styles=StyleSheet.create(
      alignItems:"center",
      columnGap:5,
      borderRadius:9,
-   
+  
      width: '100%',
      backgroundColor: 'white',
      elevation: 5,
@@ -74,14 +74,16 @@ const styles=StyleSheet.create(
      shadowOffset: {width: 0, height: 0},
      shadowOpacity: 0.1,
      shadowRadius: 5,
-     padding:10
+     padding:10,
+    
+     marginBottom:10,
    
      
     },
     LeftContainer:{
-      height:130,
-    
-      flex:1,
+      height:100,
+     
+      flex:0.8,
        justifyContent:"center",
        alignItems:"center",
       borderRadius:9,
@@ -116,7 +118,7 @@ const styles=StyleSheet.create(
 
     },
     RightContainer:{
-    minHeight:120,
+    minHeight:70,
       height:"auto",
      paddingTop:10,
       flex:4,

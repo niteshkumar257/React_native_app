@@ -30,7 +30,7 @@ export const AuthProvider=({children})=>
         
           if(username && password)
           {
-            console.log(username,password);
+           
             setShow(true);
               setIsLoding(true);
                axios.post(`${GW_URL}/parent/login`,{

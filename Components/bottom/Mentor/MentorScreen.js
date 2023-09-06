@@ -60,7 +60,7 @@ const Screen4 = ({navigation}) => {
               });
 
               setMentorDetails(mentor);
-              console.log(mentor);
+             
               setParentMentor(true);
               setIsLoding(false);
             });

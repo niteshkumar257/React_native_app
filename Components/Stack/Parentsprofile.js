@@ -51,9 +51,7 @@ const PARENT="PARENT";
       setAltPhone(res?.data?.parentDetails.alternative_mobile);
       
     }
-    if (isError) {
-      console.log(Error);
-    }
+  
   }, [res]);
   
   return (
@@ -75,22 +73,22 @@ const PARENT="PARENT";
             </Text>
           </View>
           <View style={styles.infoBox}>
-            <Text>Name</Text>
+            <Text style={styles.lable}>Name :</Text>
             <Text style={styles.text}>{name}</Text>
           </View>
 
           <View style={styles.infoBox}>
-            <Text>Email</Text>
+            <Text style={styles.lable}>Email :</Text>
             <Text style={styles.text}>{email}</Text>
           </View>
 
           <View style={styles.infoBox}>
-            <Text>Phone Number</Text>
+            <Text style={styles.lable}>Phone Number :</Text>
             <Text style={styles.text}>{phone}</Text>
           </View>
 
           <View style={styles.infoBox}>
-            <Text>Alternate Number</Text>
+            <Text style={styles.lable}>Alternate Number :</Text>
             <Text style={styles.text}>{altPhone.length!=0?altPhone:"Not given"}</Text>
           </View>
         </View>
@@ -227,6 +225,12 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 500,
     color: 'black',
+  },
+  lable:{
+    fontSize:15,
+    fontWeight:700,
+    color:"black"
+
   },
   shadowProp: {
     shadowOffset: {width: -2, height: 4},

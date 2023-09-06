@@ -43,7 +43,7 @@ const Notification = () => {
   const GeneralNotificationRedux=useSelector(
     state=>state.GeneralNotification
   )
-  console.log(GeneralNotificationRedux)
+  
   const ptmListLoading = useSelector(state => state.PTMNotification.isLoading);
   const isLoading = useSelector(state => state.Notification.isLoading);
   const Error = useSelector(state => state.Notification.error);
@@ -60,7 +60,7 @@ const Notification = () => {
   return (
     <SafeAreaView>
       <ScrollView overScrollMode="never" removeClippedSubviews={true}>
-        {isLoading && ptmListLoading ? (
+        {isLoading || ptmListLoading ? (
           <AcitivityhandlerStack show={isLoading} />
         ) : (
           <View style={styles.mainContainer}>

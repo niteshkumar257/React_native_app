@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 const useFetchSchoolDetails = ({ school_id, parentConfig }) => {
   const fetchSchoolDetails = async (school_id, parentConfig) => {
     const res = await axios.get(`${GW_URL}/schools/${school_id}`, parentConfig);
-    console.log(13, res);
+   
     return res;
   };
 

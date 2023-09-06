@@ -56,16 +56,19 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 10,
     textAlign: 'center',
+    color:'black'
   },
   whatsNew: {
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 5,
+    color:'black'
   },
   whatsNewContent: {
     fontSize: 14,
     marginBottom: 15,
     textAlign: 'center',
+    color:'black'
   },
   updateButton: {
     backgroundColor:"green",
