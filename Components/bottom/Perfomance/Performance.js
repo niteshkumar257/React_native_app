@@ -23,6 +23,7 @@ const Screen3 = () => {
       .then((res) => {
 
         setTestDetails(res.data.allmarksDetail);
+        console.log(res.data.allmarksDetail);
         setDataFetchStatus(false);
 
       })

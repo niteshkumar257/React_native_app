@@ -44,6 +44,33 @@ const PerfomanceScreen = () => {
       <Text>Error: {error.message}</Text>
     </View>;
   }
+  if(!isLoading)
+  {
+    console.log(49,res.data.allmarksDetail);
+  }
+
+
+  const removeFrom=()=>{
+
+    const data= [{"mark_obtained": [23, 32, 37, -1, 40, 43, 32, 23], "percentage": "57.25", "subject_name": ["Math", "Biology", "Hindi", "Physics", "Chemistry", "English", "SST", "Sanskrit"], "test_date": "2023-08-25", "test_id": 62, "test_name": "Unit Test - 25-08-2023", "total_marks": [50, 50, 50, 50, 50, 50, 50, 50]}, {"mark_obtained": [23, 30, 40, 50], "percentage": "75.26", "subject_name": ["Math", "Biology", "Hindi", "Sanskrit"], "test_date": "2023-08-31", "test_id": 64, "test_name": "MonthlyTest1", "total_marks": [50, 30, 40, 70]}]
+    function removeNegativeValuesAndSubjects(obj) {
+      const markObtained = obj.mark_obtained.filter((value, index) => value >= 0);
+      const subjectName = obj.subject_name.filter((value, index) => obj.mark_obtained[index] >= 0);
+      obj.mark_obtained = markObtained;
+      obj.subject_name = subjectName;
+    }
+    
+    // Remove negative values and corresponding subjects from each object
+    data.forEach(record => {
+      removeNegativeValuesAndSubjects(record);
+    });
+    
+    // Remove negative values from the "mark_obtained" array in each object
+   
+  console.log(62,data);
+    return data;
+  }
+  removeFrom();
 
  
 
@@ -93,7 +120,7 @@ const PerfomanceScreen = () => {
                 {
                   graphShow &&
                   <View style={styles.bottomContainer}>
-                    <BarGraphCompnent data={res?.data?.allmarksDetail}></BarGraphCompnent>
+                    <BarGraphCompnent data={removeFrom(res?.data?.allmarksDetail)}></BarGraphCompnent>
 
                   </View>
 

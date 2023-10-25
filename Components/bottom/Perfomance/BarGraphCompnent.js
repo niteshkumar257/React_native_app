@@ -7,6 +7,8 @@ import Area from "./Area";
 
 const months=['Jan','Feb','Mar','Apr','May','June','July','Aug','Sep','Oct','Nov','Dec']
 const BarGraphCompnent = ({data}) => {
+
+
     let dataList = [];
     const graphDataConvert = (markList) => {
       dataList = markList?.reduce((acc, test) => {

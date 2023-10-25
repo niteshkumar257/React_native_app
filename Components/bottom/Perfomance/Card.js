@@ -2,6 +2,8 @@ import { View, Text ,StyleSheet} from 'react-native'
 import React from 'react'
 
 const Card = ({subject,obtaindMark,totalMark}) => {
+  console.log(obtaindMark);
+ 
   return (
     <View>
       <View style={styles.CardContainer}>
@@ -9,7 +11,9 @@ const Card = ({subject,obtaindMark,totalMark}) => {
         <Text style={styles.text}>{subject}</Text>
         </View>
        <View style={styles.MarkContainer}>
+        {obtaindMark==-1 ? <Text style={styles.text}>Absent</Text>:
        <Text style={styles.text}>{obtaindMark}/{totalMark}</Text>
+  }
        </View>
       
         
