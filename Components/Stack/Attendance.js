@@ -329,7 +329,7 @@ const Calendar = ({route}) => {
 export default Calendar;
 const styles = StyleSheet.create({
   calendar: {
-    width: wp('99%'),
+    width: wp('100%'),
     height: hp('75%'),
 
     display: 'flex',

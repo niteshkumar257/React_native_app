@@ -19,7 +19,7 @@ function extractPlaylistId(url) {
   }
   return null;
 }
-const getVideoId=(video_url)=>
+ const getVideoId=(video_url)=>
 {
   const pattern = /(?:\?v=|\/embed\/|\/\d{2}\/|\/embed\/|\.be\/|\/v\/|http:\/\/youtu.be\/)([^#\&\?]{11})/;
 

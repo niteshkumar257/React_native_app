@@ -44,6 +44,22 @@ const Children = ({navigation}) => {
       videoId: 'HlyUcNeW2uU',
     },
   ];
+  const getVideoId=(video_url)=>
+{
+  const pattern = /(?:\?v=|\/embed\/|\/\d{2}\/|\/embed\/|\.be\/|\/v\/|http:\/\/youtu.be\/)([^#\&\?]{11})/;
+
+// Extract the video ID using the pattern
+const matches = video_url.match(pattern);
+
+// Check if a match is found and retrieve the video ID
+if (matches && matches.length > 1) {
+  const videoId = matches[1];
+ // Output: uzldSDFrCC8
+  return videoId;
+}
+return null;
+
+}
   let userInfo = jwtDecode(userToken);
   let parentId = userInfo.result.parent_id;
   const {studentDetails, studentData, setStudentDetails} = useContext(
@@ -72,10 +88,13 @@ const Children = ({navigation}) => {
     axios
       .get(`${GW_URL}/videos/getAllPromotionalVideo`,parentConfig)
       .then(res => {
-        console.log(56, res);
+        console.log(56, res.data);
+        setPromotionalVideo(res.data.allVideos);
+        setVideoLoading(false);
       })
       .catch(err => {
         console.log(58, err);
+        setVideoLoading(false);
       });
   };
 
@@ -110,8 +129,8 @@ const Children = ({navigation}) => {
     getVideos();
   }, []);
   const renderVideo = ({item}) => (
-    <View style={{padding: 2}}>
-      <YouTube videoId={item.videoId} videoReady={videoReady} />
+    <View   style={{padding: 2}}>
+      <YouTube videoId={getVideoId(item.video_url)} videoReady={videoReady} />
     </View>
   );
   return (
@@ -150,9 +169,12 @@ const Children = ({navigation}) => {
           )}
         </View>
       )}
-      {!isLoading && (
+      {!videoLoading && (
         <View style={styles.videoConainer}>
-          <Text style={styles.title}>Promotional Videos</Text>
+          {
+            promotionaVideos.length>0 &&     <Text style={styles.title}>Promotional Videos</Text>
+          }
+       
           {/* {
           promotionaVideos?.map((video)=>{
              return  <YouTube/>
@@ -160,9 +182,9 @@ const Children = ({navigation}) => {
         } */}
 
           <FlatList
-            data={videoList}
+            data={promotionaVideos}
             renderItem={renderVideo}
-            keyExtractor={item => item.videoId}
+            keyExtractor={item => getVideoId(item.video_url)}
           />
         </View>
       )}

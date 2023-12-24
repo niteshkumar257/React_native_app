@@ -13,7 +13,7 @@ import Student from './Stack/Student';
 import Logo from './Stack/Logo';
 import Success from './Stack/Success';
 import {COLORS} from './Utils/Colors/Colors';
-import Calendar from './Stack/Calendar';
+import Attendance from './Stack/Attendance';
 import Ticket from './Stack/Ticket';
 import TicketStatus from './Stack/TicketStatus';
 import SchoolDetailsUI from './Stack/SchoolDetails';
@@ -104,7 +104,7 @@ const AppNavigator = () => {
         />
         <Stack.Screen
           name="calendar"
-          component={Calendar}
+          component={Attendance}
           options={{title: 'Attendance', headerShown: true}}
         />
            <Stack.Screen

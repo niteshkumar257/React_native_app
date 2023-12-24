@@ -20,6 +20,7 @@ function createAbbreviatedName(fullName) {
   return abbreviation;
 }
 const customHeader = ({navigation, title, photo_url, data,isLoading}) => {
+  console.log(title);
 
   const dummYImage=require("../../assets/WhiteBack.jpg");
 
@@ -92,8 +93,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   header: {
-    fontSize: FONTS.TextTitle,
-    fontWeight: FONTS.TextTitleWeight,
+    fontSize: FONTS.TextSubTitle,
+    fontWeight: FONTS.TextSubTitleWeight,
     color: 'black',
   },
 });

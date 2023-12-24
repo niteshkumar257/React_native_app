@@ -13,17 +13,18 @@ import {AuthContext} from '../Context/Context';
 import {COLORS} from '../Utils/Colors/Colors';
 import Ticket from '../Stack/Ticket';
 import {StudentDetailsContext} from '../Context/StudentDetailsContext';
-import TicketIcon from "react-native-vector-icons/MaterialCommunityIcons"
+import TicketIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {FONTS} from '../Utils/Colors/fonts';
 
 const student = require('../../assets/Student.png');
 
 const CustomDrawer = ({navigation, child_name, child_id, photo_url}) => {
-  const {studentDetails}=useContext(StudentDetailsContext);
-  
- const image=studentDetails?.allChildren?.find((item)=>item.student_id===child_id);
- 
- 
- 
+  const {studentDetails} = useContext(StudentDetailsContext);
+
+  const image = studentDetails?.allChildren?.find(
+    item => item.student_id === child_id,
+  );
+
   const childrenHandler = () => {
     navigation.navigate('children', {
       child_id: child_id,
@@ -48,10 +49,11 @@ const CustomDrawer = ({navigation, child_name, child_id, photo_url}) => {
         <View style={styles.profileContainer}>
           <View style={styles.ImageContainer}>
             <Image
-              source={{uri:photo_url}}
+              source={{uri: photo_url}}
               style={{
                 height: 70,
                 width: 70,
+                borderRadius: 50,
               }}
             />
           </View>
@@ -89,7 +91,6 @@ const CustomDrawer = ({navigation, child_name, child_id, photo_url}) => {
             <TicketIcon name="ticket" size={25} color={COLORS.IconColor} />
             <Text style={styles.text1}>Ticket Status</Text>
           </View>
-         
         </View>
         <View style={styles.logOutMainContainer}>
           <View style={styles.logoutContainer}>
@@ -129,11 +130,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    borderWidth: 0.5,
+    borderWidth: 1,
     borderColor: 'lightgrey',
     borderLeftWidth: 0,
     borderRightWidth: 0,
-    backgroundColor:"white",
+    backgroundColor: 'white',
+    backgroundColor:"#e6e6e6"
   },
   subProfileContainer: {
     display: 'flex',
@@ -144,40 +146,48 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     flex: 3,
-    width: '80%',
+    width: '100%',
     marginTop: 20,
+    
     display: 'flex',
     rowGap: 10,
+    
   },
   ListItemContainer: {
     display: 'flex',
-
+     
     flexDirection: 'row',
     padding: 2,
+    paddingLeft:25,
+    paddingBottom:7,
+    paddingTop:7,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    columnGap: 20,
+    columnGap: 20,borderBottomWidth:0.75,
+    borderColor:"grey"
   },
   logOutMainContainer: {
     width: '100%',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
-
+    justifyContent: 'flex-end',
+    rowGap: 10,
     flex: 2,
     borderWidth: 1,
     borderColor: 'lightgrey',
     borderBottomWidth: 0,
     borderRightWidth: 0,
     borderLeftWidth: 0,
+    
   },
   logoutContainer: {
-    width: '80%',
-    height: 150,
+    width: '100%',
+    height: 100,
     display: 'flex',
+   rowGap:10,
     justifyContent: 'center',
 
-    rowGap: 10,
+   
   },
   boxContainer: {
     display: 'flex',
@@ -187,11 +197,15 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     columnGap: 20,
+    borderBottomWidth:.5,
+    borderColor:"grey", paddingLeft:25,
+    paddingBottom:7,paddingTop:7,
+   
   },
 
   text: {
-    fontSize: 20,
-    color:COLORS.IconColor,
+    fontSize: FONTS.TextSubTitle,
+    color: COLORS.IconColor,
   },
   subtext: {},
   text1: {
@@ -205,8 +219,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-
-    borderRadius: 50,
+    borderRadius: 20,
   },
 });
 export default CustomDrawer;
